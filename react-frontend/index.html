@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Preview lokal custom theme Blogspot (React + Tailwind CSS + Laravel)." />
+    <title>Pesonaku — Preview Tema Blogger</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!--
+      HANYA UNTUK DEV (`npm run dev`). Meniru window.BloggerData dari blogger-theme/template.xml.
+      Preview tampilan lain: ?page=item | ?page=static_page | ?page=404
+    -->
+    <script>
+      const page = new URLSearchParams(location.search).get('page')
+      window.BloggerData = {
+        blogTitle: 'Pesonaku',
+        homepageUrl: '/',
+        searchUrl: '/search',
+        pageType: page === '404' ? 'error_page' : page || 'index',
+        pageTitle: 'Pesonaku',
+        isMobile: false,
+        apiBaseUrl: '__API_BASE_URL__',
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Markup di bawah meniru output server-side Blogger (atribut data-bt sama dengan template.xml) -->
+    <div id="root">
+      <nav data-bt="labels">
+        <a class="bt-label" data-name="Travel" data-count="12" href="/search/label/Travel">Travel</a>
+        <a class="bt-label" data-name="Coding" data-count="8" href="/search/label/Coding">Coding</a>
+        <a class="bt-label" data-name="Kuliner" data-count="5" href="/search/label/Kuliner">Kuliner</a>
+        <a class="bt-label" data-name="Catatan" data-count="3" href="/search/label/Catatan">Catatan</a>
+      </nav>
+      <main data-bt="posts">
+        <article data-bt="post" data-id="1" data-title="Fajar di Danau Beratan: Catatan Perjalanan ke Bedugul" data-url="/?page=item" data-author="Pesonaku" data-date="2026-10-08T06:30:00+07:00">
+          <meta data-bt="image" content="/mock/lake.jpg" />
+          <h2><a href="/?page=item">Fajar di Danau Beratan: Catatan Perjalanan ke Bedugul</a></h2>
+          <div data-bt="labels"><a data-name="Travel" href="/search/label/Travel">Travel</a></div>
+          <p data-bt="snippet">Kabut tipis menggantung di atas air ketika matahari mulai naik. Inilah cerita tentang pagi yang tenang di salah satu danau paling ikonik di Bali, lengkap dengan tips waktu terbaik untuk berkunjung.</p>
+        </article>
+        <article data-bt="post" data-id="2" data-title="Membangun Tema Blogger dengan React dan Tailwind CSS" data-url="/?page=item" data-author="Pesonaku" data-date="2026-10-05T20:00:00+07:00">
+          <meta data-bt="image" content="/mock/code.jpg" />
+          <h2><a href="/?page=item">Membangun Tema Blogger dengan React dan Tailwind CSS</a></h2>
+          <div data-bt="labels"><a data-name="Coding" href="/search/label/Coding">Coding</a><a data-name="Catatan" href="/search/label/Catatan">Catatan</a></div>
+          <p data-bt="snippet">Blogger masih relevan! Dengan sedikit trik build Vite, kita bisa membawa komponen React dan utilitas Tailwind langsung ke dalam template XML.</p>
+        </article>
+        <article data-bt="post" data-id="3" data-title="Kopi Tubruk dan Obrolan Sore di Yogyakarta" data-url="/?page=item" data-author="Pesonaku" data-date="2026-09-28T16:15:00+07:00">
+          <meta data-bt="image" content="/mock/coffee.jpg" />
+          <h2><a href="/?page=item">Kopi Tubruk dan Obrolan Sore di Yogyakarta</a></h2>
+          <div data-bt="labels"><a data-name="Kuliner" href="/search/label/Kuliner">Kuliner</a></div>
+          <p data-bt="snippet">Kedai kecil di sudut kota, aroma kopi yang pekat, dan cerita-cerita yang mengalir tanpa terburu-buru.</p>
+        </article>
+        <article data-bt="post" data-id="4" data-title="Catatan Singkat: Mengapa Saya Kembali Menulis" data-url="/?page=item" data-author="Pesonaku" data-date="2026-09-20T09:00:00+07:00">
+          <h2><a href="/?page=item">Catatan Singkat: Mengapa Saya Kembali Menulis</a></h2>
+          <div data-bt="labels"><a data-name="Catatan" href="/search/label/Catatan">Catatan</a></div>
+          <p data-bt="snippet">Post tanpa gambar unggulan — kartu ini menampilkan fallback gradient agar tetap terlihat rapi.</p>
+        </article>
+        <nav data-bt="pager"><a data-bt="older" href="/?older">Lebih lama</a></nav>
+      </main>
+    </div>
+
+    <template id="mock-item">
+      <main data-bt="posts">
+        <article data-bt="post" data-id="2" data-title="Membangun Tema Blogger dengan React dan Tailwind CSS" data-url="/?page=item" data-author="Pesonaku" data-date="2026-10-05T20:00:00+07:00">
+          <meta data-bt="image" content="/mock/code.jpg" />
+          <h1>Membangun Tema Blogger dengan React dan Tailwind CSS</h1>
+          <div data-bt="labels"><a data-name="Coding" href="/search/label/Coding">Coding</a><a data-name="Catatan" href="/search/label/Catatan">Catatan</a></div>
+          <div class="bt-post-body" data-bt="body">
+            <p>Blogger menyimpan konten, sedangkan React mengurus tampilan. Template XML merender markup untuk SEO, lalu React membacanya dan menampilkan UI modern.</p>
+            <h2>Alur build</h2>
+            <ol><li>Vite membangun satu file JS &amp; CSS tanpa hash.</li><li>Script <code>build-theme.mjs</code> menyisipkannya ke template.</li><li>Upload <code>index.xml</code> ke Blogger.</li></ol>
+            <blockquote>Routing tetap milik Blogger — React hanya memilih tampilan berdasarkan <code>pageType</code>.</blockquote>
+            <pre><code>window.BloggerData = { pageType: "item" }</code></pre>
+            <p>Selamat mencoba!</p>
+          </div>
+        </article>
+      </main>
+    </template>
+    <script>
+      if (page === 'item' || page === 'static_page') {
+        document.getElementById('root').replaceChildren(
+          document.getElementById('mock-item').content.cloneNode(true),
+        )
+      }
+    </script>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

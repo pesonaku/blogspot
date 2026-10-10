@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<!--
+  SOURCE TEMPLATE - JANGAN di-upload langsung ke Blogger.
+  Jalankan `npm run build:theme` di folder react-frontend untuk menghasilkan
+  blogger-theme/index.xml (bundle React + Tailwind sudah di-inline).
+
+  Penanda injeksi (jangan dihapus):
+    /*__THEME_CSS__*/  -> diganti CSS hasil build Tailwind
+    //__THEME_JS__     -> diganti JS hasil build React
+    __API_BASE_URL__   -> diganti URL Laravel API (env THEME_API_BASE_URL)
+-->
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' expr:lang='data:blog.localeUnderscoreDelimited' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta charset='utf-8'/>
+  <meta content='width=device-width, initial-scale=1' name='viewport'/>
+  <b:include data='blog' name='all-head-content'/>
+  <title><data:view.title.escaped/></title>
+  <link href='https://fonts.googleapis.com' rel='preconnect'/>
+  <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+  <link href='https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap' rel='stylesheet'/>
+
+  <!-- Fallback style untuk markup server-side (tampil sebelum React mount / tanpa JS) -->
+  <b:skin version='1.0.0'><![CDATA[
+body{margin:0;background:#0b0b14;color:#e5e7f0;font-family:Inter,system-ui,sans-serif;line-height:1.6}
+a{color:#a5b4fc}
+#root{max-width:960px;margin:0 auto;padding:24px}
+.bt-ssr-post{padding:16px 0;border-bottom:1px solid #22223a}
+.bt-ssr-post img{max-width:100%;height:auto}
+.bt-hidden{display:none}
+  ]]></b:skin>
+
+  <!-- Tailwind CSS hasil build (diinjeksi oleh scripts/build-theme.mjs) -->
+  <style type='text/css'>/*<![CDATA[*/
+/*__THEME_CSS__*/
+  /*]]>*/</style>
+
+  <!-- Jembatan data Blogger -> React -->
+  <script type='text/javascript'>
+    window.BloggerData = {
+      blogTitle: "<data:blog.title.jsEscaped/>",
+      homepageUrl: "<data:blog.homepageUrl.jsEscaped/>",
+      searchUrl: "<data:blog.searchUrl.jsEscaped/>",
+      pageType: "<data:blog.pageType/>",
+      pageTitle: "<data:view.title.jsEscaped/>",
+      isMobile: "<data:blog.isMobileRequest/>" === "true",
+      apiBaseUrl: "__API_BASE_URL__"
+    };
+  </script>
+</head>
+<body>
+  <!--
+    #root berisi markup server-side (SEO + fallback tanpa JS).
+    React membaca data dari markup ini, lalu me-render ulang UI di #root.
+  -->
+  <div id='root'>
+    <b:section class='bt-labels' id='labels' maxwidgets='1' showaddelement='yes'>
+      <b:widget id='Label1' locked='false' title='Label' type='Label' version='2'>
+        <b:includable id='main'>
+          <nav class='bt-hidden' data-bt='labels'>
+            <b:loop values='data:labels' var='label'>
+              <a class='bt-label' expr:data-count='data:label.count' expr:data-name='data:label.name' expr:href='data:label.url'><data:label.name/></a>
+            </b:loop>
+          </nav>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <b:section class='bt-main' id='main' maxwidgets='1' showaddelement='no'>
+      <b:widget id='Blog1' locked='true' title='Postingan Blog' type='Blog' version='2'>
+        <b:includable id='main' var='top'>
+          <main data-bt='posts'>
+            <b:if cond='data:view.isLabelSearch'>
+              <h1 class='bt-ssr-heading' data-bt='heading'>Label: <data:view.search.label/></h1>
+            <b:elseif cond='data:view.isSearch'/>
+              <h1 class='bt-ssr-heading' data-bt='heading'>Hasil pencarian: <data:view.search.query/></h1>
+            </b:if>
+
+            <b:loop values='data:posts' var='post'>
+              <article class='bt-ssr-post' data-bt='post' expr:data-author='data:post.author.name' expr:data-date='data:post.date.iso8601' expr:data-id='data:post.id' expr:data-title='data:post.title' expr:data-url='data:post.url'>
+                <b:if cond='data:post.featuredImage'>
+                  <b:if cond='data:post.featuredImage.isResizable'>
+                    <meta data-bt='image' expr:content='resizeImage(data:post.featuredImage, 1200, &quot;16:9&quot;)'/>
+                  <b:else/>
+                    <meta data-bt='image' expr:content='data:post.featuredImage'/>
+                  </b:if>
+                </b:if>
+
+                <b:if cond='data:view.isSingleItem'>
+                  <h1><data:post.title/></h1>
+                <b:else/>
+                  <h2><a expr:href='data:post.url'><data:post.title/></a></h2>
+                </b:if>
+
+                <div data-bt='labels'>
+                  <b:loop values='data:post.labels' var='label'>
+                    <a class='bt-label' expr:data-name='data:label.name' expr:href='data:label.url' rel='tag'><data:label.name/></a>
+                  </b:loop>
+                </div>
+
+                <b:if cond='data:view.isSingleItem'>
+                  <div class='bt-post-body' data-bt='body'><data:post.body/></div>
+                <b:else/>
+                  <p data-bt='snippet'><data:post.snippets.long/></p>
+                </b:if>
+              </article>
+            </b:loop>
+
+            <nav data-bt='pager'>
+              <b:if cond='data:newerPageUrl'>
+                <a data-bt='newer' expr:href='data:newerPageUrl'>Lebih baru</a>
+              </b:if>
+              <b:if cond='data:olderPageUrl'>
+                <a data-bt='older' expr:href='data:olderPageUrl'>Lebih lama</a>
+              </b:if>
+            </nav>
+          </main>
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </div>
+
+  <!-- React bundle hasil build (diinjeksi oleh scripts/build-theme.mjs) -->
+  <script type='text/javascript'>//<![CDATA[
+//__THEME_JS__
+  //]]></script>
+</body>
+</html>
