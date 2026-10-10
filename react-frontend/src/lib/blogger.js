@@ -7,8 +7,9 @@
  * 2. Markup server-side di dalam #root -> daftar post, label, dan pager.
  *    Markup ini dirender Blogger (bagus untuk SEO & tanpa JS), lalu dibaca di sini
  *    sebelum React mengganti isi #root.
- *
- * Kontrak atribut `data-bt` harus sama dengan blogger-theme/template.xml.
+ * 3. Fallback Feed JSON Blogger (/feeds/posts/default?alt=json) -> jika SSR
+ *    menghasilkan 0 artikel (misal saat widget Blogger belum aktif / cache template baru),
+ *    React akan otomatis mengambil data via feed JSON Blogger.
  */
 
 const text = (el) => (el ? el.textContent.trim() : '')
@@ -36,6 +37,82 @@ function readPost(el) {
   }
 }
 
+export function enhanceBloggerImageUrl(url) {
+  if (!url) return null
+  let src = url.trim()
+  if (src.startsWith('//')) src = `https:${src}`
+  // Ganti ukuran thumbnail kecil (/s72-c/, /w72-h72/) menjadi ukuran resolusi tinggi HD
+  return src
+    .replace(/\/s72(-[a-zA-Z0-9_-]+)?\//, '/s1200/')
+    .replace(/\/w\d+-h\d+[^/]*\//, '/s1200/')
+}
+
+export function parseFeedEntry(entry, blog = {}) {
+  const alternateLink = entry.link?.find((l) => l.rel === 'alternate')?.href || '#'
+  const id = entry.id?.$t || alternateLink
+  const title = entry.title?.$t || 'Tanpa Judul'
+  const author = entry.author?.[0]?.name?.$t || ''
+  const date = entry.published?.$t || ''
+  const contentHtml = entry.content?.$t || entry.summary?.$t || ''
+
+  let image = enhanceBloggerImageUrl(entry.media$thumbnail?.url)
+  if (!image && contentHtml) {
+    const match = contentHtml.match(/<img[^>]+src=["']([^"']+)["']/i)
+    if (match) image = enhanceBloggerImageUrl(match[1])
+  }
+
+  const searchBase = blog.searchUrl || '/search'
+  const labels = (entry.category || []).map((c) => ({
+    name: c.term,
+    url: `${searchBase}/label/${encodeURIComponent(c.term)}`,
+    count: null,
+  }))
+
+  const rawSnippet = entry.summary?.$t || contentHtml.replace(/<[^>]+>/g, ' ').trim()
+  const cleanSnippet = rawSnippet.replace(/\s+/g, ' ').slice(0, 160).trim()
+
+  return {
+    id,
+    title,
+    url: alternateLink,
+    author,
+    date,
+    image,
+    labels,
+    snippet: cleanSnippet ? `${cleanSnippet}…` : '',
+    bodyHtml: entry.content?.$t || null,
+  }
+}
+
+export async function fetchBloggerFeed(blog = {}) {
+  try {
+    const origin = (blog.homepageUrl || (typeof window !== 'undefined' ? window.location.origin : '')).replace(/\/+$/, '')
+    const feedUrl = `${origin}/feeds/posts/default?alt=json&max-results=50`
+    const res = await fetch(feedUrl)
+    if (!res.ok) return null
+    const json = await res.json()
+    const entries = json.feed?.entry || []
+    const posts = entries.map((e) => parseFeedEntry(e, blog))
+
+    const labelCounts = {}
+    for (const post of posts) {
+      for (const l of post.labels) {
+        labelCounts[l.name] = (labelCounts[l.name] || 0) + 1
+      }
+    }
+    const labels = Object.keys(labelCounts).map((name) => ({
+      name,
+      url: `${blog.searchUrl || '/search'}/label/${encodeURIComponent(name)}`,
+      count: labelCounts[name],
+    }))
+
+    return { posts, labels }
+  } catch (err) {
+    console.warn('[BloggerFeed] Fetch fallback gagal:', err)
+    return null
+  }
+}
+
 export function readBloggerData(container, globalData = window.BloggerData || {}) {
   const pager = container.querySelector('[data-bt="pager"]')
   return {
@@ -46,6 +123,7 @@ export function readBloggerData(container, globalData = window.BloggerData || {}
       pageType: globalData.pageType || 'index',
       pageTitle: globalData.pageTitle || '',
       isMobile: Boolean(globalData.isMobile),
+      apiBaseUrl: globalData.apiBaseUrl,
     },
     heading: text(container.querySelector('[data-bt="heading"]')),
     posts: Array.from(container.querySelectorAll('[data-bt="post"]')).map(readPost),

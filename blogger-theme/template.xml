@@ -55,7 +55,7 @@ a{color:#a5b4fc}
   -->
   <div id='root'>
     <b:section class='bt-labels' id='labels' maxwidgets='1' showaddelement='yes'>
-      <b:widget id='Label1' locked='false' title='Label' type='Label' version='2'>
+      <b:widget id='Label1' locked='false' title='Label' type='Label' version='2' visible='true'>
         <b:includable id='main'>
           <nav class='bt-hidden' data-bt='labels'>
             <b:loop values='data:labels' var='label'>
@@ -66,9 +66,9 @@ a{color:#a5b4fc}
       </b:widget>
     </b:section>
 
-    <b:section class='bt-main' id='main' maxwidgets='1' showaddelement='no'>
-      <b:widget id='Blog1' locked='true' title='Postingan Blog' type='Blog' version='2'>
-        <b:includable id='main' var='top'>
+    <b:section class='bt-main' id='main' maxwidgets='1' showaddelement='yes'>
+      <b:widget id='Blog1' locked='true' title='Postingan Blog' type='Blog' version='2' visible='true'>
+        <b:includable id='main'>
           <main data-bt='posts'>
             <b:if cond='data:view.isLabelSearch'>
               <h1 class='bt-ssr-heading' data-bt='heading'>Label: <data:view.search.label/></h1>
@@ -79,11 +79,11 @@ a{color:#a5b4fc}
             <b:loop values='data:posts' var='post'>
               <article class='bt-ssr-post' data-bt='post' expr:data-author='data:post.author.name' expr:data-date='data:post.date.iso8601' expr:data-id='data:post.id' expr:data-title='data:post.title' expr:data-url='data:post.url'>
                 <b:if cond='data:post.featuredImage'>
-                  <b:if cond='data:post.featuredImage.isResizable'>
-                    <meta data-bt='image' expr:content='resizeImage(data:post.featuredImage, 1200, &quot;16:9&quot;)'/>
-                  <b:else/>
-                    <meta data-bt='image' expr:content='data:post.featuredImage'/>
-                  </b:if>
+                  <meta data-bt='image' expr:content='data:post.featuredImage'/>
+                <b:elseif cond='data:post.firstImageUrl'/>
+                  <meta data-bt='image' expr:content='data:post.firstImageUrl'/>
+                <b:elseif cond='data:post.thumbnailUrl'/>
+                  <meta data-bt='image' expr:content='data:post.thumbnailUrl'/>
                 </b:if>
 
                 <b:if cond='data:view.isSingleItem'>
@@ -101,7 +101,7 @@ a{color:#a5b4fc}
                 <b:if cond='data:view.isSingleItem'>
                   <div class='bt-post-body' data-bt='body'><data:post.body/></div>
                 <b:else/>
-                  <p data-bt='snippet'><data:post.snippets.long/></p>
+                  <p data-bt='snippet'><data:post.snippet/></p>
                 </b:if>
               </article>
             </b:loop>

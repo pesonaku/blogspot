@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react'
-import { fetchApiStatus } from '../lib/api.js'
+import { fetchApiStatus, isApiConfigured } from '../lib/api.js'
 
 const STYLES = {
   loading: { dot: 'bg-amber-300 animate-pulse', label: 'Menghubungkan API…' },
   online: { dot: 'bg-emerald-400', label: 'API online' },
-  offline: { dot: 'bg-rose-400', label: 'API offline' },
+  offline: { dot: 'bg-slate-500', label: 'API offline' },
 }
 
 /** Badge kecil yang memanggil Laravel GET /api/status. */
 export default function ApiStatus() {
-  const [state, setState] = useState({ status: 'loading', detail: '' })
+  const configured = isApiConfigured()
+  const [state, setState] = useState({
+    status: configured ? 'loading' : 'offline',
+    detail: configured ? '' : 'Opsional: Hubungkan Laravel API via THEME_API_BASE_URL',
+  })
 
   useEffect(() => {
+    if (!configured) return
     const controller = new AbortController()
     fetchApiStatus({ signal: controller.signal })
       .then((json) =>
@@ -21,9 +26,9 @@ export default function ApiStatus() {
         if (err.name !== 'AbortError') setState({ status: 'offline', detail: err.message })
       })
     return () => controller.abort()
-  }, [])
+  }, [configured])
 
-  const s = STYLES[state.status]
+  const s = STYLES[state.status] || STYLES.offline
   return (
     <span
       id="api-status"
