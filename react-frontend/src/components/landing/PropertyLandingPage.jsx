@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { HeroSection } from './HeroSection.jsx'
 import { QuickStats } from './QuickStats.jsx'
 import { UspSection } from './UspSection.jsx'
@@ -42,6 +42,84 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
   const [prefilledUnitForSurvey, setPrefilledUnitForSurvey] = useState('')
   const [activeVideo, setActiveVideo] = useState({ url: '', title: '' })
   const [activeVirtualTourUrl, setActiveVirtualTourUrl] = useState('')
+
+  // Deteksi mode admin / studio kustomisasi rahasia (agar tersembunyi dari publik)
+  const [isAdminMode, setIsAdminMode] = useState(() => {
+    try {
+      if (typeof window === 'undefined') return false
+      const urlParams = new URLSearchParams(window.location.search)
+      if (
+        urlParams.get('admin') === '1' ||
+        urlParams.get('admin') === 'true' ||
+        urlParams.get('customize') === '1' ||
+        urlParams.get('edit') === '1'
+      ) {
+        localStorage.setItem('pesona_customizer_admin', '1')
+        return true
+      }
+      if (window.location.hash === '#admin' || window.location.hash === '#customize') {
+        localStorage.setItem('pesona_customizer_admin', '1')
+        return true
+      }
+      return localStorage.getItem('pesona_customizer_admin') === '1'
+    } catch {
+      return false
+    }
+  })
+
+  // Keyboard shortcut listener (Ctrl + Shift + E atau Alt + E) & secret footer trigger
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (
+        (e.ctrlKey && e.shiftKey && (e.key === 'E' || e.key === 'e')) ||
+        (e.altKey && (e.key === 'E' || e.key === 'e'))
+      ) {
+        e.preventDefault()
+        setIsAdminMode(true)
+        setShowCustomizer((prev) => !prev)
+        try {
+          localStorage.setItem('pesona_customizer_admin', '1')
+        } catch {}
+      }
+    }
+
+    const handleToggleAdmin = () => {
+      setIsAdminMode(true)
+      setShowCustomizer(true)
+      try {
+        localStorage.setItem('pesona_customizer_admin', '1')
+      } catch {}
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('pesona:toggle-admin', handleToggleAdmin)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('pesona:toggle-admin', handleToggleAdmin)
+    }
+  }, [])
+
+  const handleHideAdminMode = () => {
+    setIsAdminMode(false)
+    setShowCustomizer(false)
+    try {
+      localStorage.removeItem('pesona_customizer_admin')
+      if (window.location.hash === '#admin' || window.location.hash === '#customize') {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search)
+      }
+      const url = new URL(window.location.href)
+      let changed = false
+      ;['admin', 'customize', 'edit'].forEach((p) => {
+        if (url.searchParams.has(p)) {
+          url.searchParams.delete(p)
+          changed = true
+        }
+      })
+      if (changed) {
+        window.history.replaceState(null, '', url.pathname + (url.search ? url.search : ''))
+      }
+    } catch {}
+  }
 
   const [savedOverrides, setSavedOverrides] = useState(() => {
     try {
@@ -281,28 +359,41 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
         />
       )}
 
-      {/* Floating Trigger Button: Custom Widget Studio */}
-      <div className="fixed bottom-6 left-6 z-40">
-        <button
-          type="button"
-          onClick={() => setShowCustomizer(true)}
-          className="glass group flex items-center gap-2.5 rounded-full border border-emerald-400/40 bg-white/95 dark:bg-ink-950/95 px-4 py-3 text-xs font-bold text-emerald-950 dark:text-white shadow-2xl backdrop-blur-xl hover:border-emerald-400 hover:scale-105 transition-all"
-          title="Buka Form Customizer Widget & Media Uploader"
-        >
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-gradient-to-tr from-emerald-600 to-teal-600 text-sm text-white shadow-md">
-            ⚙️
-          </span>
-          <span className="hidden sm:inline">Form Custom Widget</span>
-          <span className="chip border-emerald-400/30 text-[10px] text-emerald-700 dark:text-emerald-300">
-            Full Edit
-          </span>
-        </button>
-      </div>
+      {/* Floating Trigger Tombol Form Customizer Studio (HANYA MUNCUL KETIKA ADMIN MODE AKTIF, 100% TERSEMBUNYI DARI PUBLIK) */}
+      {isAdminMode && (
+        <div className="fixed bottom-6 left-6 z-40 flex items-center gap-2 animate-fade-up">
+          <button
+            type="button"
+            onClick={() => setShowCustomizer(true)}
+            className="glass group flex items-center gap-2.5 rounded-full border border-emerald-400/50 bg-white/95 dark:bg-ink-950/95 px-4 py-3 text-xs font-bold text-emerald-950 dark:text-white shadow-2xl backdrop-blur-xl hover:border-emerald-400 hover:scale-105 transition-all"
+            title="Buka Form Customizer Widget (Mode Admin Aktif)"
+          >
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-gradient-to-tr from-emerald-600 to-teal-600 text-sm text-white shadow-md">
+              ⚙️
+            </span>
+            <span className="hidden sm:inline">Custom Widget Studio</span>
+            <span className="chip border-emerald-400/30 text-[10px] text-emerald-700 dark:text-emerald-300">
+              Admin
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleHideAdminMode}
+            className="h-8 w-8 rounded-full bg-slate-900/80 hover:bg-rose-600 text-white/70 hover:text-white flex items-center justify-center text-xs shadow-lg backdrop-blur transition"
+            title="Sembunyikan tombol & keluar dari mode admin (tampilan publik murni)"
+          >
+            ✕
+          </button>
+        </div>
+      )}
 
       {/* Modal Customizer Studio */}
       <WidgetCustomizerModal
         isOpen={showCustomizer}
         onClose={() => setShowCustomizer(false)}
+        isAdminMode={isAdminMode}
+        onHideAdminMode={handleHideAdminMode}
         currentSections={activeSections.map((s) => ({
           ...s,
           config: { ...(s.config || {}), ...(savedOverrides[s.id] || {}) },

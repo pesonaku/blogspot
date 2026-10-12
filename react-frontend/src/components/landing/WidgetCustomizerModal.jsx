@@ -204,6 +204,8 @@ export default function WidgetCustomizerModal({
   onClose,
   currentSections = [],
   onApplyOverrides,
+  isAdminMode,
+  onHideAdminMode,
 }) {
   const [activeTab, setActiveTab] = useState('hero')
   const [copiedNotification, setCopiedNotification] = useState(false)
@@ -310,6 +312,26 @@ export default function WidgetCustomizerModal({
               ✕
             </button>
           </div>
+        </div>
+
+        {/* Info Banner: Mode Admin Tersembunyi dari Publik */}
+        <div className="px-5 py-2.5 bg-emerald-500/10 border-b border-emerald-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-emerald-950 dark:text-emerald-200">
+          <div className="flex items-center gap-2">
+            <span className="text-base shrink-0">🔒</span>
+            <span className="leading-tight">
+              <strong>Studio Khusus Admin (Tersembunyi dari Publik):</strong> Pengunjung biasa tidak melihat studio/tombol ini. Buka kembali kapan saja via URL <code className="font-mono bg-emerald-500/20 px-1 py-0.5 rounded font-bold text-emerald-800 dark:text-emerald-300">?admin=1</code> atau shortcut <kbd className="font-mono bg-black/10 dark:bg-white/10 px-1.5 py-0.5 rounded font-bold">Ctrl + Shift + E</kbd>.
+            </span>
+          </div>
+          {onHideAdminMode && (
+            <button
+              type="button"
+              onClick={onHideAdminMode}
+              className="self-start sm:self-auto text-[11px] font-semibold text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 px-2.5 py-1 rounded-lg border border-rose-500/30 hover:bg-rose-500/10 transition shrink-0"
+              title="Keluar dari mode admin dan sembunyikan semua tombol agar halaman kembali ke tampilan publik murni"
+            >
+              ✕ Sembunyikan Akses Publik
+            </button>
+          )}
         </div>
 
         {/* Main Content Area (Sidebar Tabs + Form Pane) */}

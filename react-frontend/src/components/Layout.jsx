@@ -1,3 +1,5 @@
+import { useState, useRef } from 'react'
+
 export function Hero({ blog, postCount }) {
   return (
     <section className="relative mx-auto max-w-6xl px-5 pb-12 pt-16 text-center md:pt-24">
@@ -110,6 +112,25 @@ export function Background() {
 }
 
 export function Footer({ blog }) {
+  const [clickCount, setClickCount] = useState(0)
+  const timerRef = useRef(null)
+
+  const handleSecretFooterClick = () => {
+    if (timerRef.current) clearTimeout(timerRef.current)
+    const next = clickCount + 1
+    if (next >= 3) {
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent('pesona:toggle-admin'))
+      }
+      setClickCount(0)
+    } else {
+      setClickCount(next)
+      timerRef.current = setTimeout(() => {
+        setClickCount(0)
+      }, 1200)
+    }
+  }
+
   return (
     <footer className="border-t border-emerald-100 bg-white/95 dark:bg-ink-950/95 dark:border-white/10 backdrop-blur-xl pt-12 pb-8 transition-colors">
       <div className="mx-auto max-w-6xl px-5">
@@ -174,7 +195,13 @@ export function Footer({ blog }) {
 
         {/* Bottom Credits */}
         <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
-          <p>© {new Date().getFullYear()} {blog.title || 'Pesona Kahuripan'}. Seluruh Hak Cipta Dilindungi.</p>
+          <p
+            onClick={handleSecretFooterClick}
+            className="cursor-default select-none transition-colors hover:text-emerald-600 dark:hover:text-emerald-400"
+            title={`© ${new Date().getFullYear()} ${blog.title || 'Pesona Kahuripan'}`}
+          >
+            © {new Date().getFullYear()} {blog.title || 'Pesona Kahuripan'}. Seluruh Hak Cipta Dilindungi.
+          </p>
           <p>Tema Nuansa Hijau &amp; Putih · Built with React &amp; Tailwind</p>
         </div>
       </div>
