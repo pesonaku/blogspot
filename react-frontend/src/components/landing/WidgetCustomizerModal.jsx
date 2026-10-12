@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { serializeSectionConfig, isSectionDisabled } from '../../lib/widgetConfig.js'
 
 /**
@@ -221,6 +221,19 @@ export default function WidgetCustomizerModal({
     return initial
   })
 
+  // Sinkronkan state formData secara otomatis setiap kali modal dibuka atau data section berubah
+  useEffect(() => {
+    if (isOpen && currentSections.length > 0) {
+      setFormData((prev) => {
+        const updated = { ...prev }
+        currentSections.forEach((sec) => {
+          updated[sec.id] = { ...(sec.config || {}), ...(prev[sec.id] || {}) }
+        })
+        return updated
+      })
+    }
+  }, [isOpen, currentSections])
+
   if (!isOpen) return null
 
   const handleFieldChange = (secId, key, val) => {
@@ -249,18 +262,112 @@ export default function WidgetCustomizerModal({
 
   const activeConfig = formData[activeTab] || {}
 
+  // Pemetaan 1-ke-1 dengan urutan dan nama Section di Tata Letak Blogger
   const sectionTabs = [
-    { id: 'header', name: 'Logo & Menu Header', icon: '🏷️', widgetCode: 'HTML10' },
-    { id: 'hero', name: 'Hero Banner', icon: '🖼️', widgetCode: 'HTML1' },
-    { id: 'stats', name: 'Quick Stats', icon: '📊', widgetCode: 'HTML2' },
-    { id: 'usp', name: 'Keunggulan USP', icon: '⭐', widgetCode: 'HTML3' },
-    { id: 'location', name: 'Lokasi & Maps', icon: '📍', widgetCode: 'HTML4' },
-    { id: 'units', name: 'Tipe Unit & Spek', icon: '🏡', widgetCode: 'HTML5' },
-    { id: 'gallery', name: 'Galeri & 360°', icon: '📸', widgetCode: 'HTML6' },
-    { id: 'promo', name: 'Promo Spesial', icon: '🎁', widgetCode: 'HTML7' },
-    { id: 'social-proof', name: 'Testimoni & BAST', icon: '🤝', widgetCode: 'HTML8' },
-    { id: 'lead-form', name: 'Form Survey Lead', icon: '📝', widgetCode: 'HTML9' },
-    { id: 'floating-cta', name: 'CTA Pojok Kanan Bawah', icon: '💬', widgetCode: 'HTML11' },
+    {
+      id: 'config',
+      sectionName: '#CONFIG',
+      name: 'Kode Lisensi & Sistem',
+      widgetTitle: 'Kode Lisensi ( Premium )',
+      widgetCode: 'HTML99',
+      icon: '🔑',
+    },
+    {
+      id: 'header',
+      sectionName: '#HEADER-SECTION',
+      name: 'Logo & Menu Header',
+      widgetTitle: 'Pengaturan Tambahan Header & CTA',
+      widgetCode: 'HTML10',
+      icon: '🏷️',
+    },
+    {
+      id: 'hero',
+      sectionName: '#HERO-BANNER',
+      name: 'Hero: Headline & CTA',
+      widgetTitle: 'Wujudkan Rumah Impian Anda (Hero Banner Utama)',
+      widgetCode: 'HTML1',
+      icon: '🖼️',
+    },
+    {
+      id: 'hero-media',
+      sectionName: '#HERO-BANNER',
+      name: 'Hero: Media, Video & 360°',
+      widgetTitle: 'Rumah Subsidi - Pesona Kahuripan (Media & Video)',
+      widgetCode: 'HTML12',
+      icon: '🎬',
+    },
+    {
+      id: 'stats',
+      sectionName: '#SECTION-STATS',
+      name: 'Quick Stats Kredibilitas',
+      widgetTitle: 'Ringkasan Proyek & Angka Kunci (Quick Stats)',
+      widgetCode: 'HTML2',
+      icon: '📊',
+    },
+    {
+      id: 'usp',
+      sectionName: '#SECTION-USP',
+      name: 'Keunggulan Kawasan (USP)',
+      widgetTitle: 'Keunggulan Kawasan & Fasilitas (USP)',
+      widgetCode: 'HTML3',
+      icon: '⭐',
+    },
+    {
+      id: 'location',
+      sectionName: '#SECTION-LOKASI',
+      name: 'Lokasi Strategis & Peta',
+      widgetTitle: 'Aksesibilitas Lokasi & Peta Google Maps',
+      widgetCode: 'HTML4',
+      icon: '📍',
+    },
+    {
+      id: 'units',
+      sectionName: '#SECTION-TIPE-UNIT',
+      name: 'Tipe Unit & Spesifikasi',
+      widgetTitle: 'Katalog Tipe Unit & Spesifikasi Rumah',
+      widgetCode: 'HTML5',
+      icon: '🏡',
+    },
+    {
+      id: 'gallery',
+      sectionName: '#SECTION-GALERI',
+      name: 'Galeri Foto & Tur 360°',
+      widgetTitle: 'Galeri Foto Ruangan & Tur Virtual 360°',
+      widgetCode: 'HTML6',
+      icon: '📸',
+    },
+    {
+      id: 'promo',
+      sectionName: '#SECTION-PROMO',
+      name: 'Promo & Countdown NUP',
+      widgetTitle: 'Promo Spesial Bulan Ini & Countdown NUP',
+      widgetCode: 'HTML7',
+      icon: '🎁',
+    },
+    {
+      id: 'social-proof',
+      sectionName: '#SECTION-TESTIMONI',
+      name: 'Testimoni Pembeli & BAST',
+      widgetTitle: 'Testimoni Konsumen & Serah Terima Kunci (BAST)',
+      widgetCode: 'HTML8',
+      icon: '🤝',
+    },
+    {
+      id: 'lead-form',
+      sectionName: '#SECTION-SURVEY',
+      name: 'Formulir Survey Sales',
+      widgetTitle: 'Formulir Reservasi Survey & Kontak Sales',
+      widgetCode: 'HTML9',
+      icon: '📝',
+    },
+    {
+      id: 'floating-cta',
+      sectionName: '#FLOATING-CTA',
+      name: 'Tombol Melayang WhatsApp',
+      widgetTitle: 'Tombol Melayang WhatsApp Pojok Bawah',
+      widgetCode: 'HTML11',
+      icon: '💬',
+    },
   ]
 
   const activeTabMeta = sectionTabs.find((t) => t.id === activeTab) || sectionTabs[0]
@@ -352,9 +459,9 @@ export default function WidgetCustomizerModal({
         {/* Main Content Area (Sidebar Tabs + Form Pane) */}
         <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
           {/* Left Sidebar: Section Tabs */}
-          <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-emerald-500/15 bg-slate-50/50 dark:bg-ink-900/40 p-3 overflow-x-auto md:overflow-y-auto shrink-0 flex md:flex-col gap-1.5">
+          <div className="w-full md:w-72 border-b md:border-b-0 md:border-r border-emerald-500/15 bg-slate-50/50 dark:bg-ink-900/40 p-3 overflow-x-auto md:overflow-y-auto shrink-0 flex md:flex-col gap-1.5">
             <p className="hidden md:block text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-emerald-300/40 px-3 py-1">
-              Pilih Section Widget:
+              Tata Letak Blogger (13 Widget):
             </p>
             {sectionTabs.map((tab) => {
               const tabCfg = formData[tab.id] || {}
@@ -364,7 +471,7 @@ export default function WidgetCustomizerModal({
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs font-bold transition text-left shrink-0 ${
+                  className={`flex items-center justify-between rounded-xl px-3 py-2 text-xs font-bold transition text-left shrink-0 ${
                     activeTab === tab.id
                       ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
                       : isTabDisabled
@@ -372,23 +479,31 @@ export default function WidgetCustomizerModal({
                       : 'text-slate-700 dark:text-emerald-200 hover:bg-emerald-500/10'
                   }`}
                 >
-                  <span className="flex items-center gap-2">
-                    <span>{tab.icon}</span>
-                    <span className={isTabDisabled && activeTab !== tab.id ? 'line-through' : ''}>
-                      {tab.name}
+                  <div className="flex flex-col gap-0.5 min-w-0 pr-2">
+                    <div className="flex items-center gap-1.5 truncate">
+                      <span className="text-sm shrink-0">{tab.icon}</span>
+                      <span className={`truncate text-xs ${isTabDisabled && activeTab !== tab.id ? 'line-through' : ''}`}>
+                        {tab.name}
+                      </span>
+                    </div>
+                    <span className={`text-[10px] font-mono pl-5 truncate ${
+                      activeTab === tab.id ? 'text-emerald-100/80' : 'text-slate-400 dark:text-emerald-300/50'
+                    }`}>
+                      {tab.sectionName}
                     </span>
-                  </span>
-                  <div className="flex items-center gap-1">
+                  </div>
+
+                  <div className="flex items-center gap-1 shrink-0">
                     {isTabDisabled && (
                       <span className="text-[9px] px-1 py-0.2 rounded bg-rose-500/20 text-rose-500 font-mono">
                         OFF
                       </span>
                     )}
                     <span
-                      className={`text-[9px] px-1.5 py-0.5 rounded font-mono ${
+                      className={`text-[9px] px-1.5 py-0.5 rounded font-mono font-bold ${
                         activeTab === tab.id
                           ? 'bg-white/20 text-white'
-                          : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                          : 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
                       }`}
                     >
                       {tab.widgetCode}
@@ -404,21 +519,27 @@ export default function WidgetCustomizerModal({
             {/* Action Sub-header */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-emerald-500/15">
               <div>
-                <span className="chip text-[10px] font-bold text-emerald-700 dark:text-emerald-300">
-                  Target Widget: {activeTabMeta.widgetCode}
-                </span>
-                <h4 className="mt-1 font-display text-lg font-bold text-emerald-950 dark:text-white">
-                  Form Pengaturan {activeTabMeta.name}
+                <div className="flex flex-wrap items-center gap-2 mb-1">
+                  <span className="chip text-[10px] font-mono font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30">
+                    Tata Letak: {activeTabMeta.sectionName}
+                  </span>
+                  <span className="chip text-[10px] font-mono font-bold bg-teal-500/20 text-teal-800 dark:text-teal-200 border-teal-500/30">
+                    Widget: {activeTabMeta.widgetCode}
+                  </span>
+                </div>
+                <h4 className="font-display text-lg font-extrabold text-emerald-950 dark:text-white">
+                  {activeTabMeta.widgetTitle || activeTabMeta.name}
                 </h4>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 shrink-0">
                 <button
                   type="button"
                   onClick={handleCopyBloggerCode}
-                  className="rounded-xl border border-emerald-500/30 glass px-3 py-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/15 transition flex items-center gap-1.5"
+                  className="rounded-xl border border-emerald-500/40 bg-emerald-600 text-white hover:bg-emerald-700 px-3.5 py-1.5 text-xs font-bold transition flex items-center gap-1.5 shadow-md shadow-emerald-600/20"
+                  title={`Salin konfigurasi khusus widget ${activeTabMeta.widgetCode}`}
                 >
-                  <span>{copiedNotification ? '✔ Tersalin!' : '📋 Salin Kode Blogger'}</span>
+                  <span>{copiedNotification ? '✔ Tersalin!' : `📋 Salin Kode ${activeTabMeta.widgetCode}`}</span>
                 </button>
                 <button
                   type="button"
@@ -506,7 +627,36 @@ export default function WidgetCustomizerModal({
               )
             })()}
 
-            {/* SECTION 0: LOGO & MENU HEADER */}
+            {/* SECTION 0A: KODE LISENSI TEMPLATE & SISTEM (HTML99) */}
+            {activeTab === 'config' && (
+              <div className="space-y-4">
+                <div className="rounded-2xl p-4 bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-950 dark:text-emerald-200">
+                  🔑 <strong>Konfigurasi Lisensi Blogger:</strong> Widget ini memvalidasi lisensi resmi tema Pesonaku dan status aktivasi sistem.
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <TextInput
+                    label="Kode Lisensi Template"
+                    value={activeConfig.license_key}
+                    onChange={(val) => handleFieldChange('config', 'license_key', val)}
+                    placeholder="PESONA-PREMIUM-2026-ACTIVE"
+                  />
+                  <TextInput
+                    label="Status Lisensi"
+                    value={activeConfig.status}
+                    onChange={(val) => handleFieldChange('config', 'status', val)}
+                    placeholder="verified"
+                  />
+                </div>
+                <TextInput
+                  label="Versi Tema"
+                  value={activeConfig.theme_version}
+                  onChange={(val) => handleFieldChange('config', 'theme_version', val)}
+                  placeholder="2.5.0"
+                />
+              </div>
+            )}
+
+            {/* SECTION 0B: LOGO & MENU HEADER (HTML10) */}
             {activeTab === 'header' && (
               <div className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -577,44 +727,27 @@ export default function WidgetCustomizerModal({
               </div>
             )}
 
-            {/* SECTION 1: HERO BANNER */}
+            {/* SECTION 1A: HERO BANNER UTAMA - HEADLINE & TOMBOL (HTML1) */}
             {activeTab === 'hero' && (
               <div className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <FileUploadField
-                    label="Foto Hero Utama (Upload / Link)"
-                    value={activeConfig.hero_image}
-                    onChange={(val) => handleFieldChange('hero', 'hero_image', val)}
-                    helpText="Foto lanskap perumahan cluster tampak depan resolusi tinggi."
-                  />
-                  <FileUploadField
-                    label="Video Kawasan / YouTube Embed"
-                    value={activeConfig.video_url}
-                    onChange={(val) => handleFieldChange('hero', 'video_url', val)}
-                    isVideo={true}
-                    accept="video/*"
-                    helpText="Bisa paste link YouTube atau upload file MP4."
-                  />
-                </div>
-
                 <div className="grid gap-4 sm:grid-cols-3">
                   <TextInput
-                    label="Badge Cluster"
+                    label="Badge Cluster Tahap"
                     value={activeConfig.badge}
                     onChange={(val) => handleFieldChange('hero', 'badge', val)}
-                    placeholder="Contoh: Cluster Baru Rilis Tahap 3"
+                    placeholder="Cluster Baru Rilis Tahap 3"
                   />
                   <TextInput
-                    label="Pill 1 (Ready Stock)"
-                    value={activeConfig.pill1}
-                    onChange={(val) => handleFieldChange('hero', 'pill1', val)}
-                    placeholder="Contoh: Ready Stock Tahap 3"
+                    label="Badge Promo DP"
+                    value={activeConfig.badge_promo}
+                    onChange={(val) => handleFieldChange('hero', 'badge_promo', val)}
+                    placeholder="✦ Promo DP 0% & Subsidi Suku Bunga KPR"
                   />
                   <TextInput
-                    label="Pill 2 (Bebas Banjir)"
-                    value={activeConfig.pill2}
-                    onChange={(val) => handleFieldChange('hero', 'pill2', val)}
-                    placeholder="Contoh: Bebas Banjir 100%"
+                    label="Badge Legalitas SHM"
+                    value={activeConfig.badge_shm}
+                    onChange={(val) => handleFieldChange('hero', 'badge_shm', val)}
+                    placeholder="★ Legalitas 100% Sertifikat SHM Pecah"
                   />
                 </div>
 
@@ -622,31 +755,16 @@ export default function WidgetCustomizerModal({
                   label="Headline Utama (Judul Besar)"
                   value={activeConfig.headline}
                   onChange={(val) => handleFieldChange('hero', 'headline', val)}
-                  placeholder="Wujudkan Rumah Impian Masa Depan Keluarga Anda..."
+                  placeholder="Wujudkan Rumah Impian Masa Depan Keluarga Anda di Pesona Kahuripan"
                 />
 
                 <TextAreaInput
                   label="Subheadline / Deskripsi Ringkas"
                   value={activeConfig.subheadline}
                   onChange={(val) => handleFieldChange('hero', 'subheadline', val)}
-                  placeholder="Hunian bernuansa asri berkonsep modern minimalis..."
+                  placeholder="Hunian bernuansa asri berkonsep modern minimalis di lokasi sangat strategis. Nikmati kemudahan DP 0%..."
                   rows={2}
                 />
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <TextInput
-                    label="Judul Kartu Overlay Foto"
-                    value={activeConfig.card_title}
-                    onChange={(val) => handleFieldChange('hero', 'card_title', val)}
-                    placeholder="Suasana Asri & Udara Sejuk Khas Perbukitan"
-                  />
-                  <TextInput
-                    label="Deskripsi Kartu Overlay Foto"
-                    value={activeConfig.card_desc}
-                    onChange={(val) => handleFieldChange('hero', 'card_desc', val)}
-                    placeholder="Konsep hunian hijau dengan row jalan lebar..."
-                  />
-                </div>
 
                 <div className="grid gap-4 sm:grid-cols-3">
                   <TextInput
@@ -662,10 +780,91 @@ export default function WidgetCustomizerModal({
                     placeholder="📥 Unduh Brosur & Pricelist"
                   />
                   <TextInput
-                    label="Nomor WhatsApp Hotline"
-                    value={activeConfig.whatsapp}
-                    onChange={(val) => handleFieldChange('hero', 'whatsapp', val)}
-                    placeholder="6281288997711"
+                    label="Tombol Chat WhatsApp"
+                    value={activeConfig.cta_wa}
+                    onChange={(val) => handleFieldChange('hero', 'cta_wa', val)}
+                    placeholder="💬 Chat Sales via WhatsApp"
+                  />
+                </div>
+
+                <TextInput
+                  label="Nomor WhatsApp Hotline (Format 628...)"
+                  value={activeConfig.whatsapp}
+                  onChange={(val) => handleFieldChange('hero', 'whatsapp', val)}
+                  placeholder="6281288997711"
+                />
+              </div>
+            )}
+
+            {/* SECTION 1B: HERO MEDIA, VIDEO & TOUR 360 (HTML12) */}
+            {activeTab === 'hero-media' && (
+              <div className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <FileUploadField
+                    label="Foto Hero Kawasan (Upload / Link)"
+                    value={activeConfig.hero_image}
+                    onChange={(val) => handleFieldChange('hero-media', 'hero_image', val)}
+                    helpText="Foto lanskap perumahan cluster tampak depan resolusi tinggi."
+                  />
+                  <FileUploadField
+                    label="Video Kawasan / YouTube Embed"
+                    value={activeConfig.video_url}
+                    onChange={(val) => handleFieldChange('hero-media', 'video_url', val)}
+                    isVideo={true}
+                    accept="video/*"
+                    helpText="Bisa paste link YouTube atau upload file MP4."
+                  />
+                </div>
+
+                <TextInput
+                  label="Link Tur Virtual 360° (Kuula / Matterport)"
+                  value={activeConfig.virtual_tour_url}
+                  onChange={(val) => handleFieldChange('hero-media', 'virtual_tour_url', val)}
+                  placeholder="https://kuula.co/share/... atau https://my.matterport.com/show/..."
+                />
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <TextInput
+                    label="Pill Tag 1"
+                    value={activeConfig.pill1}
+                    onChange={(val) => handleFieldChange('hero-media', 'pill1', val)}
+                    placeholder="Ready Stock Tahap 3"
+                  />
+                  <TextInput
+                    label="Pill Tag 2"
+                    value={activeConfig.pill2}
+                    onChange={(val) => handleFieldChange('hero-media', 'pill2', val)}
+                    placeholder="Bebas Banjir 100%"
+                  />
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <TextInput
+                    label="Judul Kartu Overlay Foto"
+                    value={activeConfig.card_title}
+                    onChange={(val) => handleFieldChange('hero-media', 'card_title', val)}
+                    placeholder="Suasana Asri & Udara Sejuk Khas Perbukitan"
+                  />
+                  <TextInput
+                    label="Deskripsi Kartu Overlay Foto"
+                    value={activeConfig.card_desc}
+                    onChange={(val) => handleFieldChange('hero-media', 'card_desc', val)}
+                    placeholder="Konsep hunian hijau dengan row jalan lebar dan taman bermain..."
+                  />
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <TextInput
+                    label="Label Tombol Tur Virtual"
+                    value={activeConfig.cta_tour}
+                    onChange={(val) => handleFieldChange('hero-media', 'cta_tour', val)}
+                    placeholder="🔄 Virtual Tour 360°"
+                  />
+                  <TextInput
+                    label="Label Tombol Video Kawasan"
+                    value={activeConfig.cta_video}
+                    onChange={(val) => handleFieldChange('hero-media', 'cta_video', val)}
+                    placeholder="▶ Putar Video Kawasan"
                   />
                 </div>
               </div>

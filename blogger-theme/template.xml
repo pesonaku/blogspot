@@ -174,7 +174,7 @@ show_search: true]]></b:widget-setting>
     </b:section>
 
     <!-- HERO BANNER UTAMA -->
-    <b:section class='sec-hero' id='sec-hero' name='HERO BANNER UTAMA' showaddelement='yes'>
+    <b:section class='sec-hero' id='sec-hero' name='#HERO-BANNER' showaddelement='yes'>
       <b:widget id='HTML1' locked='false' title='Wujudkan Rumah Impian Anda (Hero Banner Utama)' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================

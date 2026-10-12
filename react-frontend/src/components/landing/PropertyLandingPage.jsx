@@ -20,8 +20,10 @@ import {
 } from './Modals.jsx'
 
 export const DEFAULT_LANDING_SECTIONS = [
+  { id: 'config' },
   { id: 'header' },
   { id: 'hero' },
+  { id: 'hero-media' },
   { id: 'stats' },
   { id: 'usp' },
   { id: 'location' },
@@ -154,22 +156,34 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
       return null
     }
     switch (sec.id) {
+      case 'config':
+        return null // Metadata lisensi sistem
+      case 'hero-media':
+        return null // Media telah terintegrasi di HeroSection
       case 'hero':
+        const heroMediaConfig = {
+          ...(sections.find((s) => s.id === 'hero-media')?.config || {}),
+          ...(savedOverrides['hero-media'] || {}),
+        }
+        const mergedHeroConfig = {
+          ...config,
+          ...heroMediaConfig,
+        }
         return (
           <div key="hero" id="sec-hero-wrapper">
             <HeroSection
               blog={blog}
-              config={config}
+              config={mergedHeroConfig}
               onOpenVideo={(url, title) => {
                 setActiveVideo({
-                  url: url || config.video_url || '',
-                  title: title || config.headline || config.title || '',
+                  url: url || mergedHeroConfig.video_url || '',
+                  title: title || mergedHeroConfig.headline || mergedHeroConfig.title || '',
                 })
                 setShowVideoModal(true)
               }}
               onOpenBrosur={() => setShowBrosurModal(true)}
               onOpenVirtualTour={(url) => {
-                setActiveVirtualTourUrl(url || config.virtual_tour_url || '')
+                setActiveVirtualTourUrl(url || mergedHeroConfig.virtual_tour_url || '')
                 setShowVirtualTour(true)
               }}
             />
