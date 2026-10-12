@@ -1,6 +1,6 @@
 import { uspFeatures } from './propertyData.js'
 
-export function UspSection() {
+export function UspSection({ config = {} }) {
   const getIcon = (type) => {
     switch (type) {
       case 'shield-check':
@@ -25,13 +25,13 @@ export function UspSection() {
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-14">
         <span className="chip border-violet-400/30 bg-violet-400/10 text-violet-200 uppercase tracking-widest text-[11px] font-bold">
-          Keunggulan Eksklusif
+          {config.badge || 'Keunggulan Eksklusif'}
         </span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-          Mengapa Pesona Kahuripan Pilihan Tepat Keluarga Anda?
+          {config.title || 'Mengapa Pesona Kahuripan Pilihan Tepat Keluarga Anda?'}
         </h2>
         <p className="mt-4 text-base text-slate-300">
-          Lebih dari sekadar bangunan, kami menghadirkan ekosistem hunian yang aman, nyaman, dan bernilai investasi tinggi untuk generasi mendatang.
+          {config.desc || 'Lebih dari sekadar bangunan, kami menghadirkan ekosistem hunian yang aman, nyaman, dan bernilai investasi tinggi untuk generasi mendatang.'}
         </p>
       </div>
 

@@ -1,7 +1,11 @@
 import { propertyInfo } from './propertyData.js'
 
-export function HeroSection({ blog, onOpenVideo, onOpenBrosur, onOpenVirtualTour }) {
-  const brandName = blog?.title || propertyInfo.name
+export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOpenVirtualTour }) {
+  const brandName = config.title || blog?.title || propertyInfo.name
+  const headline = config.headline || propertyInfo.headline
+  const subheadline = config.subheadline || propertyInfo.subheadline
+  const whatsapp = config.whatsapp || propertyInfo.whatsapp
+  const heroImage = config.hero_image || '/hero-cluster.jpg'
 
   return (
     <section id="hero" className="relative overflow-hidden pt-8 pb-16 md:pt-14 md:pb-24">
@@ -14,13 +18,13 @@ export function HeroSection({ blog, onOpenVideo, onOpenBrosur, onOpenVirtualTour
         <div className="flex flex-wrap items-center justify-center gap-2 mb-6 animate-fade-up">
           <span className="chip border-emerald-400/30 bg-emerald-400/10 text-emerald-300 font-semibold shadow-sm">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping inline-block mr-1" />
-            Cluster Baru Rilis Tahap 3
+            {config.badge || 'Cluster Baru Rilis Tahap 3'}
           </span>
           <span className="chip border-violet-400/30 bg-violet-400/10 text-violet-200">
-            ✦ Promo DP 0% &amp; Subsidi Suku Bunga KPR
+            {config.badge_promo || '✦ Promo DP 0% & Subsidi Suku Bunga KPR'}
           </span>
           <span className="chip border-amber-400/30 bg-amber-400/10 text-amber-200">
-            ★ Legalitas 100% Sertifikat SHM Pecah
+            {config.badge_shm || '★ Legalitas 100% Sertifikat SHM Pecah'}
           </span>
         </div>
 
@@ -37,14 +41,14 @@ export function HeroSection({ blog, onOpenVideo, onOpenBrosur, onOpenVirtualTour
             className="mt-4 font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight animate-fade-up"
             style={{ animationDelay: '120ms' }}
           >
-            {propertyInfo.headline}
+            {headline}
           </p>
 
           <p
             className="mt-5 text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto animate-fade-up"
             style={{ animationDelay: '180ms' }}
           >
-            {propertyInfo.subheadline}
+            {subheadline}
           </p>
 
           {/* Dual CTAs & Quick Micro Action */}
@@ -57,7 +61,7 @@ export function HeroSection({ blog, onOpenVideo, onOpenBrosur, onOpenVirtualTour
               href="#lead-form"
               className="btn-primary w-full sm:w-auto px-8 py-3.5 text-base font-bold shadow-xl shadow-violet-500/30 flex items-center justify-center gap-2"
             >
-              <span>📅 Jadwalkan Survey Lokasi</span>
+              <span>{config.cta_survey || '📅 Jadwalkan Survey Lokasi'}</span>
               <span className="text-xs bg-white/20 rounded-full px-2 py-0.5">Gratis</span>
             </a>
 
@@ -67,18 +71,18 @@ export function HeroSection({ blog, onOpenVideo, onOpenBrosur, onOpenVirtualTour
               onClick={onOpenBrosur}
               className="btn-ghost w-full sm:w-auto px-7 py-3.5 text-base font-semibold border-white/20 hover:border-violet-400/50 flex items-center justify-center gap-2"
             >
-              <span>📥 Unduh Brosur &amp; Pricelist</span>
+              <span>{config.cta_brosur || '📥 Unduh Brosur & Pricelist'}</span>
             </button>
 
             <a
               id="cta-hero-wa"
-              href={`https://wa.me/${propertyInfo.whatsapp}?text=Halo%20Marketing%20${encodeURIComponent(brandName)}%2C%20saya%20tertarik%20tanya%20info%20promo%20dan%20jadwal%20survey`}
+              href={`https://wa.me/${whatsapp}?text=Halo%20Marketing%20${encodeURIComponent(brandName)}%2C%20saya%20tertarik%20tanya%20info%20promo%20dan%20jadwal%20survey`}
               target="_blank"
               rel="noreferrer"
               className="glass hover:bg-emerald-500/20 hover:border-emerald-400/40 text-emerald-300 rounded-full px-6 py-3.5 text-sm font-semibold flex items-center justify-center gap-2 transition"
             >
               <span className="text-base">💬</span>
-              <span>Chat Sales via WhatsApp</span>
+              <span>{config.cta_wa || 'Chat Sales via WhatsApp'}</span>
             </a>
           </div>
         </div>
@@ -91,8 +95,8 @@ export function HeroSection({ blog, onOpenVideo, onOpenBrosur, onOpenVirtualTour
           {/* Main Visual */}
           <div className="relative aspect-[16/9] md:aspect-[21/9] w-full overflow-hidden">
             <img
-              src="/hero-cluster.jpg"
-              alt="Cluster Perumahan Pesona Kahuripan"
+              src={heroImage}
+              alt={brandName}
               className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
             />
             {/* Dark gradient overlay for text readability */}

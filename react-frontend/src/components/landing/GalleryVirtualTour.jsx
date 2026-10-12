@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { galleryItems } from './propertyData.js'
 
-export function GalleryVirtualTour({ onOpenLightbox, onOpenVirtualTour, onOpenVideo }) {
+export function GalleryVirtualTour({ config = {}, onOpenLightbox, onOpenVirtualTour, onOpenVideo }) {
   const [activeFilter, setActiveFilter] = useState('all')
 
   const filterTabs = [
@@ -22,13 +22,13 @@ export function GalleryVirtualTour({ onOpenLightbox, onOpenVirtualTour, onOpenVi
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-12">
         <span className="chip border-violet-400/30 bg-violet-400/10 text-violet-200 uppercase tracking-widest text-[11px] font-bold">
-          Galeri &amp; Tur Virtual
+          {config.badge || 'Galeri & Tur Virtual'}
         </span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-          Jelajahi Setiap Sudut Keindahan Rumah Impian
+          {config.title || 'Jelajahi Setiap Sudut Keindahan Rumah Impian'}
         </h2>
         <p className="mt-4 text-base text-slate-300">
-          Kenyamanan nyata yang dapat Anda rasakan langsung melalui visual detail ruangan dan pengalaman tur 360 derajat interaktif.
+          {config.desc || 'Kenyamanan nyata yang dapat Anda rasakan langsung melalui visual detail ruangan dan pengalaman tur 360 derajat interaktif.'}
         </p>
       </div>
 

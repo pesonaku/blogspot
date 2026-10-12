@@ -55,12 +55,14 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
   const activeSections = sections && sections.length > 0 ? sections : DEFAULT_LANDING_SECTIONS
 
   const renderSection = (sec) => {
+    const config = sec.config || {}
     switch (sec.id) {
       case 'hero':
         return (
           <div key="hero" id="sec-hero-wrapper">
             <HeroSection
               blog={blog}
+              config={config}
               onOpenVideo={() => setShowVideoModal(true)}
               onOpenBrosur={() => setShowBrosurModal(true)}
               onOpenVirtualTour={() => setShowVirtualTour(true)}
@@ -76,7 +78,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
       case 'stats':
         return (
           <div key="stats" id="sec-stats-wrapper">
-            <QuickStats />
+            <QuickStats config={config} />
             {sec.contentHtml && (
               <div
                 className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-emerald-500/20 bg-emerald-950/20 p-4 text-sm text-slate-200"
@@ -88,7 +90,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
       case 'usp':
         return (
           <div key="usp" id="sec-usp-wrapper">
-            <UspSection />
+            <UspSection config={config} />
             {sec.contentHtml && (
               <div
                 className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-violet-950/20 p-4 text-sm text-slate-200"
@@ -100,7 +102,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
       case 'location':
         return (
           <div key="location" id="sec-location-wrapper">
-            <LocationSection />
+            <LocationSection config={config} />
             {sec.contentHtml && (
               <div
                 className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-violet-950/20 p-4 text-sm text-slate-200"
@@ -113,6 +115,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
         return (
           <div key="units" id="sec-units-wrapper">
             <UnitTypesSection
+              config={config}
               onOpenFloorPlan={(unit) => setSelectedFloorPlanUnit(unit)}
               onSelectUnitForSurvey={handleSelectUnitForSurvey}
             />
@@ -128,6 +131,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
         return (
           <div key="gallery" id="sec-gallery-wrapper">
             <GalleryVirtualTour
+              config={config}
               onOpenLightbox={(item) =>
                 setLightboxData({
                   image: item.image,
@@ -149,7 +153,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
       case 'promo':
         return (
           <div key="promo" id="sec-promo-wrapper">
-            <PromoSection onClaimPromo={handleClaimPromo} />
+            <PromoSection config={config} onClaimPromo={handleClaimPromo} />
             {sec.contentHtml && (
               <div
                 className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-amber-500/20 bg-amber-950/20 p-4 text-sm text-slate-200"
@@ -161,7 +165,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
       case 'social-proof':
         return (
           <div key="social-proof" id="sec-social-proof-wrapper">
-            <SocialProofSection />
+            <SocialProofSection config={config} />
             {sec.contentHtml && (
               <div
                 className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-emerald-500/20 bg-emerald-950/20 p-4 text-sm text-slate-200"
@@ -173,7 +177,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
       case 'lead-form':
         return (
           <div key="lead-form" id="sec-lead-form-wrapper">
-            <LeadFormSection prefilledUnit={prefilledUnitForSurvey} />
+            <LeadFormSection config={config} prefilledUnit={prefilledUnitForSurvey} />
             {sec.contentHtml && (
               <div
                 className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-violet-950/20 p-4 text-sm text-slate-200"

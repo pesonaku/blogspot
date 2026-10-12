@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { promoOffers, propertyInfo } from './propertyData.js'
 
-export function PromoSection({ onClaimPromo }) {
+export function PromoSection({ config = {}, onClaimPromo }) {
   // Real-time countdown timer to create urgency
   const [timeLeft, setTimeLeft] = useState({
     days: 4,
@@ -35,17 +35,17 @@ export function PromoSection({ onClaimPromo }) {
           <div>
             <div className="flex items-center gap-2">
               <span className="chip border-fuchsia-400/40 bg-fuchsia-400/20 text-fuchsia-300 font-bold text-xs uppercase tracking-wider">
-                ⚡ Promo Terbatas Bulan Ini
+                {config.badge || '⚡ Promo Terbatas Bulan Ini'}
               </span>
               <span className="chip border-amber-400/40 bg-amber-400/20 text-amber-300 font-bold text-xs">
-                Sisa 5 Unit Terakhir
+                {config.subbadge || 'Sisa 5 Unit Terakhir'}
               </span>
             </div>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-              Paket Spesial Hunian Baru: All-In Bebas Biaya!
+              {config.title || 'Paket Spesial Hunian Baru: All-In Bebas Biaya!'}
             </h2>
             <p className="mt-2 text-sm md:text-base text-slate-300 max-w-xl">
-              Dapatkan kemudahan kepemilikan rumah impian tanpa beban biaya administrasi tambahan. Penawaran berlaku terbatas sebelum harga naik!
+              {config.desc || 'Dapatkan kemudahan kepemilikan rumah impian tanpa beban biaya administrasi tambahan. Penawaran berlaku terbatas sebelum harga naik!'}
             </p>
           </div>
 

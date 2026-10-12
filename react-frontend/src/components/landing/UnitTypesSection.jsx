@@ -1,24 +1,25 @@
 import { useState } from 'react'
 import { propertyInfo, unitTypes } from './propertyData.js'
 
-export function UnitTypesSection({ onOpenFloorPlan, onSelectUnitForSurvey }) {
+export function UnitTypesSection({ config = {}, onOpenFloorPlan, onSelectUnitForSurvey }) {
   const [selectedUnitId, setSelectedUnitId] = useState(unitTypes[0].id)
   const [showSpecsTable, setShowSpecsTable] = useState(false)
 
   const activeUnit = unitTypes.find((u) => u.id === selectedUnitId) || unitTypes[0]
+  const whatsappNumber = config.whatsapp || propertyInfo.whatsapp
 
   return (
     <section id="tipe-unit" className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
       {/* Section Heading */}
       <div className="text-center max-w-3xl mx-auto mb-12">
         <span className="chip border-fuchsia-400/30 bg-fuchsia-400/10 text-fuchsia-300 uppercase tracking-widest text-[11px] font-bold">
-          Pilihan Tipe Unit
+          {config.badge || 'Pilihan Tipe Unit'}
         </span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-          Koleksi Rumah Modern Sesuai Kebutuhan Anda
+          {config.title || 'Koleksi Rumah Modern Sesuai Kebutuhan Anda'}
         </h2>
         <p className="mt-4 text-base text-slate-300">
-          Setiap unit didesain dengan konsep tropis modern berplafon tinggi, pencahayaan alami optimal, dan material bangunan berkualitas standar SNI.
+          {config.desc || 'Setiap unit didesain dengan konsep tropis modern berplafon tinggi, pencahayaan alami optimal, dan material bangunan berkualitas standar SNI.'}
         </p>
       </div>
 
@@ -181,7 +182,7 @@ export function UnitTypesSection({ onOpenFloorPlan, onSelectUnitForSurvey }) {
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a
                 id={`cta-tanya-${activeUnit.id}`}
-                href={`https://wa.me/${propertyInfo.whatsapp}?text=Halo%20Marketing%2C%20saya%20ingin%20tanya%20harga%20dan%20ketersediaan%20unit%20untuk%20${encodeURIComponent(activeUnit.name + ' (' + activeUnit.code + ')')}`}
+                href={`https://wa.me/${whatsappNumber}?text=Halo%20Marketing%2C%20saya%20ingin%20tanya%20harga%20dan%20ketersediaan%20unit%20untuk%20${encodeURIComponent(activeUnit.name + ' (' + activeUnit.code + ')')}`}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-primary flex-1 justify-center py-3 text-sm font-bold shadow-lg shadow-violet-500/25"

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { propertyInfo, unitTypes } from './propertyData.js'
 
-export function LeadFormSection({ prefilledUnit }) {
+export function LeadFormSection({ config = {}, prefilledUnit }) {
   const [formData, setFormData] = useState({
     name: '',
     whatsapp: '',
@@ -14,6 +14,11 @@ export function LeadFormSection({ prefilledUnit }) {
 
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const whatsappNumber = config.whatsapp || propertyInfo.whatsapp
+  const whatsappDisplay = config.whatsapp_display || propertyInfo.whatsappDisplay
+  const address = config.address || propertyInfo.address
+  const openingHours = config.opening_hours || propertyInfo.openingHours
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -29,7 +34,7 @@ export function LeadFormSection({ prefilledUnit }) {
   const generateWhatsAppUrl = () => {
     const text = `Halo Tim Sales Pesona Kahuripan,\n\nSaya telah mendaftar jadwal survey lokasi dengan data berikut:\n- *Nama*: ${formData.name}\n- *No. WhatsApp*: ${formData.whatsapp}\n- *Email*: ${formData.email || '-'}\n- *Pilihan Unit*: ${formData.unitType}\n- *Rencana Tanggal Survey*: ${formData.surveyDate || 'Hari ini / Akhir Pekan'}\n- *Waktu*: ${formData.surveyTime}\n- *Catatan*: ${formData.notes || '-'}\n\nMohon konfirmasi kesiapan tim sales di lokasi. Terima kasih!`
 
-    return `https://wa.me/${propertyInfo.whatsapp}?text=${encodeURIComponent(text)}`
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`
   }
 
   return (
@@ -43,13 +48,13 @@ export function LeadFormSection({ prefilledUnit }) {
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
               <span className="chip border-emerald-400/30 bg-emerald-400/10 text-emerald-300 uppercase tracking-widest text-[11px] font-bold">
-                Jadwal Survey &amp; Konsultasi KPR
+                {config.badge || 'Jadwal Survey & Konsultasi Langsung'}
               </span>
               <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold text-white">
-                Kunjungi Rumah Contoh &amp; Rasakan Langsung Suasananya
+                {config.title || 'Kunjungi Rumah Contoh & Rasakan Langsung Suasananya'}
               </h2>
               <p className="mt-4 text-sm text-slate-300 leading-relaxed">
-                Tim sales profesional kami siap menyambut Anda setiap hari di lokasi, mendampingi keliling show unit, serta memberikan konsultasi properti gratis tanpa dipungut biaya.
+                {config.desc || 'Tim sales profesional kami siap menyambut Anda setiap hari di lokasi, mendampingi keliling show unit, serta memberikan konsultasi properti gratis tanpa dipungut biaya.'}
               </p>
 
               <div className="mt-8 space-y-4 text-xs sm:text-sm text-slate-300">
@@ -57,7 +62,7 @@ export function LeadFormSection({ prefilledUnit }) {
                   <span className="text-xl">📍</span>
                   <div>
                     <strong className="text-white block">Kantor Pemasaran:</strong>
-                    <span>{propertyInfo.address}</span>
+                    <span>{address}</span>
                   </div>
                 </div>
 
@@ -65,7 +70,7 @@ export function LeadFormSection({ prefilledUnit }) {
                   <span className="text-xl">⏰</span>
                   <div>
                     <strong className="text-white block">Jam Operasional Show Unit:</strong>
-                    <span>{propertyInfo.openingHours}</span>
+                    <span>{openingHours}</span>
                   </div>
                 </div>
 
@@ -74,12 +79,12 @@ export function LeadFormSection({ prefilledUnit }) {
                   <div>
                     <strong className="text-white block">Hotline Telepon &amp; WhatsApp:</strong>
                     <a
-                      href={`https://wa.me/${propertyInfo.whatsapp}`}
+                      href={`https://wa.me/${whatsappNumber}`}
                       target="_blank"
                       rel="noreferrer"
                       className="text-emerald-400 hover:underline"
                     >
-                      {propertyInfo.whatsappDisplay} (Fast Response)
+                      {whatsappDisplay} (Fast Response)
                     </a>
                   </div>
                 </div>

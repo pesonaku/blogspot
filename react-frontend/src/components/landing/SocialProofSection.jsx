@@ -1,18 +1,18 @@
 import { bankPartners, testimonials } from './propertyData.js'
 
-export function SocialProofSection() {
+export function SocialProofSection({ config = {} }) {
   return (
     <section id="testimoni" className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-14">
         <span className="chip border-amber-400/30 bg-amber-400/10 text-amber-300 uppercase tracking-widest text-[11px] font-bold">
-          Bukti Sosial &amp; Kepuasan Konsumen
+          {config.badge || 'Bukti Sosial & Kepuasan Konsumen'}
         </span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-          Dipercaya Lebih dari 1.250+ Keluarga Bahagia
+          {config.title || 'Dipercaya Lebih dari 1.250+ Keluarga Bahagia'}
         </h2>
         <p className="mt-4 text-base text-slate-300">
-          Kisah nyata kepuasan para pembeli yang telah mewujudkan hunian idaman mereka bersama Pesona Kahuripan.
+          {config.desc || 'Kisah nyata kepuasan para pembeli yang telah mewujudkan hunian idaman mereka bersama Pesona Kahuripan.'}
         </p>
       </div>
 

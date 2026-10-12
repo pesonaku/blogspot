@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { locationPoints, propertyInfo } from './propertyData.js'
 
-export function LocationSection() {
+export function LocationSection({ config = {} }) {
   const [activeTab, setActiveTab] = useState('transportasi')
 
   const tabs = [
@@ -11,17 +11,20 @@ export function LocationSection() {
     { key: 'belanja', label: '🛍️ Mall & Rekreasi', icon: '🛍️' },
   ]
 
+  const gmapsUrl = config.gmaps_url || propertyInfo.googleMapsUrl
+  const gmapsEmbed = config.gmaps_embed || propertyInfo.googleMapsEmbed
+
   return (
     <section id="lokasi" className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
       <div className="text-center max-w-3xl mx-auto mb-14">
         <span className="chip border-emerald-400/30 bg-emerald-400/10 text-emerald-300 uppercase tracking-widest text-[11px] font-bold">
-          Location Advantage
+          {config.badge || 'Location Advantage'}
         </span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-          Aksesibilitas Tanpa Batas di Titik Paling Strategis
+          {config.title || 'Aksesibilitas Tanpa Batas di Titik Paling Strategis'}
         </h2>
         <p className="mt-4 text-base text-slate-300">
-          Dekat dengan simpul gerbang tol, stasiun KRL, sentra niaga, dan fasilitas umum vital untuk mobilitas harian yang efisien.
+          {config.desc || 'Dekat dengan simpul gerbang tol, stasiun KRL, sentra niaga, dan fasilitas umum vital untuk mobilitas harian yang efisien.'}
         </p>
       </div>
 
@@ -88,7 +91,7 @@ export function LocationSection() {
         <div className="lg:col-span-6 flex flex-col">
           <div className="relative flex-1 min-h-[380px] rounded-3xl overflow-hidden border border-white/15 bg-slate-900 shadow-2xl flex flex-col">
             <iframe
-              src={propertyInfo.googleMapsEmbed}
+              src={gmapsEmbed}
               title="Peta Lokasi Pesona Kahuripan"
               className="w-full flex-1 border-0 filter contrast-[1.05]"
               loading="lazy"
@@ -101,7 +104,7 @@ export function LocationSection() {
                 🧭 Navigasikan perjalanan survey langsung ke lokasi kami
               </span>
               <a
-                href={propertyInfo.googleMapsUrl}
+                href={gmapsUrl}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-primary w-full sm:w-auto py-2 px-4 text-xs font-bold text-center justify-center shrink-0"

@@ -12,6 +12,8 @@
  *    React akan otomatis mengambil data via feed JSON Blogger.
  */
 
+import { parseWidgetConfig } from './widgetConfig.js'
+
 const text = (el) => (el ? el.textContent.trim() : '')
 
 function readLinks(nodes) {
@@ -118,10 +120,14 @@ export function readBloggerData(container, globalData = window.BloggerData || {}
   const sectionEls = Array.from(container.querySelectorAll('[data-bt-section]'))
   const sections = sectionEls.map((el) => {
     const contentEl = el.querySelector('[data-bt="content"]')
+    const rawContent = contentEl ? contentEl.textContent.trim() : ''
+    const rawHtml = contentEl ? contentEl.innerHTML.trim() : ''
+    const { config, customHtml } = parseWidgetConfig(rawContent, rawHtml)
     return {
       id: el.dataset.btSection,
       title: el.dataset.title || '',
-      contentHtml: contentEl ? contentEl.innerHTML.trim() : '',
+      contentHtml: customHtml,
+      config,
     }
   })
 

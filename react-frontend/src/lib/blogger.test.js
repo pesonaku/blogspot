@@ -52,11 +52,18 @@ describe('readBloggerData', () => {
     el.innerHTML = `
       <div data-bt-section="hero" data-title="[Section 1] Hero Banner"></div>
       <div data-bt-section="promo" data-title="[Section 7] Promo"><div data-bt="content"><b>Diskon 50%</b></div></div>
+      <div data-bt-section="stats" data-title="[Section 2] Stats"><div data-bt="content"># PANDUAN&#10;stat1_num: 2.000+&#10;whatsapp: 08123456</div></div>
     `
     const data = readBloggerData(el)
     expect(data.sections).toEqual([
-      { id: 'hero', title: '[Section 1] Hero Banner', contentHtml: '' },
-      { id: 'promo', title: '[Section 7] Promo', contentHtml: '<b>Diskon 50%</b>' },
+      { id: 'hero', title: '[Section 1] Hero Banner', contentHtml: '', config: {} },
+      { id: 'promo', title: '[Section 7] Promo', contentHtml: '<b>Diskon 50%</b>', config: {} },
+      {
+        id: 'stats',
+        title: '[Section 2] Stats',
+        contentHtml: '',
+        config: { stat1_num: '2.000+', whatsapp: '08123456' },
+      },
     ])
   })
 })
