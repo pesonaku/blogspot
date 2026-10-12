@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 
 /**
  * Switch tema Dark (default) dan Light
- * - Mode Dark: dominan warna hijau tua / deep emerald
- * - Mode Light: dominan warna hijau segar dan putih bersih
+ * Menampilkan HANYA ikon (tanpa teks) dengan pill toggle slider yang halus
  */
 export default function ThemeToggle({ className = '' }) {
   const [theme, setTheme] = useState(() => {
@@ -44,37 +43,24 @@ export default function ThemeToggle({ className = '' }) {
       type="button"
       onClick={toggleTheme}
       aria-label={`Ganti ke mode ${isDark ? 'Light' : 'Dark'}`}
-      title={`Tema saat ini: ${isDark ? 'Dark (Default Hijau)' : 'Light (Hijau & Putih)'}. Klik untuk ganti.`}
-      className={`group relative inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/50 ${
+      title={`Tema saat ini: ${isDark ? 'Dark (Latar Dark Grey)' : 'Light (Latar Putih Bersih)'}. Klik untuk berganti.`}
+      className={`group relative inline-flex h-8 w-14 shrink-0 items-center rounded-full border p-0.5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/50 ${
         isDark
-          ? 'border-emerald-500/30 bg-emerald-950/80 text-emerald-200 hover:border-emerald-400 hover:bg-emerald-900/60 shadow-lg shadow-emerald-950/40'
-          : 'border-emerald-300 bg-white text-emerald-900 hover:border-emerald-400 hover:bg-emerald-50/80 shadow-sm shadow-emerald-900/5'
+          ? 'border-white/15 bg-[#1b1f23] shadow-inner hover:border-emerald-500/50'
+          : 'border-emerald-300 bg-emerald-50/90 shadow-sm hover:border-emerald-400'
       } ${className}`}
     >
-      {/* Visual pill slider track */}
-      <div
-        className={`relative flex h-5 w-9 shrink-0 items-center rounded-full p-0.5 transition-colors duration-300 ${
-          isDark ? 'bg-emerald-900/90' : 'bg-emerald-100'
+      {/* Sliding Icon Circle */}
+      <span
+        className={`grid h-6 w-6 place-items-center rounded-full text-xs shadow-md transition-all duration-300 ease-out ${
+          isDark
+            ? 'translate-x-6 bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-emerald-500/40'
+            : 'translate-x-0 bg-white text-emerald-700 shadow-slate-300/80 border border-emerald-100'
         }`}
       >
-        <span
-          className={`grid h-4 w-4 place-items-center rounded-full text-[10px] shadow-sm transition-transform duration-300 ${
-            isDark
-              ? 'translate-x-4 bg-emerald-500 text-white shadow-emerald-500/50'
-              : 'translate-x-0 bg-emerald-600 text-white shadow-emerald-600/30'
-          }`}
-        >
+        <span className="transition-transform duration-300 group-hover:rotate-12">
           {isDark ? '🌙' : '☀️'}
         </span>
-      </div>
-
-      {/* Label Text */}
-      <span className="font-display tracking-tight text-[11px] font-bold">
-        {isDark ? (
-          <span className="text-emerald-300 group-hover:text-emerald-200">Mode Dark</span>
-        ) : (
-          <span className="text-emerald-800 group-hover:text-emerald-950">Mode Light</span>
-        )}
       </span>
     </button>
   )

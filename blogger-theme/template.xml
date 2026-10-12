@@ -33,10 +33,10 @@
 
   <!-- Fallback style untuk markup server-side (tampil sebelum React mount / tanpa JS) -->
   <b:skin version='1.0.0'><![CDATA[
-body{margin:0;background:#021811;color:#ecfdf5;font-family:Inter,system-ui,sans-serif;line-height:1.6}
-a{color:#34d399}
+body{margin:0;background:#121517;color:#f1f5f9;font-family:Inter,system-ui,sans-serif;line-height:1.6}
+a{color:#10b981}
 #root{max-width:960px;margin:0 auto;padding:24px}
-.bt-ssr-post{padding:16px 0;border-bottom:1px solid #064e3b}
+.bt-ssr-post{padding:16px 0;border-bottom:1px solid #2d3748}
 .bt-ssr-post img{max-width:100%;height:auto}
 .bt-hidden{display:none}
   ]]></b:skin>

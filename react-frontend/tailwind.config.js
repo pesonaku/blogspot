@@ -12,11 +12,11 @@ export default {
       },
       colors: {
         ink: {
-          950: '#021811',
-          900: '#06261c',
-          800: '#0b3829',
-          700: '#104d39',
-          600: '#17644b',
+          950: '#121517', // darkgrey background
+          900: '#181c20', // darkgrey surface 1
+          800: '#20252a', // darkgrey surface 2
+          700: '#2c333a',
+          600: '#3c454e',
         },
       },
       keyframes: {

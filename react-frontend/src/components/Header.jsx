@@ -31,7 +31,7 @@ export default function Header({ blog, sections = [] }) {
     <header
       className={`sticky top-0 z-40 transition-all duration-300 ${
         scrolled
-          ? 'border-b border-emerald-500/20 bg-ink-950/90 shadow-lg shadow-emerald-950/30 backdrop-blur-xl dark:border-emerald-500/20 dark:bg-ink-950/90 light:border-emerald-100 light:bg-white/95 light:shadow-sm'
+          ? 'border-b border-emerald-100 bg-white/95 shadow-md shadow-emerald-950/5 backdrop-blur-xl dark:border-white/10 dark:bg-ink-950/95 dark:shadow-black/40'
           : 'bg-transparent'
       }`}
     >
@@ -56,8 +56,8 @@ export default function Header({ blog, sections = [] }) {
           </div>
         </a>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-5 text-xs font-semibold text-emerald-950/80 dark:text-emerald-100/80">
+        {/* Desktop Navigation Links - Terang & Bersih di Light Mode, Elegan di Dark Mode */}
+        <nav className="hidden lg:flex items-center gap-5 text-xs font-semibold text-slate-700 dark:text-slate-200">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -69,7 +69,7 @@ export default function Header({ blog, sections = [] }) {
           ))}
           <a
             href="#post-list"
-            className="text-emerald-700 dark:text-emerald-300 hover:text-emerald-500 transition-colors py-1 font-bold"
+            className="text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors py-1 font-bold"
           >
             Artikel &amp; Berita
           </a>
@@ -84,7 +84,7 @@ export default function Header({ blog, sections = [] }) {
               name="q"
               type="search"
               placeholder="Cari artikel…"
-              className="glass w-36 rounded-full px-3.5 py-1.5 text-xs text-emerald-950 dark:text-white placeholder:text-slate-400 dark:placeholder:text-emerald-300/40 outline-none transition focus:w-48 focus:border-emerald-500/50"
+              className="w-36 rounded-full px-3.5 py-1.5 text-xs outline-none transition focus:w-48 bg-white border border-emerald-200 text-slate-800 placeholder:text-slate-400 focus:border-emerald-500 dark:bg-white/5 dark:border-white/10 dark:text-white dark:placeholder:text-slate-400"
             />
           </form>
 
@@ -95,7 +95,7 @@ export default function Header({ blog, sections = [] }) {
             📅 Survey Lokasi
           </a>
 
-          {/* Theme switch Dark (default) dan Light */}
+          {/* Theme switch: Icon Only (tanpa teks) */}
           <div className="inline-flex">
             <ThemeToggle />
           </div>
@@ -104,7 +104,7 @@ export default function Header({ blog, sections = [] }) {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden grid h-9 w-9 place-items-center rounded-xl border border-emerald-500/20 bg-emerald-500/10 text-emerald-900 dark:text-white"
+            className="lg:hidden grid h-9 w-9 place-items-center rounded-xl border border-emerald-200 bg-white text-emerald-950 shadow-sm dark:border-white/10 dark:bg-white/5 dark:text-white"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? '✕' : '☰'}
@@ -114,14 +114,14 @@ export default function Header({ blog, sections = [] }) {
 
       {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-emerald-500/20 bg-white/95 dark:bg-ink-950/95 backdrop-blur-2xl px-5 py-4 space-y-3 animate-fade-up shadow-xl">
-          <div className="grid grid-cols-2 gap-2 text-xs font-semibold text-emerald-950 dark:text-emerald-100">
+        <div className="lg:hidden border-b border-emerald-100 bg-white/98 backdrop-blur-2xl px-5 py-4 space-y-3 animate-fade-up shadow-xl dark:border-white/10 dark:bg-ink-950/98">
+          <div className="grid grid-cols-2 gap-2 text-xs font-semibold text-slate-800 dark:text-slate-200">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2.5 rounded-xl border border-emerald-500/15 bg-emerald-500/5 hover:bg-emerald-500/15 dark:bg-white/[0.03] dark:border-white/5 dark:hover:bg-white/10"
+                className="p-2.5 rounded-xl border border-emerald-100 bg-emerald-50/50 hover:bg-emerald-100/50 text-slate-800 dark:bg-white/[0.03] dark:border-white/5 dark:hover:bg-white/10 dark:text-slate-200"
               >
                 {link.label}
               </a>
@@ -129,13 +129,13 @@ export default function Header({ blog, sections = [] }) {
             <a
               href="#post-list"
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2.5 rounded-xl bg-emerald-600/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 font-bold"
+              className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 font-bold dark:bg-emerald-600/10 dark:border-emerald-500/30 dark:text-emerald-300"
             >
               Artikel &amp; Berita
             </a>
           </div>
 
-          <div className="pt-2 flex items-center justify-between border-t border-emerald-500/10 dark:border-white/5">
+          <div className="pt-2 flex items-center justify-between border-t border-emerald-100 dark:border-white/5">
             <a
               href="#lead-form"
               onClick={() => setMobileMenuOpen(false)}

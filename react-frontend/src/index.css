@@ -20,14 +20,14 @@
     @apply min-h-screen font-sans antialiased transition-colors duration-300;
   }
 
-  /* Default / Dark Mode: Dominan Warna Hijau Pekat (Deep Forest Emerald) */
+  /* Mode Dark: Latar Darkgrey Modern dengan Aksen Hijau Emerald */
   html.dark body {
-    @apply bg-[#021811] text-emerald-100/90;
+    @apply bg-[#121517] text-slate-100;
   }
 
-  /* Light Mode: Dominan Warna Hijau dan Putih Bersih */
+  /* Mode Light: Latar Putih Bersih Segar dengan Aksen Hijau */
   html.light body {
-    @apply bg-[#f7faf8] text-slate-800;
+    @apply bg-[#f8faf9] text-slate-800;
   }
 
   ::selection {
@@ -42,11 +42,11 @@
   }
 
   html.dark .glass {
-    @apply border-emerald-500/20 bg-emerald-950/40 text-emerald-100;
+    @apply border-white/10 bg-[#181c20]/80 text-slate-100 shadow-md shadow-black/20;
   }
 
   html.light .glass {
-    @apply border-emerald-100 bg-white/90 text-slate-800 shadow-sm shadow-emerald-900/5;
+    @apply border-emerald-100 bg-white/95 text-slate-800 shadow-sm shadow-emerald-950/5;
   }
 
   /* Teks Bergradasi */
@@ -56,7 +56,7 @@
   }
 
   html.dark .text-gradient {
-    @apply bg-gradient-to-r from-emerald-300 via-teal-200 to-lime-300;
+    @apply bg-gradient-to-r from-emerald-400 via-teal-300 to-lime-300;
   }
 
   html.light .text-gradient {
@@ -69,7 +69,7 @@
   }
 
   html.dark .chip {
-    @apply border border-emerald-500/25 bg-emerald-500/15 text-emerald-200 hover:border-emerald-400/50 hover:bg-emerald-500/25 hover:text-white;
+    @apply border border-emerald-500/25 bg-emerald-500/15 text-emerald-300 hover:border-emerald-400/50 hover:bg-emerald-500/25 hover:text-white;
   }
 
   html.light .chip {
@@ -90,10 +90,10 @@
   }
 
   html.dark .btn-ghost {
-    @apply text-emerald-100 hover:bg-emerald-900/50 hover:border-emerald-400/40;
+    @apply text-slate-100 hover:bg-white/10 hover:border-emerald-500/40;
   }
 
   html.light .btn-ghost {
-    @apply text-emerald-900 border-emerald-300 hover:bg-emerald-50;
+    @apply text-slate-800 border-emerald-200 bg-white hover:bg-emerald-50 hover:text-emerald-900;
   }
 }
