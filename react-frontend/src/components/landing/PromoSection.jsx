@@ -3,9 +3,12 @@ import { promoOffers, propertyInfo } from './propertyData.js'
 
 export function PromoSection({ config = {}, onClaimPromo }) {
   // Real-time countdown timer to create urgency
+  const initialDays = config.timer_days ? parseInt(config.timer_days, 10) : 4
+  const initialHours = config.timer_hours ? parseInt(config.timer_hours, 10) : 18
+
   const [timeLeft, setTimeLeft] = useState({
-    days: 4,
-    hours: 18,
+    days: isNaN(initialDays) ? 4 : initialDays,
+    hours: isNaN(initialHours) ? 18 : initialHours,
     minutes: 42,
     seconds: 30,
   })
@@ -22,6 +25,20 @@ export function PromoSection({ config = {}, onClaimPromo }) {
     }, 1000)
     return () => clearInterval(timer)
   }, [])
+
+  const mergedOffers = promoOffers.map((offer, idx) => {
+    const num = idx + 1
+    return {
+      ...offer,
+      title: config[`offer${num}_title`] || offer.title,
+      highlight: config[`offer${num}_highlight`] || offer.highlight,
+      desc: config[`offer${num}_desc`] || offer.desc,
+      badge: config[`offer${num}_badge`] || offer.badge,
+      icon: config[`offer${num}_icon`] || offer.icon || '🎁',
+    }
+  })
+
+  const whatsappNumber = config.whatsapp || propertyInfo.whatsapp
 
   return (
     <section id="promo" className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
@@ -52,7 +69,7 @@ export function PromoSection({ config = {}, onClaimPromo }) {
           {/* Countdown Clock Box */}
           <div className="glass rounded-2xl border border-emerald-500/20 p-4 shrink-0 text-center shadow-lg">
             <p className="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-widest mb-2">
-              Promo Berakhir Dalam:
+              {config.timer_label || 'Promo Berakhir Dalam:'}
             </p>
             <div className="flex items-center gap-2 font-mono font-extrabold text-lg sm:text-xl text-emerald-950 dark:text-white">
               <div className="glass rounded-xl px-2.5 py-1.5 min-w-[44px]">
@@ -91,7 +108,7 @@ export function PromoSection({ config = {}, onClaimPromo }) {
 
         {/* 3 Main Promo Offer Benefit Cards */}
         <div className="relative z-10 mt-8 grid gap-6 md:grid-cols-3">
-          {promoOffers.map((offer) => (
+          {mergedOffers.map((offer) => (
             <div
               key={offer.id}
               className="glass rounded-2xl p-6 transition hover:border-emerald-400/50"
@@ -100,7 +117,7 @@ export function PromoSection({ config = {}, onClaimPromo }) {
                 <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 border border-emerald-400/30">
                   {offer.badge}
                 </span>
-                <span className="text-2xl">🎁</span>
+                <span className="text-2xl">{offer.icon}</span>
               </div>
               <h3 className="font-display text-lg font-bold text-emerald-950 dark:text-white">
                 {offer.title}
@@ -119,10 +136,10 @@ export function PromoSection({ config = {}, onClaimPromo }) {
         <div className="relative z-10 mt-10 rounded-2xl glass border border-emerald-500/25 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <p className="font-display font-bold text-emerald-950 dark:text-white text-base md:text-lg">
-              Siap Mengamankan Voucher Promo &amp; Unit Pilihan Anda?
+              {config.cta_title || 'Siap Mengamankan Voucher Promo & Unit Pilihan Anda?'}
             </p>
             <p className="text-xs text-slate-600 dark:text-emerald-100/70 mt-0.5">
-              Konsultasikan syarat KPR dan amankan nomor urut pemesanan (NUP) Anda hari ini.
+              {config.cta_desc || 'Konsultasikan syarat KPR dan amankan nomor urut pemesanan (NUP) Anda hari ini.'}
             </p>
           </div>
 
@@ -133,16 +150,16 @@ export function PromoSection({ config = {}, onClaimPromo }) {
               onClick={onClaimPromo}
               className="btn-primary w-full sm:w-auto py-3 px-6 text-sm font-bold shadow-xl shadow-emerald-600/30 justify-center"
             >
-              🎟 Klaim Voucher Promo Sekarang
+              {config.cta_btn || '🎟 Klaim Voucher Promo Sekarang'}
             </button>
             <a
-              href={`https://wa.me/${propertyInfo.whatsapp}?text=Halo%20Marketing%2C%20saya%20ingin%20klaim%20Voucher%20Promo%20Pesona%20Kahuripan%20(Free%20Biaya%20%2B%20Bonus%20AC%20Kanopi)`}
+              href={`https://wa.me/${whatsappNumber}?text=Halo%20Marketing%2C%20saya%20ingin%20klaim%20Voucher%20Promo%20Pesona%20Kahuripan%20(Free%20Biaya%20%2B%20Bonus%20AC%20Kanopi)`}
               target="_blank"
               rel="noreferrer"
               className="glass hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-400/40 rounded-full px-5 py-3 text-xs font-bold transition flex items-center gap-1.5"
             >
               <span>💬</span>
-              <span>Klaim via WhatsApp</span>
+              <span>{config.wa_btn || 'Klaim via WhatsApp'}</span>
             </a>
           </div>
         </div>

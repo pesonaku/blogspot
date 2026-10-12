@@ -59,13 +59,13 @@ export function GalleryVirtualTour({ config = {}, onOpenLightbox, onOpenVirtualT
           <div className="absolute inset-0 bg-gradient-to-r from-emerald-950 via-[#032317] to-teal-950/90" />
           <div className="relative z-10">
             <span className="chip border-emerald-400/40 bg-emerald-400/20 text-emerald-300 text-xs font-semibold">
-              🔄 360° Interactive View
+              {config.tour_badge || config.card1_badge || '🔄 360° Interactive View'}
             </span>
             <h3 className="font-display text-2xl font-bold text-white mt-3">
-              Tur Virtual 360 Derajat
+              {config.tour_title || config.card1_title || 'Tur Virtual 360 Derajat'}
             </h3>
             <p className="text-xs sm:text-sm text-emerald-100/80 mt-2 max-w-md">
-              Jelajahi ruang tamu berplafon tinggi, kamar tidur utama, dan layout rumah contoh dari gadget Anda kapan saja.
+              {config.tour_desc || config.card1_desc || 'Jelajahi ruang tamu berplafon tinggi, kamar tidur utama, dan layout rumah contoh dari gadget Anda kapan saja.'}
             </p>
           </div>
           <div className="relative z-10 mt-6">
@@ -74,7 +74,7 @@ export function GalleryVirtualTour({ config = {}, onOpenLightbox, onOpenVirtualT
               onClick={() => onOpenVirtualTour && onOpenVirtualTour(config.virtual_tour_url)}
               className="btn-primary py-2.5 px-5 text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg shadow-emerald-600/30"
             >
-              <span>Mulai Tur Virtual 360°</span>
+              <span>{config.tour_btn || config.card1_btn || 'Mulai Tur Virtual 360°'}</span>
               <span>➔</span>
             </button>
           </div>
@@ -85,13 +85,13 @@ export function GalleryVirtualTour({ config = {}, onOpenLightbox, onOpenVirtualT
           <div className="absolute inset-0 bg-gradient-to-r from-teal-950/90 via-[#032317] to-emerald-950" />
           <div className="relative z-10">
             <span className="chip border-teal-400/40 bg-teal-400/20 text-teal-300 text-xs font-semibold">
-              🎬 Drone &amp; Video Walkthrough
+              {config.video_badge || config.card2_badge || '🎬 Drone & Video Walkthrough'}
             </span>
             <h3 className="font-display text-2xl font-bold text-white mt-3">
-              Video Site Plan &amp; Kawasan
+              {config.video_title || config.card2_title || 'Video Site Plan & Kawasan'}
             </h3>
             <p className="text-xs sm:text-sm text-emerald-100/80 mt-2 max-w-md">
-              Saksikan masterplan kawasan perumahan dari ketinggian dan suasana lingkungan warga yang ramah &amp; asri.
+              {config.video_desc || config.card2_desc || 'Saksikan masterplan kawasan perumahan dari ketinggian dan suasana lingkungan warga yang ramah & asri.'}
             </p>
           </div>
           <div className="relative z-10 mt-6">
@@ -103,7 +103,7 @@ export function GalleryVirtualTour({ config = {}, onOpenLightbox, onOpenVirtualT
               }
               className="btn glass hover:bg-emerald-500/20 text-emerald-200 border-emerald-400/40 py-2.5 px-5 text-xs sm:text-sm font-bold flex items-center gap-2 transition"
             >
-              <span>▶ Putar Video Kawasan</span>
+              <span>▶ {config.video_btn || config.card2_btn || 'Putar Video Kawasan'}</span>
             </button>
           </div>
         </div>

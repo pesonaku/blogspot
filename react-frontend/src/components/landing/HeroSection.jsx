@@ -7,23 +7,30 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
   const whatsapp = config.whatsapp || propertyInfo.whatsapp
   const heroImage = config.hero_image || '/hero-cluster.jpg'
 
+  const pill1 = config.pill1 || config.pill_highlight_1 || '100% Real Architecture & Ready Unit'
+  const pill2 = config.pill2 || config.pill_highlight_2 || '🏷 Cicilan Mulai Rp 1,9 Juta/bln'
+  const cardTitle = config.card_title || 'Rumah Tropis Modern Plafon 3.8 Meter'
+  const cardDesc = config.card_desc || 'Double dinding hebel • Granit 60x60 • One Gate System 24 Jam • Bebas Banjir'
+  const ctaTour = config.cta_tour || 'Tur Virtual 360°'
+  const ctaVideo = config.cta_video || 'Tonton Video Show Unit'
+
   return (
     <section id="hero" className="relative overflow-hidden pt-8 pb-16 md:pt-14 md:pb-24">
       {/* Ambient background glow accents */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-violet-600/20 blur-3xl pointer-events-none -z-10" />
-      <div className="absolute top-1/2 right-10 h-72 w-72 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-emerald-600/15 blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/2 right-10 h-72 w-72 rounded-full bg-teal-500/15 blur-3xl pointer-events-none -z-10" />
 
       <div className="mx-auto max-w-6xl px-5">
         {/* Top Badges */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-6 animate-fade-up">
-          <span className="chip border-emerald-400/30 bg-emerald-400/10 text-emerald-300 font-semibold shadow-sm">
+          <span className="chip border-emerald-400/30 bg-emerald-400/10 text-emerald-700 dark:text-emerald-300 font-semibold shadow-sm">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping inline-block mr-1" />
             {config.badge || 'Cluster Baru Rilis Tahap 3'}
           </span>
-          <span className="chip border-violet-400/30 bg-violet-400/10 text-violet-200">
+          <span className="chip border-teal-400/30 bg-teal-400/10 text-teal-800 dark:text-teal-200">
             {config.badge_promo || '✦ Promo DP 0% & Subsidi Suku Bunga KPR'}
           </span>
-          <span className="chip border-amber-400/30 bg-amber-400/10 text-amber-200">
+          <span className="chip border-amber-400/30 bg-amber-400/10 text-amber-800 dark:text-amber-200">
             {config.badge_shm || '★ Legalitas 100% Sertifikat SHM Pecah'}
           </span>
         </div>
@@ -45,7 +52,7 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
           </p>
 
           <p
-            className="mt-5 text-base sm:text-lg md:text-xl text-slate-600 dark:text-emerald-100/80 leading-relaxed max-w-3xl mx-auto animate-fade-up"
+            className="mt-5 text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl mx-auto animate-fade-up"
             style={{ animationDelay: '180ms' }}
           >
             {subheadline}
@@ -89,7 +96,7 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
 
         {/* Hero Visual Card with High-Res Image & Overlays */}
         <div
-          className="relative rounded-3xl overflow-hidden border border-white/15 bg-slate-950 shadow-2xl group animate-fade-up"
+          className="relative rounded-3xl overflow-hidden border border-emerald-500/20 bg-slate-950 shadow-2xl group animate-fade-up"
           style={{ animationDelay: '300ms' }}
         >
           {/* Main Visual */}
@@ -106,23 +113,27 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
 
           {/* Floating Pill Highlights on Hero Visual */}
           <div className="absolute top-4 left-4 md:top-6 md:left-6 flex flex-wrap gap-2 pointer-events-none">
-            <span className="glass rounded-xl px-3.5 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur-md flex items-center gap-1.5 border-emerald-400/40">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              100% Real Architecture &amp; Ready Unit
-            </span>
-            <span className="glass rounded-xl px-3.5 py-1.5 text-xs font-semibold text-amber-200 shadow-lg backdrop-blur-md hidden sm:inline-flex items-center gap-1">
-              🏷 Cicilan Mulai Rp 1,9 Juta/bln
-            </span>
+            {pill1 && (
+              <span className="glass rounded-xl px-3.5 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur-md flex items-center gap-1.5 border-emerald-400/40">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                {pill1}
+              </span>
+            )}
+            {pill2 && (
+              <span className="glass rounded-xl px-3.5 py-1.5 text-xs font-semibold text-amber-200 shadow-lg backdrop-blur-md hidden sm:inline-flex items-center gap-1">
+                {pill2}
+              </span>
+            )}
           </div>
 
           {/* Interactive Trigger Buttons on Hero Image */}
           <div className="absolute bottom-5 left-5 right-5 md:bottom-8 md:left-8 md:right-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="glass rounded-2xl p-4 md:px-5 md:py-3.5 max-w-lg backdrop-blur-xl border-white/20">
               <p className="font-display font-bold text-white text-base md:text-lg">
-                Rumah Tropis Modern Plafon 3.8 Meter
+                {cardTitle}
               </p>
-              <p className="text-xs md:text-sm text-slate-300 mt-0.5">
-                Double dinding hebel • Granit 60x60 • One Gate System 24 Jam • Bebas Banjir
+              <p className="text-xs md:text-sm text-slate-200 mt-0.5">
+                {cardDesc}
               </p>
             </div>
 
@@ -130,19 +141,19 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
               <button
                 type="button"
                 onClick={() => onOpenVirtualTour && onOpenVirtualTour(config.virtual_tour_url)}
-                className="btn glass hover:bg-violet-600/30 text-violet-200 border-violet-400/40 rounded-2xl px-4 py-3 text-xs md:text-sm font-semibold flex items-center gap-2 backdrop-blur-md transition shadow-lg"
+                className="btn glass hover:bg-emerald-600/30 text-white border-white/20 rounded-2xl px-4 py-3 text-xs md:text-sm font-semibold flex items-center gap-2 backdrop-blur-md transition shadow-lg"
               >
                 <span>🔄</span>
-                <span>Tur Virtual 360°</span>
+                <span>{ctaTour}</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => onOpenVideo && onOpenVideo(config.video_url, brandName)}
-                className="btn-primary rounded-2xl px-5 py-3 text-xs md:text-sm font-bold flex items-center gap-2 shadow-xl shadow-fuchsia-500/25 transition"
+                className="btn-primary rounded-2xl px-5 py-3 text-xs md:text-sm font-bold flex items-center gap-2 shadow-xl shadow-emerald-600/30 transition"
               >
                 <span>▶</span>
-                <span>Tonton Video Show Unit</span>
+                <span>{ctaVideo}</span>
               </button>
             </div>
           </div>

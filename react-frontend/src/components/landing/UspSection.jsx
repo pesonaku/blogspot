@@ -16,9 +16,21 @@ export function UspSection({ config = {} }) {
       case 'trending-up':
         return '📈'
       default:
-        return '⭐'
+        return type || '⭐'
     }
   }
+
+  // Gabungkan 6 feature keunggulan dengan input custom dari widget
+  const mergedFeatures = uspFeatures.map((usp, idx) => {
+    const num = idx + 1
+    return {
+      ...usp,
+      title: config[`usp${num}_title`] || config[`keunggulan${num}_title`] || usp.title,
+      desc: config[`usp${num}_desc`] || config[`keunggulan${num}_desc`] || usp.desc,
+      badge: config[`usp${num}_badge`] || config[`keunggulan${num}_badge`] || usp.badge,
+      icon: config[`usp${num}_icon`] || usp.icon,
+    }
+  })
 
   return (
     <section id="keunggulan" className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
@@ -30,14 +42,14 @@ export function UspSection({ config = {} }) {
         <h2 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-emerald-950 dark:text-white">
           {config.title || 'Mengapa Pesona Kahuripan Pilihan Tepat Keluarga Anda?'}
         </h2>
-        <p className="mt-4 text-base text-slate-600 dark:text-emerald-100/70">
+        <p className="mt-4 text-base text-slate-600 dark:text-slate-300">
           {config.desc || 'Lebih dari sekadar bangunan, kami menghadirkan ekosistem hunian yang aman, nyaman, dan bernilai investasi tinggi untuk generasi mendatang.'}
         </p>
       </div>
 
       {/* Feature Grid Cards */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {uspFeatures.map((usp) => (
+        {mergedFeatures.map((usp) => (
           <div
             key={usp.id}
             className="group glass relative rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-400/50 hover:shadow-2xl hover:shadow-emerald-900/10"
@@ -56,7 +68,7 @@ export function UspSection({ config = {} }) {
             <h3 className="font-display text-xl font-bold text-emerald-950 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">
               {usp.title}
             </h3>
-            <p className="mt-3 text-sm text-slate-600 dark:text-emerald-100/70 leading-relaxed">
+            <p className="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               {usp.desc}
             </p>
 

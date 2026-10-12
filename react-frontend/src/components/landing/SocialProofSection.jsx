@@ -46,16 +46,16 @@ export function SocialProofSection({ config = {} }) {
 
               <div className="absolute top-4 left-4">
                 <span className="chip border-emerald-400/40 bg-emerald-400/20 text-emerald-300 text-xs font-semibold backdrop-blur-md">
-                  ✓ Serah Terima Kunci (BAST) Resmi
+                  {config.bast_badge || '✓ Serah Terima Kunci (BAST) Resmi'}
                 </span>
               </div>
 
               <div className="absolute bottom-4 left-4 right-4 text-white">
                 <p className="font-display font-bold text-sm md:text-base">
-                  Momen Serah Terima Unit Rumah Kepada Konsumen Bahagia
+                  {config.bast_title || 'Momen Serah Terima Unit Rumah Kepada Konsumen Bahagia'}
                 </p>
                 <p className="text-xs text-slate-300 mt-0.5">
-                  Legalitas lengkap, kunci diserahkan tepat waktu, siap huni dengan rasa bangga.
+                  {config.bast_desc || 'Legalitas lengkap, kunci diserahkan tepat waktu, siap huni dengan rasa bangga.'}
                 </p>
               </div>
             </div>
@@ -64,39 +64,47 @@ export function SocialProofSection({ config = {} }) {
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
               <span className="chip border-emerald-500/30 text-emerald-800 dark:text-emerald-200 text-xs font-semibold">
-                Komitmen Serah Terima
+                {config.bast_label || 'Komitmen Serah Terima'}
               </span>
               <h3 className="mt-2 font-display text-2xl font-bold text-emerald-950 dark:text-white">
-                Akad Kredit Lancar, Kunci Diterima Tanpa Kendala
+                {config.bast_heading || 'Akad Kredit Lancar, Kunci Diterima Tanpa Kendala'}
               </h3>
               <p className="mt-3 text-sm text-slate-600 dark:text-emerald-100/70 leading-relaxed">
-                Setiap konsumen didampingi secara personal oleh tim legal dan konsultan KPR kami sejak tahap pemberkasan, wawancara bank, hingga prosesi tanda tangan akad kredit notaris dan serah terima kunci fisik.
+                {config.bast_body || 'Setiap konsumen didampingi secara personal oleh tim legal dan konsultan KPR kami sejak tahap pemberkasan, wawancara bank, hingga prosesi tanda tangan akad kredit notaris dan serah terima kunci fisik.'}
               </p>
 
               <div className="mt-5 space-y-2 text-xs text-slate-700 dark:text-emerald-100/80">
                 <div className="flex items-center gap-2">
                   <span className="text-emerald-600 dark:text-emerald-400 font-bold">✔</span>
-                  <span>100% Sertifikat Pecah per Kaveling &amp; IMB/PBG Resmi</span>
+                  <span>{config.bast_point1 || '100% Sertifikat Pecah per Kaveling & IMB/PBG Resmi'}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-emerald-600 dark:text-emerald-400 font-bold">✔</span>
-                  <span>Pendampingan KPR di Bank Rekanan sampai disetujui</span>
+                  <span>{config.bast_point2 || 'Pendampingan KPR di Bank Rekanan sampai disetujui'}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-emerald-600 dark:text-emerald-400 font-bold">✔</span>
-                  <span>Garansi pemeliharaan bangunan pasca serah terima unit</span>
+                  <span>{config.bast_point3 || 'Garansi pemeliharaan bangunan pasca serah terima unit'}</span>
                 </div>
               </div>
             </div>
 
             <div className="mt-6 pt-4 border-t border-emerald-500/10 dark:border-white/10 flex items-center justify-between">
               <div>
-                <p className="font-display font-extrabold text-2xl text-emerald-700 dark:text-emerald-300">4.9 / 5.0</p>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">Tingkat Kepuasan Konsumen</p>
+                <p className="font-display font-extrabold text-2xl text-emerald-700 dark:text-emerald-300">
+                  {config.bast_score || '4.9 / 5.0'}
+                </p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                  {config.bast_score_label || 'Tingkat Kepuasan Konsumen'}
+                </p>
               </div>
               <div className="text-right">
-                <p className="font-display font-extrabold text-2xl text-emerald-600 dark:text-emerald-400">98.5%</p>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">Approval Rate Pengajuan KPR</p>
+                <p className="font-display font-extrabold text-2xl text-emerald-600 dark:text-emerald-400">
+                  {config.bast_approval || '98.5%'}
+                </p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                  {config.bast_approval_label || 'Approval Rate Pengajuan KPR'}
+                </p>
               </div>
             </div>
           </div>

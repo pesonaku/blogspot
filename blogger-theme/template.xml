@@ -104,6 +104,14 @@ badge_shm: ★ Legalitas 100% Sertifikat SHM Pecah
 headline: Wujudkan Rumah Impian Masa Depan Keluarga Anda di Pesona Kahuripan
 subheadline: Hunian bernuansa asri berkonsep modern minimalis di lokasi sangat strategis. Nikmati kemudahan DP 0% dan sertifikat SHM sudah pecah siap serah terima.
 
+# --- BADGE KARTU GAMBAR (OVERLAY) ---
+pill1: Ready Stock Tahap 3
+pill2: Bebas Banjir 100%
+card_title: Suasana Asri & Udara Sejuk Khas Perbukitan
+card_desc: Konsep hunian hijau dengan row jalan lebar dan taman bermain keluarga terintegrasi.
+cta_tour: 🔄 Virtual Tour 360°
+cta_video: ▶ Putar Video Kawasan
+
 # --- TOMBOL CTA & KONTAK ---
 cta_survey: 📅 Jadwalkan Survey Lokasi
 cta_brosur: 📥 Unduh Brosur & Pricelist
@@ -167,10 +175,49 @@ stat5_desc: BTN, BSI, Mandiri, BRI, BCA, BNI]]></b:widget-setting>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 3] KEUNGGULAN KAWASAN & FASILITAS (USP)
 # ========================================================
+# Anda dapat mengubah judul, deskripsi, serta seluruh 6 poin
+# keunggulan & fasilitas kawasan secara bebas di bawah ini.
+# ========================================================
 
 badge: Keunggulan Eksklusif
 title: Mengapa Pesona Kahuripan Pilihan Tepat Keluarga Anda?
-desc: Lebih dari sekadar bangunan, kami menghadirkan ekosistem hunian yang aman, nyaman, dan bernilai investasi tinggi untuk generasi mendatang.]]></b:widget-setting>
+desc: Lebih dari sekadar bangunan, kami menghadirkan ekosistem hunian yang aman, nyaman, dan bernilai investasi tinggi untuk generasi mendatang.
+
+# --- KEUNGGULAN 1 ---
+usp1_title: Legalitas SHM 100% Aman & Terjamin
+usp1_desc: Sertifikat Hak Milik (SHM) dan IMB/PBG sudah pecah per kaveling, siap balik nama atas nama pembeli.
+usp1_badge: Legalitas Pasti
+usp1_icon: 🛡️
+
+# --- KEUNGGULAN 2 ---
+usp2_title: Akses Transportasi Super Strategis
+usp2_desc: Hanya 15 menit ke Gerbang Tol Nagrak/Cibubur dan Stasiun KRL, memudahkan mobilitas kerja ke Jakarta.
+usp2_badge: 15 Menit Tol
+usp2_icon: 🚆
+
+# --- KEUNGGULAN 3 ---
+usp3_title: Desain Tropis High Ceiling Modern
+usp3_desc: Plafon ruang tamu setinggi 3.8 meter membuat sirkulasi udara sejuk, hemat listrik, dan pencahayaan maksimal.
+usp3_badge: Plafon 3.8m
+usp3_icon: 🏛️
+
+# --- KEUNGGULAN 4 ---
+usp4_title: Bebas Banjir Terbukti Bertahun-tahun
+usp4_desc: Berada di kontur tanah perbukitan alami yang tinggi dengan sistem drainase bawah tanah modern terintegrasi.
+usp4_badge: Bebas Banjir
+usp4_icon: 🌊
+
+# --- KEUNGGULAN 5 ---
+usp5_title: One Gate System & Keamanan 24 Jam
+usp5_desc: Gerbang portal otomatis dengan kartu akses penghuni, kamera CCTV di setiap sudut jalan, dan pos satpam 24 jam.
+usp5_badge: Keamanan 24 Jam
+usp5_icon: 🔒
+
+# --- KEUNGGULAN 6 ---
+usp6_title: Fasilitas Lengkap Ramah Keluarga
+usp6_desc: Tersedia masjid megah di dalam kawasan, taman bermain anak, lapangan olahraga, dan jalan utama aspal row 8 meter.
+usp6_badge: Fasilitas Lengkap
+usp6_icon: 🌳]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='usp' expr:data-title='data:title'>
@@ -193,15 +240,35 @@ desc: Lebih dari sekadar bangunan, kami menghadirkan ekosistem hunian yang aman,
 # - gmaps_url: Link Google Maps penunjuk arah langsung
 # - gmaps_embed: Link embed iframe dari Google Maps
 # - siteplan_image: Link foto masterplan / denah kaveling kawasan
+# - Anda dapat mengubah nama tab dan poin akses transportasi, sekolah, RS, mall
 # ========================================================
 
 badge: Location Advantage
 title: Aksesibilitas Tanpa Batas di Titik Paling Strategis
 desc: Dekat dengan simpul gerbang tol, stasiun KRL, sentra niaga, dan fasilitas umum vital untuk mobilitas harian yang efisien.
+address_label: Alamat Kantor Pemasaran & Lokasi:
 address: Jl. Raya Pesona Asri No. 88, Cileungsi - Klapanunggal, Bogor Timur
 gmaps_url: https://maps.google.com/?q=Cileungsi+Bogor
 gmaps_embed: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.176483582496!2d106.96821437508316!3d-6.371221762326756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699313db43e261%3A0xe5a3eb4293f7734!2sCileungsi%2C%20Bogor%20Regency%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid
-siteplan_image: ]]></b:widget-setting>
+siteplan_image: 
+siteplan_badge: 🗺️ Masterplan & Siteplan Kawasan
+maps_caption: 🧭 Navigasikan perjalanan survey langsung ke lokasi kami
+maps_btn: Buka di Google Maps ↗
+
+# --- LABEL TAB KATEGORI AKSES ---
+tab_trans: 🚆 Transportasi & Tol
+tab_edu: 🎓 Sekolah & Kampus
+tab_health: 🏥 Rumah Sakit & Medis
+tab_mall: 🛍️ Mall & Rekreasi
+
+# --- CONTOH OVERRIDE POIN LOKASI (OPSIONAL) ---
+trans1_title: Gerbang Tol Nagrak (Tol Cimanggis - Cibitung)
+trans1_time: 12 Menit
+trans1_note: Akses langsung tol JORR 2 menuju Bandara & BSD
+
+trans2_title: Gerbang Tol Cibubur Junction (Tol Jagorawi)
+trans2_time: 20 Menit
+trans2_note: Jalur utama menuju pusat Kota Jakarta]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='location' expr:data-title='data:title'>
@@ -220,10 +287,10 @@ siteplan_image: ]]></b:widget-setting>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 5] KATALOG TIPE UNIT & SPESIFIKASI RUMAH
 # ========================================================
-# PANDUAN UPLOAD FOTO RUMAH & DENAH:
-# Anda bisa mengganti foto tampak depan dan denah ruangan untuk
-# setiap tipe rumah. Upload foto di Blogger (menu Posting),
-# lalu salin alamat gambar dan tempel di bawah.
+# PANDUAN PENGISIAN LENGKAP:
+# Anda bisa mengubah seluruh data tipe unit (nama, harga, cicilan,
+# dimensi, luas LB/LT, kamar tidur KT/KM, deskripsi, foto tampak depan,
+# foto denah, dan spesifikasi material pondasi/dinding/atap/listrik/air).
 # ========================================================
 
 badge: Pilihan Tipe Unit
@@ -231,29 +298,86 @@ title: Koleksi Rumah Modern Sesuai Kebutuhan Anda
 desc: Setiap unit didesain dengan konsep tropis modern berplafon tinggi, pencahayaan alami optimal, dan material bangunan berkualitas standar SNI.
 whatsapp: 6281288997711
 
-# --- TIPE 1 (MELATI 30/60) ---
+# ========================================================
+# TIPE 1: MELATI (30/60) - TIPE COMPACT MINIMALIS
+# ========================================================
 unit1_name: Tipe Melati
 unit1_code: 30/60
+unit1_tag: Compact Living · Cocok Pasangan Muda & Milenial
+unit1_badge: Best Seller DP 0%
+unit1_dimensi: 6 x 10 Meter
+unit1_lb: 30
+unit1_lt: 60
+unit1_kt: 2
+unit1_km: 1
 unit1_price: Mulai Rp 280 Jutaan
 unit1_cicilan: Rp 1,9 Jutaan / bulan
+unit1_desc: Rumah tapak fungsional 2 kamar tidur dengan sirkulasi udara optimal dan sisa tanah belakang untuk pengembangan dapur terbuka.
 unit1_image: /hero-cluster.jpg
 unit1_floorplan: https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80
+unit1_pondasi: Batu kali + sloof beton bertulang
+unit1_dinding: Bata ringan hebel diplester aci, finishing cat Weathercoat
+unit1_lantai: Granit tile 60x60 motif elegan
+unit1_atap: Rangka baja ringan, genteng flat beton monier
+unit1_kusen: Aluminium powder coating 3 inch
+unit1_pintu: Engineering solid wood (pintu utama), double teakwood
+unit1_sanitair: Kloset duduk American Standard / setara + shower
+unit1_listrik: PLN 1.300 VA sistem token
+unit1_air: Sumur pantek jet pump + torn air (air tanah jernih)
 
-# --- TIPE 2 (FLAMBOYAN 36/72) ---
+# ========================================================
+# TIPE 2: FLAMBOYAN (36/72) - TIPE FAVORIT KELUARGA
+# ========================================================
 unit2_name: Tipe Flamboyan
 unit2_code: 36/72
+unit2_tag: Most Popular · Halaman Luas & Carport Lega
+unit2_badge: Favorit Pilihan Konsumen
+unit2_dimensi: 6 x 12 Meter
+unit2_lb: 36
+unit2_lt: 72
+unit2_kt: 2
+unit2_km: 1
 unit2_price: Mulai Rp 375 Jutaan
 unit2_cicilan: Rp 2,4 Jutaan / bulan
+unit2_desc: Hunian ideal dengan ruang tamu high ceiling 3.8m, carport mobil keluarga, taman depan asri, dan void belakang untuk cahaya melimpah.
 unit2_image: https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80
 unit2_floorplan: https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80
+unit2_pondasi: Batu kali + footplate beton bertulang
+unit2_dinding: Bata hebel tebal diaci halus, cat interior Jotun & exterior Dulux
+unit2_lantai: Granit tile 60x60 polished nano
+unit2_atap: Baja ringan zincalume, insulasi peredam, genteng beton
+unit2_kusen: Aluminium anodized anti rayap & anti korosi
+unit2_pintu: Solid panel modern dengan smart lock ready
+unit2_sanitair: Kloset duduk + jet washer + instalasi water heater
+unit2_listrik: PLN 2.200 VA
+unit2_air: Sumur bor artesis + mesin semi jet pump
 
-# --- TIPE 3 (ANGGREK 45/84) ---
+# ========================================================
+# TIPE 3: ANGGREK (45/84) - TIPE EKSKLUSIF & LEGA
+# ========================================================
 unit3_name: Tipe Anggrek
 unit3_code: 45/84
+unit3_tag: Premium Unit · Ruang Keluarga Ekstra Luas
+unit3_badge: Limited Hoek Ready
+unit3_dimensi: 7 x 12 Meter
+unit3_lb: 45
+unit3_lt: 84
+unit3_kt: 3
+unit3_km: 1
 unit3_price: Mulai Rp 495 Jutaan
 unit3_cicilan: Rp 3,2 Jutaan / bulan
+unit3_desc: Unit premium 3 kamar tidur dengan master bedroom luas, ruang keluarga lapang, dan area taman samping yang memberikan privasi maksimal.
 unit3_image: https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80
-unit3_floorplan: https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80]]></b:widget-setting>
+unit3_floorplan: https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80
+unit3_pondasi: Footplate beton bertulang + batu belah
+unit3_dinding: Bata merah / hebel kualitas super, finishing double aci cat premium
+unit3_lantai: Homogeneous tile 60x60 glazed
+unit3_atap: Baja ringan Bluescope, genteng keramik berglazur
+unit3_kusen: Aluminium tebal motif urat kayu / hitam doff
+unit3_pintu: Pintu utama kayu kamper samarinda oven
+unit3_sanitair: Kloset duduk TOTO / setara + hand shower
+unit3_listrik: PLN 2.200 VA
+unit3_air: Sumur bor submersible pump + filter air terpasang]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='units' expr:data-title='data:title'>
@@ -282,34 +406,49 @@ badge: Galeri & Tur Virtual
 title: Jelajahi Setiap Sudut Keindahan Rumah Impian
 desc: Kenyamanan nyata yang dapat Anda rasakan langsung melalui visual detail ruangan dan pengalaman tur 360 derajat interaktif.
 
-# --- VIDEO SHOW UNIT & TUR VIRTUAL 360 ---
-video_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-video_title: Video Site Plan & Walkthrough Kawasan
+# --- KARTU BANNER TUR VIRTUAL 360 ---
+tour_badge: 🔄 360° Interactive View
+tour_title: Tur Virtual 360 Derajat
+tour_desc: Jelajahi ruang tamu berplafon tinggi, kamar tidur utama, dan layout rumah contoh dari gadget Anda kapan saja.
+tour_btn: Mulai Tur Virtual 360°
 virtual_tour_url: 
+
+# --- KARTU BANNER VIDEO DRONE KAWASAN ---
+video_badge: 🎬 Drone & Video Walkthrough
+video_title: Video Site Plan & Walkthrough Kawasan
+video_desc: Saksikan masterplan kawasan perumahan dari ketinggian dan suasana lingkungan warga yang ramah & asri.
+video_btn: Putar Video Kawasan
+video_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
 # --- FOTO GALERI 1 SAMPAI 6 ---
 gallery_image_1: /hero-cluster.jpg
 gallery_title_1: Cluster Tropis Modern Tahap 3
+gallery_desc_1: Row jalan utama aspal lebar 8 meter dengan pohon rindang
 gallery_cat_1: Fasad & Lingkungan
 
 gallery_image_2: /living-room.jpg
 gallery_title_2: Ruang Tamu High Ceiling 3.8m
+gallery_desc_2: Sirkulasi sejuk dengan pencahayaan alami kaca sudut
 gallery_cat_2: Living Room
 
 gallery_image_3: https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=80
 gallery_title_3: Master Bedroom Bernuansa Hangat
+gallery_desc_3: Ruang istirahat lapang dengan lantai granit nano polished
 gallery_cat_3: Kamar Tidur
 
 gallery_image_4: https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80
 gallery_title_4: Modern Kitchen & Island Bar
+gallery_desc_4: Meja dapur cor finishing keramik + kitchen sink stainless
 gallery_cat_4: Dapur & Dining
 
 gallery_image_5: https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80
 gallery_title_5: Gerbang One Gate System & Keamanan
+gallery_desc_5: Portal kartu RFID otomatis dan pos security siaga 24 jam
 gallery_cat_5: Fasad & Lingkungan
 
 gallery_image_6: https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80
 gallery_title_6: Kamar Anak / Ruang Kerja Fleksibel
+gallery_desc_6: Ruang fleksibel untuk kamar kedua maupun ruang kerja WFH
 gallery_cat_6: Kamar Tidur]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
@@ -329,7 +468,9 @@ gallery_cat_6: Kamar Tidur]]></b:widget-setting>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 7] PROMO SPESIAL & PENAWARAN DP 0%
 # ========================================================
-# PANDUAN:
+# PANDUAN PENGISIAN LENGKAP:
+# - timer_days & timer_hours: Menyetel waktu mundur promo
+# - offer1..3: Rincian 3 voucher/paket promo gratis
 # - promo_image: Link foto poster/flyer promo (opsional)
 # ========================================================
 
@@ -338,7 +479,39 @@ subbadge: Sisa 5 Unit Terakhir
 title: Paket Spesial Hunian Baru: All-In Bebas Biaya!
 desc: Cukup bayar booking fee 2 juta rupiah, tanpa uang muka (DP 0%), dan nikmati subsidi bebas semua biaya notaris, BPHTB, appraisal, hingga serah terima kunci.
 whatsapp: 6281288997711
-promo_image: ]]></b:widget-setting>
+promo_image: 
+
+# --- COUNTDOWN TIMER ---
+timer_days: 4
+timer_hours: 18
+timer_label: Promo Berakhir Dalam:
+
+# --- VOUCHER PROMO 1 ---
+offer1_badge: Hemat Rp 35 Jt
+offer1_icon: 🏷️
+offer1_title: Bebas Semua Biaya KPR & Notaris
+offer1_highlight: Subsidi BPHTB, AJB, BBN, & Provisi Bank 100%
+offer1_desc: Pembeli tidak perlu menyiapkan dana tunai puluhan juta saat akad kredit. Seluruh biaya legalitas ditanggung developer.
+
+# --- VOUCHER PROMO 2 ---
+offer2_badge: Hadiah Langsung
+offer2_icon: ❄️
+offer2_title: Bonus AC 1 PK & Kanopi Carport
+offer2_highlight: Terpasang Siap Huni Tanpa Renovasi
+offer2_desc: Langsung dapat unit AC inverter hemat daya dan kanopi carport rangka hollow kokoh begitu terima kunci fisik.
+
+# --- VOUCHER PROMO 3 ---
+offer3_badge: Kemudahan Akad
+offer3_icon: 🛡️
+offer3_title: Bantuan Lolos Berkas KPR
+offer3_highlight: Pendampingan BI Checking & Dokumen Bank
+offer3_desc: Konsultan KPR kami membantu pemberkasan Anda sampai disetujui bank rekanan dengan bunga promo spesial.
+
+# --- CTA KLAIM PROMO ---
+cta_title: Siap Mengamankan Voucher Promo & Unit Pilihan Anda?
+cta_desc: Konsultasikan syarat KPR dan amankan nomor urut pemesanan (NUP) Anda hari ini sebelum kehabisan!
+cta_btn: 🎟 Klaim Voucher Promo Sekarang
+wa_btn: Klaim via WhatsApp]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='promo' expr:data-title='data:title'>
@@ -357,17 +530,31 @@ promo_image: ]]></b:widget-setting>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 8] TESTIMONI PEMBELI & MITRA BANK
 # ========================================================
-# PANDUAN:
+# PANDUAN PENGISIAN LENGKAP:
 # - handover_image: Link foto dokumentasi serah terima kunci (BAST)
-# - testiX_avatar: Link foto avatar konsumen (1 s/d 3)
+# - bast_xxx: Teks komitmen serah terima legalitas dan skor kepuasan
+# - testi1..3: Nama, peran, unit, judul cerita, isi testimoni & foto avatar
 # ========================================================
 
 badge: Bukti Sosial & Kepuasan Konsumen
 title: Dipercaya Lebih dari 1.250+ Keluarga Bahagia
 desc: Kisah nyata kepuasan para pembeli yang telah mewujudkan hunian idaman mereka bersama Pesona Kahuripan.
 
-# --- FOTO SERAH TERIMA KUNCI (BAST) ---
+# --- FOTO & KOMITMEN SERAH TERIMA KUNCI (BAST) ---
 handover_image: /handover.jpg
+bast_badge: ✓ Serah Terima Kunci (BAST) Resmi
+bast_title: Momen Serah Terima Unit Rumah Kepada Konsumen Bahagia
+bast_desc: Legalitas lengkap, kunci diserahkan tepat waktu, siap huni dengan rasa bangga.
+bast_label: Komitmen Serah Terima
+bast_heading: Akad Kredit Lancar, Kunci Diterima Tanpa Kendala
+bast_body: Setiap konsumen didampingi secara personal oleh tim legal dan konsultan KPR kami sejak tahap pemberkasan, wawancara bank, hingga prosesi tanda tangan akad kredit notaris dan serah terima kunci fisik.
+bast_point1: 100% Sertifikat Pecah per Kaveling & IMB/PBG Resmi
+bast_point2: Pendampingan KPR di Bank Rekanan sampai disetujui
+bast_point3: Garansi pemeliharaan bangunan pasca serah terima unit
+bast_score: 4.9 / 5.0
+bast_score_label: Tingkat Kepuasan Konsumen
+bast_approval: 98.5%
+bast_approval_label: Approval Rate Pengajuan KPR
 
 # --- TESTIMONI KONSUMEN 1 ---
 testi1_name: Bapak Dimas & Ibu Rini
@@ -410,20 +597,31 @@ testi3_avatar: https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 9] FORMULIR SURVEY & KONTAK SALES
 # ========================================================
-# PANDUAN FILE & FOTO:
-# - brochure_url: Link download E-Brosur PDF (Google Drive / link langsung)
-# - office_image: Link foto kantor pemasaran / show unit (opsional)
+# PANDUAN PENGISIAN LENGKAP:
+# - brochure_url: Link file E-Brosur PDF (Google Drive / link langsung)
+# - office_image / kantor_image: Link foto kantor pemasaran
+# - Anda dapat mengubah teks tips, judul form, tombol submit, dan catatan privasi
 # ========================================================
 
 badge: Jadwal Survey & Konsultasi Langsung
 title: Kunjungi Rumah Contoh & Rasakan Langsung Suasananya
 desc: Tim sales profesional kami siap menyambut Anda setiap hari di lokasi, mendampingi keliling show unit, serta memberikan konsultasi properti gratis tanpa dipungut biaya.
+office_label: Kantor Pemasaran & Show Unit:
 address: Jl. Raya Pesona Asri No. 88, Cileungsi - Klapanunggal, Bogor Timur
+hours_label: Jam Operasional Show Unit:
 opening_hours: Buka Setiap Hari: 08.00 - 18.00 WIB
+hotline_label: Hotline Konsultasi Resmi:
 whatsapp: 6281288997711
 whatsapp_display: 0812-8899-7711
 brochure_url: 
-office_image: ]]></b:widget-setting>
+kantor_image: 
+
+# --- TIPS & TEKS FORMULIR ---
+tips_title: Tips Berkunjung:
+tips_text: Lebih baik menjadwalkan survey 1 hari sebelumnya agar tim sales dapat menyiapkan kunci rumah contoh dan berkas brosur lengkap untuk tipe yang Anda minati.
+form_title: Formulir Reservasi Survey & Konsultasi Sales
+submit_btn: 📅 Daftarkan Jadwal Survey Sekarang
+privacy_note: 🔒 Data Anda dijamin kerahasiaannya dan hanya digunakan untuk konfirmasi jadwal survey.]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='lead-form' expr:data-title='data:title'>

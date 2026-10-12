@@ -5,14 +5,57 @@ export function LocationSection({ config = {} }) {
   const [activeTab, setActiveTab] = useState('transportasi')
 
   const tabs = [
-    { key: 'transportasi', label: '🚆 Transportasi & Tol', icon: '🚆' },
-    { key: 'pendidikan', label: '🎓 Sekolah & Kampus', icon: '🎓' },
-    { key: 'kesehatan', label: '🏥 Rumah Sakit & Medis', icon: '🏥' },
-    { key: 'belanja', label: '🛍️ Mall & Rekreasi', icon: '🛍️' },
+    { key: 'transportasi', label: config.tab_trans || '🚆 Transportasi & Tol' },
+    { key: 'pendidikan', label: config.tab_edu || '🎓 Sekolah & Kampus' },
+    { key: 'kesehatan', label: config.tab_health || '🏥 Rumah Sakit & Medis' },
+    { key: 'belanja', label: config.tab_mall || '🛍️ Mall & Rekreasi' },
   ]
 
   const gmapsUrl = config.gmaps_url || propertyInfo.googleMapsUrl
   const gmapsEmbed = config.gmaps_embed || propertyInfo.googleMapsEmbed
+  const displayAddress = config.address || propertyInfo.address
+
+  // Dynamic override for location points
+  const pointsData = {
+    transportasi: locationPoints.transportasi.map((p, idx) => {
+      const n = idx + 1
+      return {
+        ...p,
+        title: config[`trans${n}_title`] || p.title,
+        time: config[`trans${n}_time`] || p.time,
+        note: config[`trans${n}_note`] || p.note,
+      }
+    }),
+    pendidikan: locationPoints.pendidikan.map((p, idx) => {
+      const n = idx + 1
+      return {
+        ...p,
+        title: config[`edu${n}_title`] || p.title,
+        time: config[`edu${n}_time`] || p.time,
+        note: config[`edu${n}_note`] || p.note,
+      }
+    }),
+    kesehatan: locationPoints.kesehatan.map((p, idx) => {
+      const n = idx + 1
+      return {
+        ...p,
+        title: config[`health${n}_title`] || p.title,
+        time: config[`health${n}_time`] || p.time,
+        note: config[`health${n}_note`] || p.note,
+      }
+    }),
+    belanja: locationPoints.belanja.map((p, idx) => {
+      const n = idx + 1
+      return {
+        ...p,
+        title: config[`mall${n}_title`] || p.title,
+        time: config[`mall${n}_time`] || p.time,
+        note: config[`mall${n}_note`] || p.note,
+      }
+    }),
+  }
+
+  const currentPoints = pointsData[activeTab] || locationPoints[activeTab]
 
   return (
     <section id="lokasi" className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
@@ -52,7 +95,7 @@ export function LocationSection({ config = {} }) {
 
             {/* List of points for the active category */}
             <div className="space-y-3.5">
-              {locationPoints[activeTab].map((point, index) => (
+              {currentPoints.map((point, index) => (
                 <div
                   key={index}
                   className="glass rounded-2xl p-4 flex items-center justify-between gap-4 transition hover:border-emerald-400/50"
@@ -78,10 +121,10 @@ export function LocationSection({ config = {} }) {
             <span className="text-2xl">📍</span>
             <div>
               <p className="text-xs font-bold text-emerald-950 dark:text-white uppercase tracking-wider">
-                Alamat Kantor Pemasaran &amp; Lokasi:
+                {config.address_label || 'Alamat Kantor Pemasaran & Lokasi:'}
               </p>
               <p className="text-xs text-slate-600 dark:text-emerald-100/70 mt-0.5">
-                {propertyInfo.address}
+                {displayAddress}
               </p>
             </div>
           </div>
@@ -96,7 +139,7 @@ export function LocationSection({ config = {} }) {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute bottom-2 left-2 glass px-3 py-1 rounded-lg text-[11px] text-emerald-700 dark:text-emerald-300 backdrop-blur-md">
-                  🗺️ Masterplan &amp; Siteplan Kawasan
+                  {config.siteplan_badge || '🗺️ Masterplan & Siteplan Kawasan'}
                 </div>
               </div>
             </div>
@@ -117,7 +160,7 @@ export function LocationSection({ config = {} }) {
             {/* Bottom Maps Action Pill */}
             <div className="p-4 bg-white/95 dark:bg-ink-950/90 border-t border-emerald-500/20 flex flex-col sm:flex-row items-center justify-between gap-3">
               <span className="text-xs text-slate-600 dark:text-emerald-100/70">
-                🧭 Navigasikan perjalanan survey langsung ke lokasi kami
+                {config.maps_caption || '🧭 Navigasikan perjalanan survey langsung ke lokasi kami'}
               </span>
               <a
                 href={gmapsUrl}
@@ -125,7 +168,7 @@ export function LocationSection({ config = {} }) {
                 rel="noreferrer"
                 className="btn-primary w-full sm:w-auto py-2 px-4 text-xs font-bold text-center justify-center shrink-0"
               >
-                Buka di Google Maps ↗
+                {config.maps_btn || 'Buka di Google Maps ↗'}
               </a>
             </div>
           </div>

@@ -61,7 +61,9 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                 <div className="flex items-start gap-3">
                   <span className="text-xl">📍</span>
                   <div>
-                    <strong className="text-emerald-950 dark:text-white block">Kantor Pemasaran &amp; Show Unit:</strong>
+                    <strong className="text-emerald-950 dark:text-white block">
+                      {config.office_label || 'Kantor Pemasaran & Show Unit:'}
+                    </strong>
                     <span>{address}</span>
                   </div>
                 </div>
@@ -69,7 +71,9 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                 <div className="flex items-start gap-3">
                   <span className="text-xl">⏰</span>
                   <div>
-                    <strong className="text-emerald-950 dark:text-white block">Jam Operasional Show Unit:</strong>
+                    <strong className="text-emerald-950 dark:text-white block">
+                      {config.hours_label || 'Jam Operasional Show Unit:'}
+                    </strong>
                     <span>{openingHours}</span>
                   </div>
                 </div>
@@ -77,7 +81,9 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                 <div className="flex items-start gap-3">
                   <span className="text-xl">📞</span>
                   <div>
-                    <strong className="text-emerald-950 dark:text-white block">Hotline Konsultasi Resmi:</strong>
+                    <strong className="text-emerald-950 dark:text-white block">
+                      {config.hotline_label || 'Hotline Konsultasi Resmi:'}
+                    </strong>
                     <span className="font-mono">{whatsappDisplay}</span>
                   </div>
                 </div>
@@ -96,7 +102,7 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
             )}
 
             <div className="mt-6 p-4 rounded-2xl glass text-xs text-emerald-900 dark:text-emerald-200">
-              💡 <strong>Tips Berkunjung:</strong> Lebih baik menjadwalkan survey 1 hari sebelumnya agar tim sales dapat menyiapkan kunci rumah contoh dan berkas brosur lengkap untuk tipe yang Anda minati.
+              💡 <strong>{config.tips_title || 'Tips Berkunjung:'}</strong> {config.tips_text || 'Lebih baik menjadwalkan survey 1 hari sebelumnya agar tim sales dapat menyiapkan kunci rumah contoh dan berkas brosur lengkap untuk tipe yang Anda minati.'}
             </div>
           </div>
 
@@ -109,7 +115,7 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                     ✓
                   </span>
                   <h3 className="font-display text-2xl font-bold text-emerald-950 dark:text-white">
-                    Permintaan Jadwal Survey Terkirim!
+                    {config.success_title || 'Permintaan Jadwal Survey Terkirim!'}
                   </h3>
                   <p className="text-sm text-slate-600 dark:text-emerald-100/70 max-w-md mx-auto">
                     Terima kasih, <strong>{formData.name}</strong>. Tim konsultan kami akan segera menghubungi Anda melalui WhatsApp di nomor <strong>{formData.whatsapp}</strong> untuk konfirmasi kedatangan.
@@ -136,7 +142,7 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <h3 className="font-display text-xl font-bold text-emerald-950 dark:text-white mb-2">
-                    Formulir Reservasi Survey &amp; Konsultasi Sales
+                    {config.form_title || 'Formulir Reservasi Survey & Konsultasi Sales'}
                   </h3>
 
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -265,11 +271,11 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                     disabled={loading}
                     className="btn-primary w-full justify-center py-3.5 text-sm font-bold shadow-xl shadow-emerald-600/30"
                   >
-                    {loading ? 'Mengirim Jadwal...' : '📅 Daftarkan Jadwal Survey Sekarang'}
+                    {loading ? 'Mengirim Jadwal...' : (config.submit_btn || '📅 Daftarkan Jadwal Survey Sekarang')}
                   </button>
 
                   <p className="text-[11px] text-center text-slate-500 dark:text-slate-400">
-                    🔒 Data Anda dijamin kerahasiaannya dan hanya digunakan untuk konfirmasi jadwal survey.
+                    {config.privacy_note || '🔒 Data Anda dijamin kerahasiaannya dan hanya digunakan untuk konfirmasi jadwal survey.'}
                   </p>
                 </form>
               )}
