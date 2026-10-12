@@ -313,14 +313,73 @@ tab_edu: 🎓 Sekolah & Kampus
 tab_health: 🏥 Rumah Sakit & Medis
 tab_mall: 🛍️ Mall & Rekreasi
 
-# --- CONTOH OVERRIDE POIN LOKASI (OPSIONAL) ---
+# --- KATEGORI 1: TRANSPORTASI & TOL ---
 trans1_title: Gerbang Tol Nagrak (Tol Cimanggis - Cibitung)
 trans1_time: 12 Menit
 trans1_note: Akses langsung tol JORR 2 menuju Bandara & BSD
 
 trans2_title: Gerbang Tol Cibubur Junction (Tol Jagorawi)
 trans2_time: 20 Menit
-trans2_note: Jalur utama menuju pusat Kota Jakarta]]></b:widget-setting>
+trans2_note: Jalur utama menuju pusat Kota Jakarta
+
+trans3_title: Stasiun KRL Nambo & Cibinong
+trans3_time: 15 Menit
+trans3_note: Terhubung langsung jaringan Commuter Line Jabodetabek
+
+trans4_title: Terminal Transjabodetabek Cileungsi
+trans4_time: 8 Menit
+trans4_note: Bus AC rute Blok M, Grogol, Senayan & Tanjung Priok
+
+# --- KATEGORI 2: SEKOLAH & KAMPUS ---
+edu1_title: Sekolah Islam Terpadu & Al-Azhar
+edu1_time: 5 Menit
+edu1_note: Pendidikan karakter unggulan dekat rumah
+
+edu2_title: SMAN 1 & SMKN Unggulan Negeri
+edu2_time: 8 Menit
+edu2_note: Sekolah negeri terakreditasi A
+
+edu3_title: Sekolah Kristen Penabur & Regina Caeli
+edu3_time: 12 Menit
+edu3_note: Fasilitas sekolah nasional plus & internasional
+
+edu4_title: Kampus & Politeknik Terkemuka
+edu4_time: 20 Menit
+edu4_note: Pusat riset dan pendidikan tinggi
+
+# --- KATEGORI 3: RUMAH SAKIT & MEDIS ---
+health1_title: RS Hermina Mekarsari
+health1_time: 7 Menit
+health1_note: RS rujukan utama dengan IGD 24 Jam
+
+health2_title: RSUD Cileungsi
+health2_time: 9 Menit
+health2_note: Fasilitas kesehatan lengkap melayani BPJS & asuransi
+
+health3_title: RS Mitra Keluarga Cibubur
+health3_time: 15 Menit
+health3_note: Pusat spesialis dan perawatan modern
+
+health4_title: Klinik Pratama & Apotek 24 Jam
+health4_time: 2 Menit
+health4_note: Tersedia tepat di gerbang perumahan
+
+# --- KATEGORI 4: MALL & REKREASI ---
+mall1_title: Metropolitan Mall Cibubur
+mall1_time: 10 Menit
+mall1_note: Bioskop XXI, Uniqlo, Matahari, & Gramedia
+
+mall2_title: Pasar Tradisional Modern Cileungsi
+mall2_time: 6 Menit
+mall2_note: Bahan pangan segar setiap hari dengan harga bersahabat
+
+mall3_title: Taman Wisata Mekarsari & Waterpark
+mall3_time: 8 Menit
+mall3_note: Wahana rekreasi hijau dan wisata keluarga akhir pekan
+
+mall4_title: Superindo, Indomaret Fresh, & Alfamidi
+mall4_time: 3 Menit
+mall4_note: Kebutuhan harian rumah tangga super praktis]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='location' expr:data-title='data:title'>

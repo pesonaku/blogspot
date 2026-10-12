@@ -16,43 +16,34 @@ export function LocationSection({ config = {} }) {
   const displayAddress = config.address || propertyInfo.address
 
   // Dynamic override for location points
+  const buildCategoryPoints = (categoryKey, prefix) => {
+    const defaults = locationPoints[categoryKey] || []
+    const points = []
+    for (let idx = 0; idx < 4; idx++) {
+      const n = idx + 1
+      const defaultItem = defaults[idx] || {}
+      const hasCustomTitle = config[`${prefix}${n}_title`] !== undefined
+      const title = hasCustomTitle ? config[`${prefix}${n}_title`] : defaultItem.title
+      const time = config[`${prefix}${n}_time`] !== undefined ? config[`${prefix}${n}_time`] : defaultItem.time
+      const note = config[`${prefix}${n}_note`] !== undefined ? config[`${prefix}${n}_note`] : defaultItem.note
+
+      // Hanya masukkan jika ada judul
+      if (title && title.trim()) {
+        points.push({
+          title: title.trim(),
+          time: (time || '').trim(),
+          note: (note || '').trim(),
+        })
+      }
+    }
+    return points.length > 0 ? points : defaults
+  }
+
   const pointsData = {
-    transportasi: locationPoints.transportasi.map((p, idx) => {
-      const n = idx + 1
-      return {
-        ...p,
-        title: config[`trans${n}_title`] || p.title,
-        time: config[`trans${n}_time`] || p.time,
-        note: config[`trans${n}_note`] || p.note,
-      }
-    }),
-    pendidikan: locationPoints.pendidikan.map((p, idx) => {
-      const n = idx + 1
-      return {
-        ...p,
-        title: config[`edu${n}_title`] || p.title,
-        time: config[`edu${n}_time`] || p.time,
-        note: config[`edu${n}_note`] || p.note,
-      }
-    }),
-    kesehatan: locationPoints.kesehatan.map((p, idx) => {
-      const n = idx + 1
-      return {
-        ...p,
-        title: config[`health${n}_title`] || p.title,
-        time: config[`health${n}_time`] || p.time,
-        note: config[`health${n}_note`] || p.note,
-      }
-    }),
-    belanja: locationPoints.belanja.map((p, idx) => {
-      const n = idx + 1
-      return {
-        ...p,
-        title: config[`mall${n}_title`] || p.title,
-        time: config[`mall${n}_time`] || p.time,
-        note: config[`mall${n}_note`] || p.note,
-      }
-    }),
+    transportasi: buildCategoryPoints('transportasi', 'trans'),
+    pendidikan: buildCategoryPoints('pendidikan', 'edu'),
+    kesehatan: buildCategoryPoints('kesehatan', 'health'),
+    belanja: buildCategoryPoints('belanja', 'mall'),
   }
 
   const currentPoints = pointsData[activeTab] || locationPoints[activeTab]

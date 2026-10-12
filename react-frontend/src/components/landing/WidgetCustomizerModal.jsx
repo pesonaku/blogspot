@@ -210,6 +210,7 @@ export default function WidgetCustomizerModal({
   const [activeTab, setActiveTab] = useState('hero')
   const [copiedNotification, setCopiedNotification] = useState(false)
   const [selectedUnitSubTab, setSelectedUnitSubTab] = useState(1)
+  const [selectedLocationSubTab, setSelectedLocationSubTab] = useState('trans')
 
   // Inisialisasi state per-section dari props
   const [formData, setFormData] = useState(() => {
@@ -671,51 +672,245 @@ export default function WidgetCustomizerModal({
 
             {/* SECTION 4: LOKASI & MAPS */}
             {activeTab === 'location' && (
-              <div className="space-y-4">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <TextInput
-                    label="Badge Section"
-                    value={activeConfig.badge}
-                    onChange={(val) => handleFieldChange('location', 'badge', val)}
-                    placeholder="Location Advantage"
+              <div className="space-y-6">
+                {/* 1. Header Section & Alamat */}
+                <div className="rounded-2xl p-4 bg-slate-50/50 dark:bg-ink-900/50 border border-emerald-500/15 space-y-4">
+                  <h4 className="font-display text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+                    Informasi Header &amp; Alamat
+                  </h4>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <TextInput
+                      label="Badge Section"
+                      value={activeConfig.badge}
+                      onChange={(val) => handleFieldChange('location', 'badge', val)}
+                      placeholder="Location Advantage"
+                    />
+                    <TextInput
+                      label="Judul Section"
+                      value={activeConfig.title}
+                      onChange={(val) => handleFieldChange('location', 'title', val)}
+                      placeholder="Aksesibilitas Tanpa Batas di Titik Paling Strategis"
+                    />
+                  </div>
+
+                  <TextAreaInput
+                    label="Deskripsi / Sub-headline Lokasi"
+                    value={activeConfig.desc}
+                    onChange={(val) => handleFieldChange('location', 'desc', val)}
+                    placeholder="Dekat dengan simpul gerbang tol, stasiun KRL, sentra niaga..."
+                    rows={2}
                   />
-                  <TextInput
-                    label="Judul Section"
-                    value={activeConfig.title}
-                    onChange={(val) => handleFieldChange('location', 'title', val)}
-                    placeholder="Aksesibilitas Tanpa Batas di Titik Paling Strategis"
-                  />
+
+                  <div className="grid gap-4 sm:grid-cols-3">
+                    <TextInput
+                      label="Label Alamat"
+                      value={activeConfig.address_label}
+                      onChange={(val) => handleFieldChange('location', 'address_label', val)}
+                      placeholder="Alamat Kantor Pemasaran & Lokasi:"
+                    />
+                    <div className="sm:col-span-2">
+                      <TextInput
+                        label="Alamat Lengkap"
+                        value={activeConfig.address}
+                        onChange={(val) => handleFieldChange('location', 'address', val)}
+                        placeholder="Jl. Raya Pesona Asri No. 88, Cileungsi - Klapanunggal, Bogor Timur"
+                      />
+                    </div>
+                  </div>
                 </div>
 
-                <TextAreaInput
-                  label="Alamat Lengkap Kantor & Lokasi"
-                  value={activeConfig.address}
-                  onChange={(val) => handleFieldChange('location', 'address', val)}
-                  placeholder="Jl. Raya Pesona Asri No. 88, Cileungsi..."
-                  rows={2}
-                />
+                {/* 2. Peta & Masterplan */}
+                <div className="rounded-2xl p-4 bg-slate-50/50 dark:bg-ink-900/50 border border-emerald-500/15 space-y-4">
+                  <h4 className="font-display text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+                    Peta Google Maps &amp; Siteplan
+                  </h4>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <TextInput
+                      label="Link Google Maps Langsung (Navigasi)"
+                      value={activeConfig.gmaps_url}
+                      onChange={(val) => handleFieldChange('location', 'gmaps_url', val)}
+                      placeholder="https://maps.google.com/?q=..."
+                    />
+                    <TextInput
+                      label="Link Iframe Embed Google Maps"
+                      value={activeConfig.gmaps_embed}
+                      onChange={(val) => handleFieldChange('location', 'gmaps_embed', val)}
+                      placeholder="https://www.google.com/maps/embed?pb=..."
+                    />
+                  </div>
 
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <TextInput
-                    label="Link Google Maps Langsung (Navigasi)"
-                    value={activeConfig.gmaps_url}
-                    onChange={(val) => handleFieldChange('location', 'gmaps_url', val)}
-                    placeholder="https://maps.google.com/?q=..."
-                  />
-                  <TextInput
-                    label="Link Iframe Embed Google Maps"
-                    value={activeConfig.gmaps_embed}
-                    onChange={(val) => handleFieldChange('location', 'gmaps_embed', val)}
-                    placeholder="https://www.google.com/maps/embed?pb=..."
-                  />
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <FileUploadField
+                      label="Foto Masterplan / Siteplan Kawasan (Upload / Link)"
+                      value={activeConfig.siteplan_image}
+                      onChange={(val) => handleFieldChange('location', 'siteplan_image', val)}
+                      helpText="Unggah gambar denah kaveling blok kawasan perumahan."
+                    />
+                    <TextInput
+                      label="Badge / Keterangan Siteplan"
+                      value={activeConfig.siteplan_badge}
+                      onChange={(val) => handleFieldChange('location', 'siteplan_badge', val)}
+                      placeholder="🗺️ Masterplan & Siteplan Kawasan"
+                    />
+                  </div>
                 </div>
 
-                <FileUploadField
-                  label="Foto Masterplan / Siteplan Kawasan (Upload / Link)"
-                  value={activeConfig.siteplan_image}
-                  onChange={(val) => handleFieldChange('location', 'siteplan_image', val)}
-                  helpText="Unggah gambar denah kaveling blok kawasan perumahan."
-                />
+                {/* 3. Kategori Akses & Poin Lokasi */}
+                <div className="rounded-2xl p-4 bg-slate-50/50 dark:bg-ink-900/50 border border-emerald-500/15 space-y-4">
+                  <div className="border-b border-emerald-500/15 pb-3">
+                    <h4 className="font-display text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300">
+                      Edit Kategori Akses &amp; Poin Lokasi
+                    </h4>
+                    <p className="text-[11px] text-slate-500 dark:text-emerald-200/60 mt-0.5">
+                      Pilih kategori di bawah untuk mengatur label nama tab serta daftar tempat penting dan waktu tempuh.
+                    </p>
+                  </div>
+
+                  {/* Sub-tabs Kategori Lokasi */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {[
+                      { key: 'trans', name: 'Transportasi & Tol', icon: '🚆', tabKey: 'tab_trans', defaultLabel: '🚆 Transportasi & Tol', prefix: 'trans' },
+                      { key: 'edu', name: 'Sekolah & Kampus', icon: '🎓', tabKey: 'tab_edu', defaultLabel: '🎓 Sekolah & Kampus', prefix: 'edu' },
+                      { key: 'health', name: 'Rumah Sakit & Medis', icon: '🏥', tabKey: 'tab_health', defaultLabel: '🏥 Rumah Sakit & Medis', prefix: 'health' },
+                      { key: 'mall', name: 'Mall & Rekreasi', icon: '🛍️', tabKey: 'tab_mall', defaultLabel: '🛍️ Mall & Rekreasi', prefix: 'mall' },
+                    ].map((cat) => (
+                      <button
+                        key={cat.key}
+                        type="button"
+                        onClick={() => setSelectedLocationSubTab(cat.key)}
+                        className={`px-3 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 ${
+                          selectedLocationSubTab === cat.key
+                            ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25'
+                            : 'glass text-slate-700 dark:text-emerald-200 hover:text-emerald-950 dark:hover:text-white'
+                        }`}
+                      >
+                        <span>{cat.icon}</span>
+                        <span className="truncate">{activeConfig[cat.tabKey] || cat.name}</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Form Detail Kategori Aktif */}
+                  {(() => {
+                    const categoriesMap = {
+                      trans: {
+                        key: 'trans',
+                        tabKey: 'tab_trans',
+                        label: 'Nama Tab Kategori Transportasi',
+                        defaultTabName: '🚆 Transportasi & Tol',
+                        prefix: 'trans',
+                        defaultPoints: [
+                          { title: 'Gerbang Tol Jagorawi / Tol Nagrak JORR 2', time: '10 Menit', note: 'Akses cepat ke Jakarta, TB Simatupang & BSD' },
+                          { title: 'Stasiun KRL Nambo & Cibinong', time: '15 Menit', note: 'Terhubung langsung jaringan Commuter Line Jabodetabek' },
+                          { title: 'Terminal Transjabodetabek Cileungsi', time: '8 Menit', note: 'Bus AC rute Blok M, Grogol, Senayan & Tanjung Priok' },
+                          { title: 'Stasiun LRT Harjamukti Cibubur', time: '20 Menit', note: 'Moda transportasi modern langsung ke pusat bisnis Jakarta' },
+                        ],
+                      },
+                      edu: {
+                        key: 'edu',
+                        tabKey: 'tab_edu',
+                        label: 'Nama Tab Kategori Pendidikan',
+                        defaultTabName: '🎓 Sekolah & Kampus',
+                        prefix: 'edu',
+                        defaultPoints: [
+                          { title: 'Sekolah Islam Terpadu & TK/SD/SMP Al-Azhar', time: '5 Menit', note: 'Pendidikan karakter unggulan dekat rumah' },
+                          { title: 'SMAN 1 & SMKN Unggulan Negeri', time: '8 Menit', note: 'Sekolah negeri terakreditasi A' },
+                          { title: 'Sekolah Kristen Penabur & Regina Caeli', time: '12 Menit', note: 'Fasilitas sekolah internasional & nasional plus' },
+                          { title: 'Kampus & Politeknik Terkemuka', time: '20 Menit', note: 'Pusat riset dan pendidikan tinggi' },
+                        ],
+                      },
+                      health: {
+                        key: 'health',
+                        tabKey: 'tab_health',
+                        label: 'Nama Tab Kategori Kesehatan',
+                        defaultTabName: '🏥 Rumah Sakit & Medis',
+                        prefix: 'health',
+                        defaultPoints: [
+                          { title: 'RS Hermina Mekarsari', time: '7 Menit', note: 'RS rujukan utama dengan fasilitas IGD 24 Jam' },
+                          { title: 'RSUD Cileungsi', time: '9 Menit', note: 'Fasilitas kesehatan lengkap melayani BPJS & asuransi' },
+                          { title: 'RS Mitra Keluarga Cibubur', time: '15 Menit', note: 'Pusat spesialis dan perawatan modern' },
+                          { title: 'Klinik Pratama & Apotek 24 Jam', time: '2 Menit', note: 'Tersedia tepat di gerbang perumahan' },
+                        ],
+                      },
+                      mall: {
+                        key: 'mall',
+                        tabKey: 'tab_mall',
+                        label: 'Nama Tab Kategori Belanja & Rekreasi',
+                        defaultTabName: '🛍️ Mall & Rekreasi',
+                        prefix: 'mall',
+                        defaultPoints: [
+                          { title: 'Metropolitan Mall Cibubur', time: '10 Menit', note: 'Bioskop XXI, Uniqlo, Matahari, & Gramedia' },
+                          { title: 'Pasar Tradisional Modern Cileungsi', time: '6 Menit', note: 'Bahan pangan segar setiap hari dengan harga bersahabat' },
+                          { title: 'Taman Wisata Mekarsari & Waterpark', time: '8 Menit', note: 'Wahana rekreasi hijau dan wisata keluarga akhir pekan' },
+                          { title: 'Superindo, Indomaret Fresh, & Alfamidi', time: '3 Menit', note: 'Kebutuhan harian rumah tangga super praktis' },
+                        ],
+                      },
+                    }
+
+                    const cur = categoriesMap[selectedLocationSubTab] || categoriesMap.trans
+
+                    return (
+                      <div className="space-y-4 pt-2">
+                        <TextInput
+                          label={cur.label}
+                          value={activeConfig[cur.tabKey]}
+                          onChange={(val) => handleFieldChange('location', cur.tabKey, val)}
+                          placeholder={cur.defaultTabName}
+                        />
+
+                        <div className="space-y-3">
+                          <p className="text-[11px] font-bold text-slate-700 dark:text-emerald-300 uppercase tracking-wider">
+                            Daftar Poin Akses Lokasi ({cur.defaultTabName}):
+                          </p>
+
+                          {[1, 2, 3, 4].map((idx) => {
+                            const def = cur.defaultPoints[idx - 1] || {}
+                            const titleKey = `${cur.prefix}${idx}_title`
+                            const timeKey = `${cur.prefix}${idx}_time`
+                            const noteKey = `${cur.prefix}${idx}_note`
+
+                            return (
+                              <div
+                                key={idx}
+                                className="rounded-xl p-3.5 bg-white/70 dark:bg-ink-950/70 border border-emerald-500/20 space-y-3"
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className="chip text-[10px] border-emerald-400/30 text-emerald-700 dark:text-emerald-300 font-bold">
+                                    Poin #{idx}
+                                  </span>
+                                </div>
+                                <div className="grid gap-3 sm:grid-cols-3">
+                                  <div className="sm:col-span-2">
+                                    <TextInput
+                                      label={`Nama Tempat / Fasilitas #${idx}`}
+                                      value={activeConfig[titleKey]}
+                                      onChange={(val) => handleFieldChange('location', titleKey, val)}
+                                      placeholder={def.title}
+                                    />
+                                  </div>
+                                  <div>
+                                    <TextInput
+                                      label="Waktu Tempuh"
+                                      value={activeConfig[timeKey]}
+                                      onChange={(val) => handleFieldChange('location', timeKey, val)}
+                                      placeholder={def.time}
+                                    />
+                                  </div>
+                                </div>
+                                <TextInput
+                                  label="Catatan / Rute Akses"
+                                  value={activeConfig[noteKey]}
+                                  onChange={(val) => handleFieldChange('location', noteKey, val)}
+                                  placeholder={def.note}
+                                />
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                    )
+                  })()}
+                </div>
               </div>
             )}
 
