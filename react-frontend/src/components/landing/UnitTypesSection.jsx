@@ -181,12 +181,12 @@ export function UnitTypesSection({ onOpenFloorPlan, onSelectUnitForSurvey }) {
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a
                 id={`cta-tanya-${activeUnit.id}`}
-                href={`https://wa.me/${propertyInfo.whatsapp}?text=Halo%20Marketing%2C%20saya%20ingin%20tanya%20harga%20dan%20simulasi%20KPR%20untuk%20${encodeURIComponent(activeUnit.name + ' (' + activeUnit.code + ')')}`}
+                href={`https://wa.me/${propertyInfo.whatsapp}?text=Halo%20Marketing%2C%20saya%20ingin%20tanya%20harga%20dan%20ketersediaan%20unit%20untuk%20${encodeURIComponent(activeUnit.name + ' (' + activeUnit.code + ')')}`}
                 target="_blank"
                 rel="noreferrer"
                 className="btn-primary flex-1 justify-center py-3 text-sm font-bold shadow-lg shadow-violet-500/25"
               >
-                💬 Tanya Harga &amp; KPR Tipe Ini
+                💬 Tanya Harga &amp; Unit Ini
               </a>
 
               <button

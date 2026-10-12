@@ -18,7 +18,6 @@ export default function Header({ blog }) {
     { label: 'Tipe Unit', href: '#tipe-unit' },
     { label: 'Galeri 360°', href: '#galeri' },
     { label: 'Promo', href: '#promo' },
-    { label: 'Simulasi KPR', href: '#kpr' },
     { label: 'Testimoni', href: '#testimoni' },
   ]
 

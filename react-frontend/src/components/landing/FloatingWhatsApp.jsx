@@ -7,7 +7,7 @@ export function FloatingWhatsApp() {
   const quickMessages = [
     { label: 'Tanya Promo DP 0% & Free Biaya', text: 'Halo Marketing, saya ingin tanya promo DP 0% dan gratis biaya BPHTB/Notaris di Pesona Kahuripan' },
     { label: 'Jadwal Survey Rumah Contoh', text: 'Halo, saya mau atur jadwal survey ke show unit Pesona Kahuripan besok' },
-    { label: 'Simulasi Angsuran KPR Bank', text: 'Halo, saya ingin simulasi cicilan KPR dan pricelist terbaru Pesona Kahuripan' },
+    { label: 'Pricelist & Brosur Terbaru', text: 'Halo Marketing, saya ingin minta pricelist dan brosur terbaru Pesona Kahuripan' },
   ]
 
   const openWhatsApp = (customText) => {
@@ -50,7 +50,7 @@ export function FloatingWhatsApp() {
 
           {/* Chat Message Bubble */}
           <div className="my-3 rounded-2xl bg-white/[0.04] p-3 text-xs text-slate-300 leading-relaxed border border-white/5">
-            👋 Halo! Ada yang bisa kami bantu seputar pilihan tipe rumah, simulasi KPR, atau jadwal survey ke lokasi hari ini?
+            👋 Halo! Ada yang bisa kami bantu seputar pilihan tipe rumah, promo spesial, atau jadwal survey ke lokasi hari ini?
           </div>
 
           {/* Quick Options */}

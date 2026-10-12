@@ -128,7 +128,6 @@ export function Footer({ blog }) {
               <li><a href="#tipe-unit" className="hover:text-white transition">Tipe Unit &amp; Spesifikasi</a></li>
               <li><a href="#galeri" className="hover:text-white transition">Galeri &amp; Tur 360°</a></li>
               <li><a href="#promo" className="hover:text-white transition">Promo Spesial Bulan Ini</a></li>
-              <li><a href="#kpr" className="hover:text-white transition">Kalkulator Simulasi KPR</a></li>
             </ul>
           </div>
 

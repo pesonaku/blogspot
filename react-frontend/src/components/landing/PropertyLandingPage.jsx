@@ -7,7 +7,6 @@ import { UnitTypesSection } from './UnitTypesSection.jsx'
 import { GalleryVirtualTour } from './GalleryVirtualTour.jsx'
 import { PromoSection } from './PromoSection.jsx'
 import { SocialProofSection } from './SocialProofSection.jsx'
-import { KprCalculator } from './KprCalculator.jsx'
 import { LeadFormSection } from './LeadFormSection.jsx'
 import { FloatingWhatsApp } from './FloatingWhatsApp.jsx'
 import {
@@ -82,8 +81,6 @@ export default function PropertyLandingPage({ blog }) {
       {/* 7. Promo & Penawaran Spesial (Offer) */}
       <PromoSection onClaimPromo={handleClaimPromo} />
 
-      {/* Fitur Tambahan: Simulasi KPR Interaktif */}
-      <KprCalculator />
 
       {/* 8. Social Proof (Bukti Sosial) */}
       <SocialProofSection />

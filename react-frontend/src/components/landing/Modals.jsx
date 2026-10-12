@@ -296,7 +296,7 @@ export function BrosurModal({ onClose }) {
             Unduh E-Brosur & Pricelist 2026
           </h3>
           <p className="mt-1 text-xs text-slate-400">
-            Dapatkan katalog lengkap spesifikasi, denah arsitektur, dan simulasi tabel angsuran bank perumahan Pesona Kahuripan.
+            Dapatkan katalog lengkap spesifikasi, denah arsitektur, dan pricelist resmi perumahan Pesona Kahuripan.
           </p>
         </div>
 

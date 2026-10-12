@@ -49,7 +49,7 @@ export function LeadFormSection({ prefilledUnit }) {
                 Kunjungi Rumah Contoh &amp; Rasakan Langsung Suasananya
               </h2>
               <p className="mt-4 text-sm text-slate-300 leading-relaxed">
-                Tim sales profesional kami siap menyambut Anda setiap hari di lokasi, mendampingi keliling show unit, serta memberikan simulasi KPR gratis tanpa dipungut biaya.
+                Tim sales profesional kami siap menyambut Anda setiap hari di lokasi, mendampingi keliling show unit, serta memberikan konsultasi properti gratis tanpa dipungut biaya.
               </p>
 
               <div className="mt-8 space-y-4 text-xs sm:text-sm text-slate-300">
@@ -87,7 +87,7 @@ export function LeadFormSection({ prefilledUnit }) {
             </div>
 
             <div className="mt-8 p-4 rounded-2xl border border-violet-400/20 bg-violet-400/5 text-xs text-violet-200">
-              💡 <strong>Tips Berkunjung:</strong> Lebih baik menjadwalkan survey 1 hari sebelumnya agar tim sales dapat menyiapkan kunci rumah contoh dan berkas simulasi KPR untuk tipe yang Anda minati.
+              💡 <strong>Tips Berkunjung:</strong> Lebih baik menjadwalkan survey 1 hari sebelumnya agar tim sales dapat menyiapkan kunci rumah contoh dan berkas brosur lengkap untuk tipe yang Anda minati.
             </div>
           </div>
 
