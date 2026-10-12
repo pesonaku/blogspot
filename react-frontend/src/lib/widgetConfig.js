@@ -219,14 +219,18 @@ export function parseWidgetConfig(rawText, rawHtml = '') {
 
 /**
  * Serialisasi objek konfigurasi menjadi teks format key: value
- * yang rapi dan siap disalin ke widget Blogger (HTML1 - HTML9).
+ * yang rapi dan siap disalin ke widget Blogger (HTML1 - HTML12, HTML99).
  */
-export function serializeSectionConfig(sectionId, config = {}) {
+export function serializeSectionConfig(sectionId, config = {}, meta = {}) {
   const lines = []
+  const widgetCode = meta.widgetCode ? ` [${meta.widgetCode}]` : ''
+  const sectionName = meta.sectionName ? ` - TATA LETAK: ${meta.sectionName}` : ''
+  const widgetTitle = meta.widgetTitle ? `\n# JUDUL WIDGET: ${meta.widgetTitle}` : ''
+
   lines.push(`# ========================================================`)
-  lines.push(`# KONFIGURASI WIDGET [${(sectionId || '').toUpperCase()}]`)
-  lines.push(`# Dihasilkan secara otomatis oleh Custom Widget Studio`)
-  lines.push(`# Salin dan tempelkan teks ini ke widget HTML Blogger Anda.`)
+  lines.push(`# KONFIGURASI WIDGET BLOGGER${widgetCode}${sectionName}${widgetTitle}`)
+  lines.push(`# Dihasilkan otomatis oleh Custom Widget Studio`)
+  lines.push(`# Salin seluruh teks ini & tempel ke widget di menu Tata Letak Blogger.`)
   lines.push(`# ========================================================\n`)
 
   // Status tampilan (disable: true / false) di baris pertama
@@ -243,5 +247,26 @@ export function serializeSectionConfig(sectionId, config = {}) {
   }
 
   return lines.join('\n')
+}
+
+/**
+ * Ekspor seluruh konfigurasi 13 widget Blogger dalam satu teks lengkap.
+ */
+export function serializeAllSectionsConfig(formData = {}, sectionTabs = []) {
+  const parts = []
+  parts.push(`# ========================================================================`)
+  parts.push(`# EKSPOR LENGKAP 13 KONFIGURASI WIDGET TATA LETAK BLOGGER`)
+  parts.push(`# Dihasilkan secara otomatis oleh Custom Widget Studio Pesonaku`)
+  parts.push(`# Salin masing-masing blok widget ke widget HTML terkait di Dashboard Blogger`)
+  parts.push(`# ========================================================================\n\n`)
+
+  sectionTabs.forEach((tab, idx) => {
+    const cfg = formData[tab.id] || {}
+    parts.push(`### [${idx + 1}/13] WIDGET: ${tab.widgetCode} | SECTION: ${tab.sectionName} ###\n`)
+    parts.push(serializeSectionConfig(tab.id, cfg, tab))
+    parts.push(`\n\n# --------------------------------------------------------\n\n`)
+  })
+
+  return parts.join('')
 }
 

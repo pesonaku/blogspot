@@ -414,11 +414,19 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
         onClose={() => setShowCustomizer(false)}
         isAdminMode={isAdminMode}
         onHideAdminMode={handleHideAdminMode}
+        rawBloggerSections={sections}
         currentSections={activeSections.map((s) => ({
           ...s,
           config: { ...(s.config || {}), ...(savedOverrides[s.id] || {}) },
         }))}
+        hasActiveOverrides={Object.keys(savedOverrides).length > 0}
         onApplyOverrides={(newOverrides) => setSavedOverrides(newOverrides)}
+        onResetAllToBlogger={() => {
+          setSavedOverrides({})
+          try {
+            localStorage.removeItem('pesona_custom_widgets')
+          } catch {}
+        }}
       />
     </div>
   )

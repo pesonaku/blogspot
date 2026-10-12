@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { serializeSectionConfig, isSectionDisabled } from '../../lib/widgetConfig.js'
+import { serializeSectionConfig, serializeAllSectionsConfig, isSectionDisabled } from '../../lib/widgetConfig.js'
 
 /**
  * Komponen upload file premium untuk Gambar atau Video
@@ -203,12 +203,17 @@ export default function WidgetCustomizerModal({
   isOpen,
   onClose,
   currentSections = [],
+  rawBloggerSections = [],
+  hasActiveOverrides = false,
   onApplyOverrides,
+  onResetAllToBlogger,
   isAdminMode,
   onHideAdminMode,
 }) {
   const [activeTab, setActiveTab] = useState('hero')
   const [copiedNotification, setCopiedNotification] = useState(false)
+  const [syncNotification, setSyncNotification] = useState(false)
+  const [showAllExportModal, setShowAllExportModal] = useState(false)
   const [selectedUnitSubTab, setSelectedUnitSubTab] = useState(1)
   const [selectedLocationSubTab, setSelectedLocationSubTab] = useState('trans')
 
@@ -221,16 +226,14 @@ export default function WidgetCustomizerModal({
     return initial
   })
 
-  // Sinkronkan state formData secara otomatis setiap kali modal dibuka atau data section berubah
+  // Sinkronkan state formData ketika modal dibuka atau data section berubah
   useEffect(() => {
-    if (isOpen && currentSections.length > 0) {
-      setFormData((prev) => {
-        const updated = { ...prev }
-        currentSections.forEach((sec) => {
-          updated[sec.id] = { ...(sec.config || {}), ...(prev[sec.id] || {}) }
-        })
-        return updated
+    if (isOpen) {
+      const initial = {}
+      currentSections.forEach((sec) => {
+        initial[sec.id] = { ...(sec.config || {}) }
       })
+      setFormData(initial)
     }
   }, [isOpen, currentSections])
 
@@ -378,18 +381,38 @@ export default function WidgetCustomizerModal({
     onClose()
   }
 
+  const handleSyncFromBlogger = () => {
+    if (confirm('Tarik & muat ulang seluruh formulir dari data aktif widget Tata Letak Blogger? Preview lokal yang belum disalin ke Blogger akan di-reset.')) {
+      onResetAllToBlogger?.()
+      const freshData = {}
+      rawBloggerSections.forEach((sec) => {
+        freshData[sec.id] = { ...(sec.config || {}) }
+      })
+      setFormData(freshData)
+      setSyncNotification(true)
+      setTimeout(() => setSyncNotification(false), 3000)
+    }
+  }
+
   const handleCopyBloggerCode = () => {
-    const serialized = serializeSectionConfig(activeTab, activeConfig)
+    const serialized = serializeSectionConfig(activeTab, activeConfig, activeTabMeta)
     navigator.clipboard.writeText(serialized)
     setCopiedNotification(true)
     setTimeout(() => setCopiedNotification(false), 2200)
   }
 
+  const handleCopyAllWidgets = () => {
+    const allSerialized = serializeAllSectionsConfig(formData, sectionTabs)
+    navigator.clipboard.writeText(allSerialized)
+    setShowAllExportModal(true)
+  }
+
   const handleResetSection = () => {
     if (confirm(`Reset konfigurasi section "${activeTabMeta.name}" ke pengaturan bawaan?`)) {
+      const rawSecCfg = rawBloggerSections.find((s) => s.id === activeTab)?.config || {}
       setFormData((prev) => ({
         ...prev,
-        [activeTab]: {},
+        [activeTab]: { ...rawSecCfg },
       }))
     }
   }
@@ -398,32 +421,50 @@ export default function WidgetCustomizerModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/80 backdrop-blur-md animate-fade-up">
       <div className="relative w-full max-w-5xl h-[92vh] max-h-[850px] rounded-3xl bg-white dark:bg-ink-950 border border-emerald-500/30 shadow-2xl flex flex-col overflow-hidden">
         {/* Top Header Bar */}
-        <div className="p-5 border-b border-emerald-500/20 bg-emerald-950/20 flex flex-wrap items-center justify-between gap-4 shrink-0">
+        <div className="p-4 sm:p-5 border-b border-emerald-500/20 bg-emerald-950/20 flex flex-wrap items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-3">
             <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-600 text-xl font-bold text-white shadow-lg shadow-emerald-600/30">
               ⚙️
             </span>
             <div>
-              <h3 className="font-display text-lg sm:text-xl font-extrabold text-emerald-950 dark:text-white flex items-center gap-2">
+              <h3 className="font-display text-base sm:text-lg font-extrabold text-emerald-950 dark:text-white flex items-center gap-2">
                 Custom Widget Studio
                 <span className="chip text-[10px] border-emerald-400/40 text-emerald-700 dark:text-emerald-300">
-                  Full Edit &amp; Media Upload
+                  Sinkronisasi Tata Letak
                 </span>
               </h3>
-              <p className="text-xs text-slate-500 dark:text-emerald-200/60">
-                Formulir visual interaktif untuk mengedit konten, upload gambar &amp; video di seluruh section landing page.
+              <p className="text-xs text-slate-500 dark:text-emerald-200/60 hidden sm:block">
+                Edit konten secara visual &amp; sinkronkan 1:1 dengan widget di menu Tata Letak Blogger.
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={handleSyncFromBlogger}
+              className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 py-2 px-3 text-xs font-bold transition flex items-center gap-1.5"
+              title="Tarik & Muat Ulang data asli langsung dari widget Tata Letak Blogger"
+            >
+              <span>🔄</span>
+              <span className="hidden md:inline">Sinkron dari Blogger</span>
+            </button>
+            <button
+              type="button"
+              onClick={handleCopyAllWidgets}
+              className="rounded-xl border border-teal-500/30 bg-teal-500/10 hover:bg-teal-500/20 text-teal-800 dark:text-teal-200 py-2 px-3 text-xs font-bold transition flex items-center gap-1.5"
+              title="Salin kode seluruh 13 widget Blogger sekaligus"
+            >
+              <span>📦</span>
+              <span className="hidden md:inline">Ekspor 13 Widget</span>
+            </button>
             <button
               type="button"
               onClick={handleSaveAndApply}
-              className="btn-primary py-2 px-4 text-xs font-bold shadow-lg shadow-emerald-600/25 flex items-center gap-1.5"
+              className="btn-primary py-2 px-3.5 text-xs font-bold shadow-lg shadow-emerald-600/25 flex items-center gap-1.5"
             >
               <span>💾</span>
-              <span>Terapkan Perubahan</span>
+              <span>Terapkan Preview</span>
             </button>
             <button
               type="button"
@@ -435,6 +476,14 @@ export default function WidgetCustomizerModal({
             </button>
           </div>
         </div>
+
+        {/* Sync Success Toast */}
+        {syncNotification && (
+          <div className="px-5 py-2.5 bg-emerald-600 text-white flex items-center justify-between text-xs font-bold animate-fade-up">
+            <span>🔄 Seluruh data formulir berhasil ditarik dan disinkronkan kembali dari widget asli Tata Letak Blogger!</span>
+            <span>✓</span>
+          </div>
+        )}
 
         {/* Info Banner: Mode Admin Tersembunyi dari Publik */}
         <div className="px-5 py-2.5 bg-emerald-500/10 border-b border-emerald-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-emerald-950 dark:text-emerald-200">
@@ -466,6 +515,11 @@ export default function WidgetCustomizerModal({
             {sectionTabs.map((tab) => {
               const tabCfg = formData[tab.id] || {}
               const isTabDisabled = isSectionDisabled(tabCfg)
+              const rawCfg = rawBloggerSections.find((s) => s.id === tab.id)?.config || {}
+              const isDifferentFromBlogger = Object.keys(tabCfg).some((k) => {
+                if (k === 'disable') return false
+                return tabCfg[k] !== undefined && tabCfg[k] !== '' && tabCfg[k] !== rawCfg[k]
+              })
               return (
                 <button
                   key={tab.id}
@@ -494,6 +548,14 @@ export default function WidgetCustomizerModal({
                   </div>
 
                   <div className="flex items-center gap-1 shrink-0">
+                    {isDifferentFromBlogger && (
+                      <span
+                        className="text-[9px] px-1 py-0.2 rounded bg-amber-500/25 text-amber-700 dark:text-amber-300 font-mono font-bold"
+                        title="Ada perubahan lokal yang belum disalin ke Tata Letak Blogger"
+                      >
+                        ⚡
+                      </span>
+                    )}
                     {isTabDisabled && (
                       <span className="text-[9px] px-1 py-0.2 rounded bg-rose-500/20 text-rose-500 font-mono">
                         OFF
@@ -1818,6 +1880,71 @@ export default function WidgetCustomizerModal({
             </button>
           </div>
         </div>
+
+        {/* Modal Ekspor Seluruh 13 Widget Blogger */}
+        {showAllExportModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-up">
+            <div className="relative w-full max-w-3xl max-h-[85vh] rounded-3xl bg-white dark:bg-ink-950 border border-emerald-500/30 p-6 flex flex-col shadow-2xl">
+              <div className="flex items-center justify-between pb-3 border-b border-emerald-500/20">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-2xl">📦</span>
+                  <div>
+                    <h4 className="font-display font-bold text-base text-emerald-950 dark:text-white">
+                      Ekspor Lengkap 13 Widget Tata Letak Blogger
+                    </h4>
+                    <p className="text-xs text-slate-500 dark:text-emerald-200/60">
+                      Teks konfigurasi lengkap berhasil disalin ke clipboard! Tempelkan ke widget Blogger terkait di Tata Letak.
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowAllExportModal(false)}
+                  className="rounded-xl p-2 text-slate-400 hover:text-white hover:bg-white/10 transition"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="flex-1 my-4 overflow-hidden flex flex-col">
+                <label className="text-xs font-semibold text-slate-700 dark:text-emerald-200 mb-1">
+                  Isi Konfigurasi Gabungan (Siap Salin):
+                </label>
+                <textarea
+                  readOnly
+                  rows={14}
+                  value={serializeAllSectionsConfig(formData, sectionTabs)}
+                  className="w-full flex-1 rounded-2xl p-4 font-mono text-xs bg-slate-900 text-emerald-300 border border-emerald-500/30 focus:outline-none resize-none leading-relaxed selection:bg-emerald-600"
+                />
+              </div>
+
+              <div className="flex items-center justify-between pt-3 border-t border-emerald-500/20 text-xs">
+                <span className="text-emerald-600 dark:text-emerald-400 font-bold">
+                  ✓ Berhasil disalin ke clipboard!
+                </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText(serializeAllSectionsConfig(formData, sectionTabs))
+                      alert('Seluruh konfigurasi 13 widget berhasil disalin ke clipboard!')
+                    }}
+                    className="btn-primary py-2 px-4 text-xs font-bold"
+                  >
+                    📋 Salin Ulang
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowAllExportModal(false)}
+                    className="btn-ghost py-2 px-4 text-xs font-semibold"
+                  >
+                    Tutup
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
