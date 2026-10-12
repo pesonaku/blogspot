@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import ApiStatus from './ApiStatus.jsx'
 
-export default function Header({ blog }) {
+export default function Header({ blog, sections = [] }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -12,14 +12,19 @@ export default function Header({ blog }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const navLinks = [
-    { label: 'Keunggulan', href: '#keunggulan' },
-    { label: 'Lokasi', href: '#lokasi' },
-    { label: 'Tipe Unit', href: '#tipe-unit' },
-    { label: 'Galeri 360°', href: '#galeri' },
-    { label: 'Promo', href: '#promo' },
-    { label: 'Testimoni', href: '#testimoni' },
+  const allNavLinks = [
+    { id: 'usp', label: 'Keunggulan', href: '#keunggulan' },
+    { id: 'location', label: 'Lokasi', href: '#lokasi' },
+    { id: 'units', label: 'Tipe Unit', href: '#tipe-unit' },
+    { id: 'gallery', label: 'Galeri 360°', href: '#galeri' },
+    { id: 'promo', label: 'Promo', href: '#promo' },
+    { id: 'social-proof', label: 'Testimoni', href: '#testimoni' },
   ]
+
+  const navLinks =
+    sections && sections.length > 0
+      ? allNavLinks.filter((link) => sections.some((s) => s.id === link.id))
+      : allNavLinks
 
   return (
     <header

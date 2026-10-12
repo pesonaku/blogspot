@@ -115,6 +115,16 @@ export async function fetchBloggerFeed(blog = {}) {
 
 export function readBloggerData(container, globalData = window.BloggerData || {}) {
   const pager = container.querySelector('[data-bt="pager"]')
+  const sectionEls = Array.from(container.querySelectorAll('[data-bt-section]'))
+  const sections = sectionEls.map((el) => {
+    const contentEl = el.querySelector('[data-bt="content"]')
+    return {
+      id: el.dataset.btSection,
+      title: el.dataset.title || '',
+      contentHtml: contentEl ? contentEl.innerHTML.trim() : '',
+    }
+  })
+
   return {
     blog: {
       title: globalData.blogTitle || document.title,
@@ -125,6 +135,7 @@ export function readBloggerData(container, globalData = window.BloggerData || {}
       isMobile: Boolean(globalData.isMobile),
       apiBaseUrl: globalData.apiBaseUrl,
     },
+    sections,
     heading: text(container.querySelector('[data-bt="heading"]')),
     posts: Array.from(container.querySelectorAll('[data-bt="post"]')).map(readPost),
     labels: readLinks(container.querySelectorAll('nav[data-bt="labels"] .bt-label')),

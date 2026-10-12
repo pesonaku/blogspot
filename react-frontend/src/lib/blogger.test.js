@@ -43,7 +43,21 @@ describe('readBloggerData', () => {
   it('memberi default aman bila data kosong', () => {
     const data = readBloggerData(document.createElement('div'), {})
     expect(data.posts).toEqual([])
+    expect(data.sections).toEqual([])
     expect(data.blog.pageType).toBe('index')
+  })
+
+  it('membaca custom section widgets dari markup Blogger Tata Letak', () => {
+    const el = document.createElement('div')
+    el.innerHTML = `
+      <div data-bt-section="hero" data-title="[Section 1] Hero Banner"></div>
+      <div data-bt-section="promo" data-title="[Section 7] Promo"><div data-bt="content"><b>Diskon 50%</b></div></div>
+    `
+    const data = readBloggerData(el)
+    expect(data.sections).toEqual([
+      { id: 'hero', title: '[Section 1] Hero Banner', contentHtml: '' },
+      { id: 'promo', title: '[Section 7] Promo', contentHtml: '<b>Diskon 50%</b>' },
+    ])
   })
 })
 

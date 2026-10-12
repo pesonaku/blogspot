@@ -36,7 +36,7 @@ function PostSkeleton() {
  * lengkap dengan 9 section yang dipersyaratkan + artikel perumahan Blogger di bawahnya.
  */
 export default function App({ data }) {
-  const { blog, heading, pager } = data
+  const { blog, heading, pager, sections = [] } = data
   const isSingle = blog.pageType === 'item' || blog.pageType === 'static_page'
 
   const [posts, setPosts] = useState(data.posts || [])
@@ -90,7 +90,7 @@ export default function App({ data }) {
       <>
         {isHome ? (
           <>
-            <PropertyLandingPage blog={blog} />
+            <PropertyLandingPage blog={blog} sections={sections} />
 
             {/* Section Artikel & Info Seputar Perumahan */}
             <section className="relative mx-auto max-w-6xl px-5 pt-16 pb-6">
@@ -140,7 +140,7 @@ export default function App({ data }) {
   return (
     <div className="relative flex min-h-screen flex-col">
       <Background />
-      <Header blog={blog} />
+      <Header blog={blog} sections={sections} />
       <main className="flex-1">{content}</main>
       <Footer blog={blog} />
     </div>
