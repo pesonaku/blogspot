@@ -193,3 +193,24 @@ export function parseWidgetConfig(rawText, rawHtml = '') {
   return { config: {}, customHtml: rawHtml || trimmed }
 }
 
+/**
+ * Serialisasi objek konfigurasi menjadi teks format key: value
+ * yang rapi dan siap disalin ke widget Blogger (HTML1 - HTML9).
+ */
+export function serializeSectionConfig(sectionId, config = {}) {
+  const lines = []
+  lines.push(`# ========================================================`)
+  lines.push(`# KONFIGURASI WIDGET [${(sectionId || '').toUpperCase()}]`)
+  lines.push(`# Dihasilkan secara otomatis oleh Custom Widget Studio`)
+  lines.push(`# Salin dan tempelkan teks ini ke widget HTML Blogger Anda.`)
+  lines.push(`# ========================================================\n`)
+
+  for (const [key, value] of Object.entries(config)) {
+    if (value !== undefined && value !== null && value !== '') {
+      lines.push(`${key}: ${value}`)
+    }
+  }
+
+  return lines.join('\n')
+}
+

@@ -12,6 +12,7 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
     notes: '',
   })
 
+  const [attachedFile, setAttachedFile] = useState(null)
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -32,7 +33,10 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
   }
 
   const generateWhatsAppUrl = () => {
-    const text = `Halo Tim Sales Pesona Kahuripan,\n\nSaya telah mendaftar jadwal survey lokasi dengan data berikut:\n- *Nama*: ${formData.name}\n- *No. WhatsApp*: ${formData.whatsapp}\n- *Email*: ${formData.email || '-'}\n- *Pilihan Unit*: ${formData.unitType}\n- *Rencana Tanggal Survey*: ${formData.surveyDate || 'Hari ini / Akhir Pekan'}\n- *Waktu*: ${formData.surveyTime}\n- *Catatan*: ${formData.notes || '-'}\n\nMohon konfirmasi kesiapan tim sales di lokasi. Terima kasih!`
+    const fileNote = attachedFile
+      ? `\n- *Lampiran Berkas*: ${attachedFile.name} (${attachedFile.size}) [Siap dikirim via chat]`
+      : ''
+    const text = `Halo Tim Sales Pesona Kahuripan,\n\nSaya telah mendaftar jadwal survey lokasi dengan data berikut:\n- *Nama*: ${formData.name}\n- *No. WhatsApp*: ${formData.whatsapp}\n- *Email*: ${formData.email || '-'}\n- *Pilihan Unit*: ${formData.unitType}\n- *Rencana Tanggal Survey*: ${formData.surveyDate || 'Hari ini / Akhir Pekan'}\n- *Waktu*: ${formData.surveyTime}\n- *Catatan*: ${formData.notes || '-'}${fileNote}\n\nMohon konfirmasi kesiapan tim sales di lokasi. Terima kasih!`
 
     return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`
   }
@@ -263,6 +267,53 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                       placeholder="Contoh: Ingin konsultasi KPR Bank BSI / cari unit posisi hoek..."
                       className="w-full glass rounded-xl px-4 py-2 text-sm text-emerald-950 dark:text-white placeholder:text-slate-400 dark:placeholder:text-emerald-300/40 outline-none focus:border-emerald-500 resize-none"
                     />
+                  </div>
+
+                  {/* Form Upload Berkas / Dokumen KPR / Foto Identitas (Opsional) */}
+                  <div className="rounded-2xl border border-dashed border-emerald-500/30 p-3.5 bg-emerald-500/5">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-xs font-bold text-emerald-950 dark:text-white flex items-center gap-1.5">
+                        <span>📎</span>
+                        <span>Unggah Foto KTP / Dokumen Pendukung KPR (Opsional)</span>
+                      </span>
+                      <span className="text-[10px] text-slate-500 dark:text-emerald-300/70">JPG / PNG / PDF</span>
+                    </div>
+
+                    {attachedFile ? (
+                      <div className="flex items-center justify-between p-2 rounded-xl bg-white dark:bg-ink-900 border border-emerald-500/20 text-xs">
+                        <div className="flex items-center gap-2 truncate">
+                          <span className="text-emerald-500 font-bold">✔</span>
+                          <span className="font-semibold text-emerald-950 dark:text-white truncate">{attachedFile.name}</span>
+                          <span className="text-[10px] text-slate-400">({attachedFile.size})</span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setAttachedFile(null)}
+                          className="text-rose-500 hover:text-rose-600 font-bold text-xs ml-2 shrink-0"
+                        >
+                          ✕ Hapus
+                        </button>
+                      </div>
+                    ) : (
+                      <label className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-emerald-500/25 bg-white/70 dark:bg-ink-900/60 cursor-pointer hover:border-emerald-500 transition text-xs text-slate-600 dark:text-emerald-200">
+                        <span>📤</span>
+                        <span className="font-medium">Pilih berkas dari perangkat Anda</span>
+                        <input
+                          type="file"
+                          accept="image/*,.pdf"
+                          onChange={(e) => {
+                            const f = e.target.files?.[0]
+                            if (f) {
+                              setAttachedFile({
+                                name: f.name,
+                                size: (f.size / 1024).toFixed(1) + ' KB',
+                              })
+                            }
+                          }}
+                          className="hidden"
+                        />
+                      </label>
+                    )}
                   </div>
 
                   <button
