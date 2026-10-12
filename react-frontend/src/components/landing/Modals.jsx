@@ -69,7 +69,7 @@ export function FloorPlanModal({ unit, onClose, onSelectUnitForSurvey }) {
                   alt={`Denah Arsitektur ${unit.name}`}
                   className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute bottom-3 left-3 glass px-3 py-1 rounded-lg text-[11px] text-white backdrop-blur-md">
+                <div className="absolute bottom-3 left-3 bg-black/60 text-white border border-white/20 px-3 py-1 rounded-lg text-[11px] backdrop-blur-md">
                   Denah Tata Ruang Resmi ({unit.code})
                 </div>
               </div>

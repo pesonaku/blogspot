@@ -114,25 +114,26 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
           {/* Floating Pill Highlights on Hero Visual */}
           <div className="absolute top-4 left-4 md:top-6 md:left-6 flex flex-wrap gap-2 pointer-events-none">
             {pill1 && (
-              <span className="glass rounded-xl px-3.5 py-1.5 text-xs font-semibold text-white shadow-lg backdrop-blur-md flex items-center gap-1.5 border-emerald-400/40">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="rounded-xl px-3.5 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-md flex items-center gap-1.5 border border-emerald-400/50 bg-white/95 dark:bg-ink-950/90 text-emerald-950 dark:text-emerald-100 transition-colors">
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                 {pill1}
               </span>
             )}
             {pill2 && (
-              <span className="glass rounded-xl px-3.5 py-1.5 text-xs font-semibold text-amber-200 shadow-lg backdrop-blur-md hidden sm:inline-flex items-center gap-1">
+              <span className="rounded-xl px-3.5 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-md hidden sm:inline-flex items-center gap-1 border border-amber-400/50 bg-white/95 dark:bg-ink-950/90 text-amber-900 dark:text-amber-200 transition-colors">
                 {pill2}
               </span>
             )}
           </div>
 
-          {/* Interactive Trigger Buttons on Hero Image */}
+          {/* Interactive Trigger Buttons & Overlay Card on Hero Image */}
           <div className="absolute bottom-5 left-5 right-5 md:bottom-8 md:left-8 md:right-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="glass rounded-2xl p-4 md:px-5 md:py-3.5 max-w-lg backdrop-blur-xl border-white/20">
-              <p className="font-display font-bold text-white text-base md:text-lg">
+            {/* Kartu Overlay Foto: Kontras tinggi di Light Mode & Dark Mode */}
+            <div className="rounded-2xl p-4 md:px-5 md:py-3.5 max-w-lg backdrop-blur-xl border border-emerald-200/80 dark:border-white/15 bg-white/95 dark:bg-ink-950/90 shadow-2xl transition-colors">
+              <p className="font-display font-bold text-emerald-950 dark:text-white text-base md:text-lg tracking-tight">
                 {cardTitle}
               </p>
-              <p className="text-xs md:text-sm text-slate-200 mt-0.5">
+              <p className="text-xs md:text-sm text-slate-700 dark:text-slate-200 mt-1 leading-relaxed font-medium">
                 {cardDesc}
               </p>
             </div>
@@ -141,7 +142,7 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
               <button
                 type="button"
                 onClick={() => onOpenVirtualTour && onOpenVirtualTour(config.virtual_tour_url)}
-                className="btn glass hover:bg-emerald-600/30 text-white border-white/20 rounded-2xl px-4 py-3 text-xs md:text-sm font-semibold flex items-center gap-2 backdrop-blur-md transition shadow-lg"
+                className="btn bg-white/95 dark:bg-ink-950/90 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-emerald-950 dark:text-white border border-emerald-200/80 dark:border-white/20 rounded-2xl px-4 py-3 text-xs md:text-sm font-bold flex items-center gap-2 backdrop-blur-md transition shadow-xl"
               >
                 <span>🔄</span>
                 <span>{ctaTour}</span>

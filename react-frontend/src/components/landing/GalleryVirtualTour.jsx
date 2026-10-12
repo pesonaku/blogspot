@@ -144,7 +144,7 @@ export function GalleryVirtualTour({ config = {}, onOpenLightbox, onOpenVirtualT
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
               <div className="absolute top-3 left-3">
-                <span className="glass rounded-lg px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md">
+                <span className="rounded-lg px-2.5 py-1 text-[11px] font-semibold text-white bg-black/60 border border-white/20 backdrop-blur-md shadow-md">
                   {item.categoryName}
                 </span>
               </div>
