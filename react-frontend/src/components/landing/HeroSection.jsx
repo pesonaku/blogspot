@@ -38,14 +38,14 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
           </h1>
 
           <p
-            className="mt-4 font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight animate-fade-up"
+            className="mt-4 font-display text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-950 dark:text-white tracking-tight animate-fade-up"
             style={{ animationDelay: '120ms' }}
           >
             {headline}
           </p>
 
           <p
-            className="mt-5 text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed max-w-3xl mx-auto animate-fade-up"
+            className="mt-5 text-base sm:text-lg md:text-xl text-slate-600 dark:text-emerald-100/80 leading-relaxed max-w-3xl mx-auto animate-fade-up"
             style={{ animationDelay: '180ms' }}
           >
             {subheadline}
@@ -59,7 +59,7 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
             <a
               id="cta-hero-survey"
               href="#lead-form"
-              className="btn-primary w-full sm:w-auto px-8 py-3.5 text-base font-bold shadow-xl shadow-violet-500/30 flex items-center justify-center gap-2"
+              className="btn-primary w-full sm:w-auto px-8 py-3.5 text-base font-bold shadow-xl shadow-emerald-600/30 flex items-center justify-center gap-2"
             >
               <span>{config.cta_survey || '📅 Jadwalkan Survey Lokasi'}</span>
               <span className="text-xs bg-white/20 rounded-full px-2 py-0.5">Gratis</span>
@@ -69,7 +69,7 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
               id="cta-hero-brosur"
               type="button"
               onClick={onOpenBrosur}
-              className="btn-ghost w-full sm:w-auto px-7 py-3.5 text-base font-semibold border-white/20 hover:border-violet-400/50 flex items-center justify-center gap-2"
+              className="btn-ghost w-full sm:w-auto px-7 py-3.5 text-base font-semibold flex items-center justify-center gap-2"
             >
               <span>{config.cta_brosur || '📥 Unduh Brosur & Pricelist'}</span>
             </button>
@@ -79,7 +79,7 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
               href={`https://wa.me/${whatsapp}?text=Halo%20Marketing%20${encodeURIComponent(brandName)}%2C%20saya%20tertarik%20tanya%20info%20promo%20dan%20jadwal%20survey`}
               target="_blank"
               rel="noreferrer"
-              className="glass hover:bg-emerald-500/20 hover:border-emerald-400/40 text-emerald-300 rounded-full px-6 py-3.5 text-sm font-semibold flex items-center justify-center gap-2 transition"
+              className="glass hover:bg-emerald-500/20 hover:border-emerald-400/40 text-emerald-700 dark:text-emerald-300 rounded-full px-6 py-3.5 text-sm font-semibold flex items-center justify-center gap-2 transition shadow-sm"
             >
               <span className="text-base">💬</span>
               <span>{config.cta_wa || 'Chat Sales via WhatsApp'}</span>

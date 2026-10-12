@@ -19,26 +19,26 @@ export default function PostDetail({ post, blog, isPage = false }) {
         </div>
       )}
 
-      <h1 className="font-display text-4xl font-bold leading-[1.1] tracking-tight text-white md:text-5xl">
+      <h1 className="font-display text-4xl font-bold leading-[1.1] tracking-tight text-emerald-950 dark:text-white md:text-5xl">
         {post.title}
       </h1>
 
       {!isPage && (
         <div className="mt-5 flex flex-wrap items-center gap-3">
           <PostMeta post={post} />
-          {minutes && <span className="text-xs text-slate-500">· {minutes} menit baca</span>}
+          {minutes && <span className="text-xs text-slate-500 dark:text-emerald-300/60">· {minutes} menit baca</span>}
         </div>
       )}
 
       {post.image && (
-        <div className="group mt-10 aspect-video overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-violet-950/50">
+        <div className="group mt-10 aspect-video overflow-hidden rounded-3xl border border-emerald-500/20 shadow-2xl shadow-emerald-950/40">
           <Cover post={post} />
         </div>
       )}
 
       <div
         id="post-body"
-        className="prose prose-invert prose-lg mt-10 max-w-none prose-headings:font-display prose-headings:text-white prose-a:text-violet-300 hover:prose-a:text-violet-200 prose-img:rounded-2xl prose-pre:border prose-pre:border-white/10 prose-pre:bg-ink-900"
+        className="prose dark:prose-invert prose-lg mt-10 max-w-none prose-headings:font-display prose-headings:text-emerald-950 dark:prose-headings:text-white prose-a:text-emerald-700 dark:prose-a:text-emerald-300 hover:prose-a:text-emerald-500 prose-img:rounded-2xl prose-pre:border prose-pre:border-emerald-500/20 prose-pre:bg-emerald-950"
         dangerouslySetInnerHTML={{ __html: post.bodyHtml || '' }}
       />
     </article>

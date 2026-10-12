@@ -94,20 +94,20 @@ export default function App({ data }) {
 
             {/* Section Artikel & Info Seputar Perumahan */}
             <section className="relative mx-auto max-w-6xl px-5 pt-16 pb-6">
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-white/10">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-emerald-500/20 dark:border-white/10">
                 <div>
-                  <span className="chip border-violet-400/30 bg-violet-400/10 text-violet-200 uppercase tracking-widest text-[11px] font-bold">
+                  <span className="chip uppercase tracking-widest text-[11px] font-bold">
                     Edukasi &amp; Berita Terkini
                   </span>
-                  <h2 className="mt-2 font-display text-2xl sm:text-3xl font-extrabold text-white">
+                  <h2 className="mt-2 font-display text-2xl sm:text-3xl font-extrabold text-emerald-950 dark:text-white">
                     Artikel &amp; Panduan Seputar Hunian
                   </h2>
-                  <p className="text-xs sm:text-sm text-slate-400 mt-1">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-emerald-100/70 mt-1">
                     Tips memilih rumah, panduan KPR, desain interior, dan info perkembangan kawasan perumahan.
                   </p>
                 </div>
                 {posts.length > 0 && (
-                  <p className="text-xs text-slate-500 shrink-0">
+                  <p className="text-xs text-slate-500 dark:text-emerald-300/60 shrink-0">
                     {posts.length} Artikel Terbaru
                   </p>
                 )}

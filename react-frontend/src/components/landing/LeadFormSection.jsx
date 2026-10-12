@@ -40,28 +40,28 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
   return (
     <section id="lead-form" className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-violet-600/15 blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none -z-10" />
 
-      <div className="rounded-3xl border border-white/15 bg-ink-900/90 backdrop-blur-2xl p-6 sm:p-10 md:p-12 shadow-2xl">
+      <div className="glass rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl">
         <div className="grid gap-10 lg:grid-cols-12 items-center">
           {/* Left Column: Reassurance & Contact Information */}
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
-              <span className="chip border-emerald-400/30 bg-emerald-400/10 text-emerald-300 uppercase tracking-widest text-[11px] font-bold">
+              <span className="chip uppercase tracking-widest text-[11px] font-bold">
                 {config.badge || 'Jadwal Survey & Konsultasi Langsung'}
               </span>
-              <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold text-white">
+              <h2 className="mt-3 font-display text-3xl sm:text-4xl font-extrabold text-emerald-950 dark:text-white">
                 {config.title || 'Kunjungi Rumah Contoh & Rasakan Langsung Suasananya'}
               </h2>
-              <p className="mt-4 text-sm text-slate-300 leading-relaxed">
+              <p className="mt-4 text-sm text-slate-600 dark:text-emerald-100/70 leading-relaxed">
                 {config.desc || 'Tim sales profesional kami siap menyambut Anda setiap hari di lokasi, mendampingi keliling show unit, serta memberikan konsultasi properti gratis tanpa dipungut biaya.'}
               </p>
 
-              <div className="mt-8 space-y-4 text-xs sm:text-sm text-slate-300">
+              <div className="mt-8 space-y-4 text-xs sm:text-sm text-slate-700 dark:text-emerald-100/80">
                 <div className="flex items-start gap-3">
                   <span className="text-xl">📍</span>
                   <div>
-                    <strong className="text-white block">Kantor Pemasaran:</strong>
+                    <strong className="text-emerald-950 dark:text-white block">Kantor Pemasaran &amp; Show Unit:</strong>
                     <span>{address}</span>
                   </div>
                 </div>
@@ -69,7 +69,7 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                 <div className="flex items-start gap-3">
                   <span className="text-xl">⏰</span>
                   <div>
-                    <strong className="text-white block">Jam Operasional Show Unit:</strong>
+                    <strong className="text-emerald-950 dark:text-white block">Jam Operasional Show Unit:</strong>
                     <span>{openingHours}</span>
                   </div>
                 </div>
@@ -77,48 +77,41 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                 <div className="flex items-start gap-3">
                   <span className="text-xl">📞</span>
                   <div>
-                    <strong className="text-white block">Hotline Telepon &amp; WhatsApp:</strong>
-                    <a
-                      href={`https://wa.me/${whatsappNumber}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-emerald-400 hover:underline"
-                    >
-                      {whatsappDisplay} (Fast Response)
-                    </a>
+                    <strong className="text-emerald-950 dark:text-white block">Hotline Konsultasi Resmi:</strong>
+                    <span className="font-mono">{whatsappDisplay}</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Foto Galeri Marketing / Kantor Pemasaran jika diupload */}
-            {config.office_image && (
-              <div className="mt-6 rounded-2xl overflow-hidden border border-white/10 shadow-lg group">
+            {/* Kantor Gallery Image jika diunggah */}
+            {config.kantor_image && (
+              <div className="mt-6 rounded-2xl overflow-hidden border border-emerald-500/20 shadow-lg group">
                 <img
-                  src={config.office_image}
-                  alt="Kantor Pemasaran & Show Unit"
+                  src={config.kantor_image}
+                  alt="Kantor Pemasaran"
                   className="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
             )}
 
-            <div className="mt-6 p-4 rounded-2xl border border-violet-400/20 bg-violet-400/5 text-xs text-violet-200">
+            <div className="mt-6 p-4 rounded-2xl glass text-xs text-emerald-900 dark:text-emerald-200">
               💡 <strong>Tips Berkunjung:</strong> Lebih baik menjadwalkan survey 1 hari sebelumnya agar tim sales dapat menyiapkan kunci rumah contoh dan berkas brosur lengkap untuk tipe yang Anda minati.
             </div>
           </div>
 
           {/* Right Column: Lead Form */}
           <div className="lg:col-span-7">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8 backdrop-blur-xl">
+            <div className="glass rounded-2xl p-6 sm:p-8">
               {submitted ? (
                 <div className="text-center py-8 space-y-4 animate-fade-up">
-                  <span className="grid mx-auto h-16 w-16 place-items-center rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 text-3xl">
+                  <span className="grid mx-auto h-16 w-16 place-items-center rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-600 dark:text-emerald-400 text-3xl font-bold">
                     ✓
                   </span>
-                  <h3 className="font-display text-2xl font-bold text-white">
+                  <h3 className="font-display text-2xl font-bold text-emerald-950 dark:text-white">
                     Permintaan Jadwal Survey Terkirim!
                   </h3>
-                  <p className="text-sm text-slate-300 max-w-md mx-auto">
+                  <p className="text-sm text-slate-600 dark:text-emerald-100/70 max-w-md mx-auto">
                     Terima kasih, <strong>{formData.name}</strong>. Tim konsultan kami akan segera menghubungi Anda melalui WhatsApp di nomor <strong>{formData.whatsapp}</strong> untuk konfirmasi kedatangan.
                   </p>
 
@@ -127,7 +120,7 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                       href={generateWhatsAppUrl()}
                       target="_blank"
                       rel="noreferrer"
-                      className="btn-primary py-3 px-6 text-sm font-bold shadow-xl shadow-emerald-500/20"
+                      className="btn-primary py-3 px-6 text-sm font-bold shadow-xl shadow-emerald-600/30"
                     >
                       💬 Buka &amp; Kirim Sekarang ke WhatsApp Sales
                     </a>
@@ -142,13 +135,13 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <h3 className="font-display text-xl font-bold text-white mb-2">
+                  <h3 className="font-display text-xl font-bold text-emerald-950 dark:text-white mb-2">
                     Formulir Reservasi Survey &amp; Konsultasi Sales
                   </h3>
 
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 dark:text-emerald-200 mb-1">
                         Nama Lengkap *
                       </label>
                       <input
@@ -158,12 +151,12 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Contoh: Hendra Wijaya"
-                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none focus:border-violet-400"
+                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-emerald-950 dark:text-white placeholder:text-slate-400 dark:placeholder:text-emerald-300/40 outline-none focus:border-emerald-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 dark:text-emerald-200 mb-1">
                         Nomor WhatsApp *
                       </label>
                       <input
@@ -173,14 +166,14 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                         value={formData.whatsapp}
                         onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value })}
                         placeholder="08xxxxxxxxxx"
-                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none focus:border-violet-400"
+                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-emerald-950 dark:text-white placeholder:text-slate-400 dark:placeholder:text-emerald-300/40 outline-none focus:border-emerald-500"
                       />
                     </div>
                   </div>
 
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 dark:text-emerald-200 mb-1">
                         Alamat Email (Opsional)
                       </label>
                       <input
@@ -189,26 +182,26 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="nama@email.com"
-                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none focus:border-violet-400"
+                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-emerald-950 dark:text-white placeholder:text-slate-400 dark:placeholder:text-emerald-300/40 outline-none focus:border-emerald-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 dark:text-emerald-200 mb-1">
                         Pilihan Tipe Rumah Minat
                       </label>
                       <select
                         id="lead-select-unit"
                         value={formData.unitType}
                         onChange={(e) => setFormData({ ...formData, unitType: e.target.value })}
-                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-white bg-ink-950 outline-none focus:border-violet-400"
+                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-emerald-950 dark:text-white bg-white dark:bg-emerald-950 outline-none focus:border-emerald-500"
                       >
                         {unitTypes.map((unit) => (
-                          <option key={unit.id} value={`${unit.name} (${unit.code})`} className="bg-ink-950 text-white">
+                          <option key={unit.id} value={`${unit.name} (${unit.code})`} className="bg-white dark:bg-emerald-950 text-slate-900 dark:text-white">
                             {unit.name} ({unit.code}) — {unit.cicilanEstimate}
                           </option>
                         ))}
-                        <option value="Belum Menentukan (Ingin Konsultasi Dulu)" className="bg-ink-950 text-white">
+                        <option value="Belum Menentukan (Ingin Konsultasi Dulu)" className="bg-white dark:bg-emerald-950 text-slate-900 dark:text-white">
                           Belum Menentukan (Konsultasi Dulu)
                         </option>
                       </select>
@@ -217,7 +210,7 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
 
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 dark:text-emerald-200 mb-1">
                         Rencana Tanggal Survey
                       </label>
                       <input
@@ -225,27 +218,27 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                         type="date"
                         value={formData.surveyDate}
                         onChange={(e) => setFormData({ ...formData, surveyDate: e.target.value })}
-                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-white outline-none focus:border-violet-400"
+                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-emerald-950 dark:text-white outline-none focus:border-emerald-500"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-300 mb-1">
+                      <label className="block text-xs font-semibold text-slate-700 dark:text-emerald-200 mb-1">
                         Pilihan Jam Kunjungan
                       </label>
                       <select
                         id="lead-select-time"
                         value={formData.surveyTime}
                         onChange={(e) => setFormData({ ...formData, surveyTime: e.target.value })}
-                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-white bg-ink-950 outline-none focus:border-violet-400"
+                        className="w-full glass rounded-xl px-4 py-2.5 text-sm text-emerald-950 dark:text-white bg-white dark:bg-emerald-950 outline-none focus:border-emerald-500"
                       >
-                        <option value="Pagi (09.00 - 12.00 WIB)" className="bg-ink-950 text-white">
+                        <option value="Pagi (09.00 - 12.00 WIB)" className="bg-white dark:bg-emerald-950 text-slate-900 dark:text-white">
                           Pagi (09.00 - 12.00 WIB)
                         </option>
-                        <option value="Siang (13.00 - 15.00 WIB)" className="bg-ink-950 text-white">
+                        <option value="Siang (13.00 - 15.00 WIB)" className="bg-white dark:bg-emerald-950 text-slate-900 dark:text-white">
                           Siang (13.00 - 15.00 WIB)
                         </option>
-                        <option value="Sore (15.00 - 17.30 WIB)" className="bg-ink-950 text-white">
+                        <option value="Sore (15.00 - 17.30 WIB)" className="bg-white dark:bg-emerald-950 text-slate-900 dark:text-white">
                           Sore (15.00 - 17.30 WIB)
                         </option>
                       </select>
@@ -253,7 +246,7 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-emerald-200 mb-1">
                       Catatan / Pertanyaan Tambahan
                     </label>
                     <textarea
@@ -262,7 +255,7 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                       value={formData.notes}
                       onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                       placeholder="Contoh: Ingin konsultasi KPR Bank BSI / cari unit posisi hoek..."
-                      className="w-full glass rounded-xl px-4 py-2 text-sm text-white placeholder:text-slate-500 outline-none focus:border-violet-400 resize-none"
+                      className="w-full glass rounded-xl px-4 py-2 text-sm text-emerald-950 dark:text-white placeholder:text-slate-400 dark:placeholder:text-emerald-300/40 outline-none focus:border-emerald-500 resize-none"
                     />
                   </div>
 
@@ -270,12 +263,12 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
                     id="lead-btn-submit"
                     type="submit"
                     disabled={loading}
-                    className="btn-primary w-full justify-center py-3.5 text-sm font-bold shadow-xl shadow-violet-500/30"
+                    className="btn-primary w-full justify-center py-3.5 text-sm font-bold shadow-xl shadow-emerald-600/30"
                   >
                     {loading ? 'Mengirim Jadwal...' : '📅 Daftarkan Jadwal Survey Sekarang'}
                   </button>
 
-                  <p className="text-[11px] text-center text-slate-500">
+                  <p className="text-[11px] text-center text-slate-500 dark:text-slate-400">
                     🔒 Data Anda dijamin kerahasiaannya dan hanya digunakan untuk konfirmasi jadwal survey.
                   </p>
                 </form>

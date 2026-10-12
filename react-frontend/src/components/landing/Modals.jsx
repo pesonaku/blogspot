@@ -9,26 +9,26 @@ export function FloorPlanModal({ unit, onClose, onSelectUnitForSurvey }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-up">
-      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-white/10 bg-ink-950 p-6 md:p-8 shadow-2xl text-slate-200">
+      <div className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-3xl border border-emerald-500/20 bg-white dark:bg-ink-950 p-6 md:p-8 shadow-2xl text-slate-800 dark:text-slate-200">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+          className="absolute top-5 right-5 grid h-10 w-10 place-items-center rounded-full bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white transition hover:bg-slate-200 dark:hover:bg-white/20"
           aria-label="Tutup Denah"
         >
           ✕
         </button>
 
         <div className="flex flex-wrap items-center gap-3 pr-12">
-          <span className="chip border-emerald-400/30 bg-emerald-400/10 text-emerald-300 font-semibold">
+          <span className="chip border-emerald-400/30 bg-emerald-400/10 text-emerald-700 dark:text-emerald-300 font-semibold">
             {unit.code}
           </span>
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-white">
+          <h3 className="font-display text-2xl md:text-3xl font-bold text-emerald-950 dark:text-white">
             Denah Tata Ruang — {unit.name}
           </h3>
         </div>
 
-        <p className="mt-2 text-sm text-slate-400">
-          Dimensi Kaveling: <span className="font-semibold text-white">{unit.dimensi}</span> • Luas Bangunan: <span className="font-semibold text-white">{unit.lb} m²</span> • Luas Tanah: <span className="font-semibold text-white">{unit.lt} m²</span>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+          Dimensi Kaveling: <span className="font-semibold text-emerald-950 dark:text-white">{unit.dimensi}</span> • Luas Bangunan: <span className="font-semibold text-emerald-950 dark:text-white">{unit.lb} m²</span> • Luas Tanah: <span className="font-semibold text-emerald-950 dark:text-white">{unit.lt} m²</span>
         </p>
 
         {/* Tab Switcher: Gambar Denah Asli vs Skema Blueprint */}
@@ -196,20 +196,20 @@ export function VirtualTourModal({ virtualTourUrl, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-up">
-      <div className="relative w-full max-w-5xl rounded-3xl border border-white/10 bg-ink-950 p-6 md:p-8 shadow-2xl text-slate-200">
+      <div className="relative w-full max-w-5xl rounded-3xl border border-emerald-500/20 bg-white dark:bg-ink-950 p-6 md:p-8 shadow-2xl text-slate-800 dark:text-slate-200">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+          className="absolute top-5 right-5 grid h-10 w-10 place-items-center rounded-full bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white transition hover:bg-slate-200 dark:hover:bg-white/20"
           aria-label="Tutup Virtual Tour"
         >
           ✕
         </button>
 
         <div className="flex flex-wrap items-center gap-3 pr-12 mb-4">
-          <span className="chip border-fuchsia-400/30 bg-fuchsia-400/10 text-fuchsia-300 font-semibold">
+          <span className="chip border-emerald-400/30 bg-emerald-400/10 text-emerald-700 dark:text-emerald-300 font-semibold">
             Tur Virtual 360° Interaktif
           </span>
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-white">
+          <h3 className="font-display text-2xl md:text-3xl font-bold text-emerald-950 dark:text-white">
             Eksplorasi Rumah Contoh Tanpa Harus Keluar Rumah
           </h3>
         </div>
@@ -304,23 +304,23 @@ export function VideoPlayerModal({ videoUrl, title, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-up">
-      <div className="relative w-full max-w-4xl rounded-3xl border border-white/10 bg-ink-950 p-6 md:p-8 shadow-2xl text-slate-200">
+      <div className="relative w-full max-w-4xl rounded-3xl border border-emerald-500/20 bg-white dark:bg-ink-950 p-6 md:p-8 shadow-2xl text-slate-800 dark:text-slate-200">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+          className="absolute top-5 right-5 grid h-10 w-10 place-items-center rounded-full bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white transition hover:bg-slate-200 dark:hover:bg-white/20"
           aria-label="Tutup Video"
         >
           ✕
         </button>
 
-        <h3 className="font-display text-2xl font-bold text-white mb-2 pr-12">
+        <h3 className="font-display text-2xl font-bold text-emerald-950 dark:text-white mb-2 pr-12">
           {title || 'Video Tour Show Unit & Site Plan Kawasan Pesona Kahuripan'}
         </h3>
-        <p className="text-xs text-slate-400 mb-5">
+        <p className="text-xs text-slate-600 dark:text-slate-400 mb-5">
           Tinjauan lengkap dari udara (drone footage) dan walkthrough interior unit rumah contoh.
         </p>
 
-        <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-white/10 bg-slate-950">
+        <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-emerald-500/20 bg-slate-950">
           <iframe
             className="w-full h-full"
             src={embedSrc}
@@ -349,23 +349,23 @@ export function BrosurModal({ brochureUrl, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-up">
-      <div className="relative w-full max-w-md rounded-3xl border border-white/10 bg-ink-950 p-6 md:p-8 shadow-2xl text-slate-200">
+      <div className="relative w-full max-w-md rounded-3xl border border-emerald-500/20 bg-white dark:bg-ink-950 p-6 md:p-8 shadow-2xl text-slate-800 dark:text-slate-200">
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+          className="absolute top-5 right-5 grid h-10 w-10 place-items-center rounded-full bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white transition hover:bg-slate-200 dark:hover:bg-white/20"
           aria-label="Tutup Modal"
         >
           ✕
         </button>
 
         <div className="text-center">
-          <span className="grid mx-auto h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white text-2xl shadow-lg mb-3">
+          <span className="grid mx-auto h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-600 text-white text-2xl shadow-lg mb-3">
             📥
           </span>
-          <h3 className="font-display text-2xl font-bold text-white">
+          <h3 className="font-display text-2xl font-bold text-emerald-950 dark:text-white">
             Unduh E-Brosur &amp; Pricelist 2026
           </h3>
-          <p className="mt-1 text-xs text-slate-400">
+          <p className="mt-1 text-xs text-slate-600 dark:text-slate-400">
             Dapatkan katalog lengkap spesifikasi, denah arsitektur, dan pricelist resmi perumahan Pesona Kahuripan.
           </p>
         </div>
@@ -388,7 +388,7 @@ export function BrosurModal({ brochureUrl, onClose }) {
         ) : (
           <form onSubmit={handleDownload} className="mt-6 space-y-4">
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">
+              <label className="block text-xs font-medium text-slate-700 dark:text-emerald-200 mb-1">
                 Nama Lengkap
               </label>
               <input
@@ -397,11 +397,11 @@ export function BrosurModal({ brochureUrl, onClose }) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Contoh: Budi Santoso"
-                className="w-full glass rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none focus:border-violet-400"
+                className="w-full glass rounded-xl px-4 py-2.5 text-sm text-emerald-950 dark:text-white placeholder:text-slate-400 dark:placeholder:text-emerald-300/40 outline-none focus:border-emerald-500"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">
+              <label className="block text-xs font-medium text-slate-700 dark:text-emerald-200 mb-1">
                 Nomor WhatsApp
               </label>
               <input
@@ -410,16 +410,16 @@ export function BrosurModal({ brochureUrl, onClose }) {
                 value={wa}
                 onChange={(e) => setWa(e.target.value)}
                 placeholder="0812xxxxxxx"
-                className="w-full glass rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 outline-none focus:border-violet-400"
+                className="w-full glass rounded-xl px-4 py-2.5 text-sm text-emerald-950 dark:text-white placeholder:text-slate-400 dark:placeholder:text-emerald-300/40 outline-none focus:border-emerald-500"
               />
             </div>
             <button
               type="submit"
-              className="btn-primary w-full justify-center py-3 text-sm font-semibold shadow-xl"
+              className="btn-primary w-full justify-center py-3 text-sm font-semibold shadow-xl shadow-emerald-600/30"
             >
-              Unduh Brosur & Pricelist Sekarang (PDF)
+              Unduh Brosur &amp; Pricelist Sekarang (PDF)
             </button>
-            <p className="text-[11px] text-center text-slate-500">
+            <p className="text-[11px] text-center text-slate-500 dark:text-slate-400">
               Privasi Anda aman. Data hanya digunakan untuk pengiriman katalog resmi.
             </p>
           </form>

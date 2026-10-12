@@ -10,7 +10,7 @@
     //__THEME_JS__     -> diganti JS hasil build React
     __API_BASE_URL__   -> diganti URL Laravel API (env THEME_API_BASE_URL)
 -->
-<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' expr:lang='data:blog.localeUnderscoreDelimited' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html class='dark' b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' expr:lang='data:blog.localeUnderscoreDelimited' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 <head>
   <meta charset='utf-8'/>
   <meta content='width=device-width, initial-scale=1' name='viewport'/>
@@ -20,12 +20,23 @@
   <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
   <link href='https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap' rel='stylesheet'/>
 
+  <script type='text/javascript'>
+    try {
+      var savedTheme = localStorage.getItem('pesona_theme') || 'dark';
+      document.documentElement.classList.remove('dark', 'light');
+      document.documentElement.classList.add(savedTheme);
+      document.documentElement.style.colorScheme = savedTheme;
+    } catch(e) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+
   <!-- Fallback style untuk markup server-side (tampil sebelum React mount / tanpa JS) -->
   <b:skin version='1.0.0'><![CDATA[
-body{margin:0;background:#0b0b14;color:#e5e7f0;font-family:Inter,system-ui,sans-serif;line-height:1.6}
-a{color:#a5b4fc}
+body{margin:0;background:#021811;color:#ecfdf5;font-family:Inter,system-ui,sans-serif;line-height:1.6}
+a{color:#34d399}
 #root{max-width:960px;margin:0 auto;padding:24px}
-.bt-ssr-post{padding:16px 0;border-bottom:1px solid #22223a}
+.bt-ssr-post{padding:16px 0;border-bottom:1px solid #064e3b}
 .bt-ssr-post img{max-width:100%;height:auto}
 .bt-hidden{display:none}
   ]]></b:skin>

@@ -4,35 +4,96 @@
 
 @layer base {
   html {
-    color-scheme: dark;
     scroll-behavior: smooth;
   }
-  body {
-    @apply min-h-screen bg-ink-950 font-sans text-slate-300 antialiased;
+  
+  /* Mode Dark Default */
+  html.dark {
+    color-scheme: dark;
   }
+
+  html.light {
+    color-scheme: light;
+  }
+
+  body {
+    @apply min-h-screen font-sans antialiased transition-colors duration-300;
+  }
+
+  /* Default / Dark Mode: Dominan Warna Hijau Pekat (Deep Forest Emerald) */
+  html.dark body {
+    @apply bg-[#021811] text-emerald-100/90;
+  }
+
+  /* Light Mode: Dominan Warna Hijau dan Putih Bersih */
+  html.light body {
+    @apply bg-[#f7faf8] text-slate-800;
+  }
+
   ::selection {
-    @apply bg-violet-500/40 text-white;
+    @apply bg-emerald-500/40 text-white;
   }
 }
 
 @layer components {
+  /* Efek Glass Card */
   .glass {
-    @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl;
+    @apply border backdrop-blur-xl transition-all duration-300;
   }
+
+  html.dark .glass {
+    @apply border-emerald-500/20 bg-emerald-950/40 text-emerald-100;
+  }
+
+  html.light .glass {
+    @apply border-emerald-100 bg-white/90 text-slate-800 shadow-sm shadow-emerald-900/5;
+  }
+
+  /* Teks Bergradasi */
   .text-gradient {
-    @apply bg-gradient-to-r from-violet-300 via-fuchsia-300 to-amber-200 bg-clip-text text-transparent;
+    @apply bg-clip-text text-transparent;
     background-size: 200% auto;
   }
-  .chip {
-    @apply inline-flex items-center gap-1 rounded-full border border-violet-400/20 bg-violet-400/10 px-3 py-1 text-xs font-medium text-violet-200 transition hover:border-violet-300/50 hover:bg-violet-400/20 hover:text-white;
+
+  html.dark .text-gradient {
+    @apply bg-gradient-to-r from-emerald-300 via-teal-200 to-lime-300;
   }
+
+  html.light .text-gradient {
+    @apply bg-gradient-to-r from-emerald-800 via-emerald-600 to-teal-700;
+  }
+
+  /* Chip / Badge Pill */
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold transition duration-200;
+  }
+
+  html.dark .chip {
+    @apply border border-emerald-500/25 bg-emerald-500/15 text-emerald-200 hover:border-emerald-400/50 hover:bg-emerald-500/25 hover:text-white;
+  }
+
+  html.light .chip {
+    @apply border border-emerald-200 bg-emerald-50 text-emerald-800 hover:border-emerald-300 hover:bg-emerald-100/80 hover:text-emerald-950;
+  }
+
+  /* Tombol Utama & Sekunder */
   .btn {
     @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition duration-300;
   }
+
   .btn-primary {
-    @apply btn bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white shadow-lg shadow-violet-500/25 hover:-translate-y-0.5 hover:shadow-violet-500/40;
+    @apply btn bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-600/30 hover:-translate-y-0.5 hover:shadow-emerald-600/50 hover:from-emerald-500 hover:to-teal-500 active:translate-y-0;
   }
+
   .btn-ghost {
-    @apply btn glass text-slate-200 hover:-translate-y-0.5 hover:bg-white/10;
+    @apply btn glass hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  html.dark .btn-ghost {
+    @apply text-emerald-100 hover:bg-emerald-900/50 hover:border-emerald-400/40;
+  }
+
+  html.light .btn-ghost {
+    @apply text-emerald-900 border-emerald-300 hover:bg-emerald-50;
   }
 }

@@ -80,7 +80,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
             />
             {sec.contentHtml && (
               <div
-                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-violet-950/20 p-4 text-sm text-slate-200"
+                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl glass p-4 text-sm text-slate-800 dark:text-emerald-100"
                 dangerouslySetInnerHTML={{ __html: sec.contentHtml }}
               />
             )}
@@ -104,7 +104,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
             <UspSection config={config} />
             {sec.contentHtml && (
               <div
-                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-violet-950/20 p-4 text-sm text-slate-200"
+                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl glass p-4 text-sm text-slate-800 dark:text-emerald-100"
                 dangerouslySetInnerHTML={{ __html: sec.contentHtml }}
               />
             )}
@@ -116,7 +116,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
             <LocationSection config={config} />
             {sec.contentHtml && (
               <div
-                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-violet-950/20 p-4 text-sm text-slate-200"
+                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl glass p-4 text-sm text-slate-800 dark:text-emerald-100"
                 dangerouslySetInnerHTML={{ __html: sec.contentHtml }}
               />
             )}
@@ -132,7 +132,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
             />
             {sec.contentHtml && (
               <div
-                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-violet-950/20 p-4 text-sm text-slate-200"
+                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl glass p-4 text-sm text-slate-800 dark:text-emerald-100"
                 dangerouslySetInnerHTML={{ __html: sec.contentHtml }}
               />
             )}
@@ -164,7 +164,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
             />
             {sec.contentHtml && (
               <div
-                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-violet-950/20 p-4 text-sm text-slate-200"
+                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl glass p-4 text-sm text-slate-800 dark:text-emerald-100"
                 dangerouslySetInnerHTML={{ __html: sec.contentHtml }}
               />
             )}
@@ -200,7 +200,7 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
             <LeadFormSection config={config} prefilledUnit={prefilledUnitForSurvey} />
             {sec.contentHtml && (
               <div
-                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl border border-violet-500/20 bg-violet-950/20 p-4 text-sm text-slate-200"
+                className="mx-auto max-w-6xl px-5 my-4 overflow-hidden rounded-2xl glass p-4 text-sm text-slate-800 dark:text-emerald-100"
                 dangerouslySetInnerHTML={{ __html: sec.contentHtml }}
               />
             )}
