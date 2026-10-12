@@ -1,13 +1,40 @@
 import { useState } from 'react'
 import { propertyInfo } from './propertyData.js'
 
-export function FloatingWhatsApp() {
+export function FloatingWhatsApp({ config = {} }) {
   const [isOpen, setIsOpen] = useState(false)
 
+  const whatsappNumber = config.whatsapp || propertyInfo.whatsapp
+  const buttonLabel = config.button_label || config.btn_label || 'Konsultasi WhatsApp'
+  const buttonIcon = config.button_icon || '💬'
+  const salesName = config.sales_name || 'Marketing Pesonaku'
+  const salesStatus = config.sales_status || 'Online • Balas Cepat'
+  const salesAvatar = config.sales_avatar || config.avatar
+  const greetingText =
+    config.greeting_text ||
+    config.pesan_sapaan ||
+    '👋 Halo! Ada yang bisa kami bantu seputar pilihan tipe rumah, promo spesial, atau jadwal survey ke lokasi hari ini?'
+  const directCtaLabel = config.direct_cta_label || 'Buka Obrolan WhatsApp Langsung'
+
   const quickMessages = [
-    { label: 'Tanya Promo DP 0% & Free Biaya', text: 'Halo Marketing, saya ingin tanya promo DP 0% dan gratis biaya BPHTB/Notaris di Pesona Kahuripan' },
-    { label: 'Jadwal Survey Rumah Contoh', text: 'Halo, saya mau atur jadwal survey ke show unit Pesona Kahuripan besok' },
-    { label: 'Pricelist & Brosur Terbaru', text: 'Halo Marketing, saya ingin minta pricelist dan brosur terbaru Pesona Kahuripan' },
+    {
+      label: config.topic1_label || 'Tanya Promo DP 0% & Free Biaya',
+      text:
+        config.topic1_text ||
+        'Halo Marketing, saya ingin tanya promo DP 0% dan gratis biaya BPHTB/Notaris di Pesona Kahuripan',
+    },
+    {
+      label: config.topic2_label || 'Jadwal Survey Rumah Contoh',
+      text:
+        config.topic2_text ||
+        'Halo, saya mau atur jadwal survey ke show unit Pesona Kahuripan besok',
+    },
+    {
+      label: config.topic3_label || 'Pricelist & Brosur Terbaru',
+      text:
+        config.topic3_text ||
+        'Halo Marketing, saya ingin minta pricelist dan brosur terbaru Pesona Kahuripan',
+    },
   ]
 
   const openWhatsApp = (customText) => {
@@ -15,7 +42,7 @@ export function FloatingWhatsApp() {
       customText ||
       'Halo Marketing Pesona Kahuripan, saya ingin tanya info ketersediaan unit dan promo terbaru.'
     window.open(
-      `https://wa.me/${propertyInfo.whatsapp}?text=${encodeURIComponent(defaultText)}`,
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultText)}`,
       '_blank',
     )
   }
@@ -29,14 +56,22 @@ export function FloatingWhatsApp() {
           <div className="flex items-center justify-between pb-3 border-b border-emerald-500/10 dark:border-white/10">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-emerald-600 text-xl font-bold text-white shadow-lg shadow-emerald-600/40">
-                  💬
-                </span>
+                {salesAvatar ? (
+                  <img
+                    src={salesAvatar}
+                    alt={salesName}
+                    className="h-10 w-10 rounded-full object-cover border-2 border-emerald-400 shadow-md"
+                  />
+                ) : (
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-emerald-600 text-xl font-bold text-white shadow-lg shadow-emerald-600/40">
+                    {buttonIcon}
+                  </span>
+                )}
                 <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-400 border-2 border-white dark:border-emerald-950" />
               </div>
               <div>
-                <p className="font-display font-bold text-sm text-emerald-950 dark:text-white">Marketing Pesonaku</p>
-                <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">Online • Balas Cepat</p>
+                <p className="font-display font-bold text-sm text-emerald-950 dark:text-white">{salesName}</p>
+                <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">{salesStatus}</p>
               </div>
             </div>
             <button
@@ -50,7 +85,7 @@ export function FloatingWhatsApp() {
 
           {/* Chat Message Bubble */}
           <div className="glass my-3 rounded-2xl p-3 text-xs text-slate-700 dark:text-emerald-100/90 leading-relaxed">
-            👋 Halo! Ada yang bisa kami bantu seputar pilihan tipe rumah, promo spesial, atau jadwal survey ke lokasi hari ini?
+            {greetingText}
           </div>
 
           {/* Quick Options */}
@@ -77,7 +112,7 @@ export function FloatingWhatsApp() {
             onClick={() => openWhatsApp()}
             className="btn-primary mt-4 w-full justify-center py-2.5 text-xs text-center"
           >
-            <span>Buka Obrolan WhatsApp Langsung</span>
+            <span>{directCtaLabel}</span>
           </button>
         </div>
       )}
@@ -93,11 +128,11 @@ export function FloatingWhatsApp() {
         {/* Pulsing ring indicator */}
         <span className="absolute -inset-1 rounded-full bg-emerald-400/40 animate-ping opacity-75 pointer-events-none" />
 
-        {/* WhatsApp Icon */}
-        <span className="relative text-xl">💬</span>
+        {/* Button Icon */}
+        <span className="relative text-xl">{buttonIcon}</span>
 
         <span className="relative hidden sm:inline text-xs md:text-sm font-bold tracking-tight">
-          Konsultasi WhatsApp
+          {buttonLabel}
         </span>
 
         {/* Unread badge dot */}

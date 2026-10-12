@@ -72,6 +72,58 @@ a{color:#10b981}
     <!-- melalui menu Tata Letak di Dashboard Blogger.           -->
     <!-- ======================================================== -->
 
+    <!-- 0. Header: Logo & Menu Navigasi -->
+    <b:section class='sec-header' id='sec-header' name='Section 0: Header Logo &amp; Menu' showaddelement='yes'>
+      <b:widget id='HTML10' locked='false' title='[Header] Logo &amp; Menu Navigasi' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [HEADER] LOGO BRAND & MENU NAVIGASI
+# ========================================================
+# PANDUAN PENGISIAN:
+# - logo_image: Link foto logo transparan PNG/SVG (kosongkan jika pakai teks)
+# - logo_icon: Ikon simbol logo brand (contoh: 🏡)
+# - brand_name: Nama perumahan / brand Anda
+# - brand_tagline: Slogan ringkas di bawah nama brand
+# - nav1..5: Menu navigasi kustom (label & link url)
+# ========================================================
+
+logo_image: 
+logo_icon: 🏡
+brand_name: Pesona Kahuripan
+brand_tagline: Residence & Cluster Modern
+
+# --- TOMBOL CTA HEADER ---
+header_cta_text: 📅 Survey Lokasi
+header_cta_url: #lead-form
+show_search: true
+
+# --- MENU NAVIGASI KUSTOM (OPSIONAL) ---
+# Kosongkan baris nav di bawah jika ingin memakai menu section bawaan otomatis.
+nav1_label: Keunggulan
+nav1_url: #keunggulan
+
+nav2_label: Lokasi
+nav2_url: #lokasi
+
+nav3_label: Tipe Unit
+nav3_url: #tipe-unit
+
+nav4_label: Galeri 360°
+nav4_url: #galeri
+
+nav5_label: Promo
+nav5_url: #promo]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='header' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
     <!-- 1. Hero Banner & Promo Utama -->
     <b:section class='sec-hero' id='sec-hero' name='Section 1: Hero Banner &amp; Headline' showaddelement='yes'>
       <b:widget id='HTML1' locked='false' title='[Section 1] Hero Banner &amp; Headline' type='HTML' version='2' visible='true'>
@@ -625,6 +677,53 @@ privacy_note: 🔒 Data Anda dijamin kerahasiaannya dan hanya digunakan untuk ko
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='lead-form' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- 11. Tombol Melayang (Floating CTA WhatsApp Pojok Bawah) -->
+    <b:section class='sec-cta' id='sec-cta' name='Floating CTA: Kontak Pojok Kanan Bawah' showaddelement='yes'>
+      <b:widget id='HTML11' locked='false' title='[Floating CTA] Kontak WhatsApp Pojok Kanan Bawah' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [FLOATING CTA] TOMBOL MELAYANG WHATSAPP POJOK KANAN BAWAH
+# ========================================================
+# PANDUAN PENGISIAN:
+# - whatsapp: Nomor WhatsApp tujuan (format 628xxxxxxxxxx)
+# - button_label: Teks yang tampil di tombol melayang
+# - button_icon: Ikon emoji tombol (contoh: 💬)
+# - sales_avatar: Link foto avatar tim sales / CS
+# - sales_name: Nama tim sales yang melayani
+# - sales_status: Status respons (contoh: Online • Balas Cepat)
+# - greeting_text: Pesan pembuka balon sapaan
+# - topic1..3: Pilihan topik pertanyaan cepat & template chat
+# ========================================================
+
+whatsapp: 6281288997711
+button_label: Konsultasi WhatsApp
+button_icon: 💬
+sales_name: Marketing Pesonaku
+sales_status: Online • Balas Cepat
+sales_avatar: 
+greeting_text: 👋 Halo! Ada yang bisa kami bantu seputar pilihan tipe rumah, promo spesial, atau jadwal survey ke lokasi hari ini?
+direct_cta_label: Buka Obrolan WhatsApp Langsung
+
+# --- 3 PILIHAN TOPIK PERTANYAAN CEPAT ---
+topic1_label: Tanya Promo DP 0% & Free Biaya
+topic1_text: Halo Marketing, saya ingin tanya promo DP 0% dan gratis biaya BPHTB/Notaris di Pesona Kahuripan
+
+topic2_label: Jadwal Survey Rumah Contoh
+topic2_text: Halo, saya mau atur jadwal survey ke show unit Pesona Kahuripan besok
+
+topic3_label: Pricelist & Brosur Terbaru
+topic3_text: Halo Marketing, saya ingin minta pricelist dan brosur terbaru Pesona Kahuripan]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='floating-cta' expr:data-title='data:title'>
             <b:if cond='data:content'>
               <div data-bt='content'><data:content/></div>
             </b:if>

@@ -19,6 +19,7 @@ import {
 } from './Modals.jsx'
 
 export const DEFAULT_LANDING_SECTIONS = [
+  { id: 'header' },
   { id: 'hero' },
   { id: 'stats' },
   { id: 'usp' },
@@ -28,6 +29,7 @@ export const DEFAULT_LANDING_SECTIONS = [
   { id: 'promo' },
   { id: 'social-proof' },
   { id: 'lead-form' },
+  { id: 'floating-cta' },
 ]
 
 export default function PropertyLandingPage({ blog, sections = [] }) {
@@ -237,7 +239,12 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
       {activeSections.map((sec) => renderSection(sec))}
 
       {/* Tombol CTA Mengambang (Floating WhatsApp Button) */}
-      <FloatingWhatsApp />
+      <FloatingWhatsApp
+        config={{
+          ...(sections.find((s) => s.id === 'floating-cta')?.config || {}),
+          ...(savedOverrides['floating-cta'] || {}),
+        }}
+      />
 
       {/* Modals Interaktif */}
       {selectedFloorPlanUnit && (

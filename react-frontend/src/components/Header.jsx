@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react'
 import ApiStatus from './ApiStatus.jsx'
 import ThemeToggle from './ThemeToggle.jsx'
 
-export default function Header({ blog, sections = [] }) {
+export default function Header({ blog, sections = [], config = {} }) {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  // Merge config jika ada section dengan id 'header'
+  const headerSec = sections.find((s) => s.id === 'header')
+  const mergedConfig = { ...(headerSec?.config || {}), ...(config || {}) }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -13,7 +17,17 @@ export default function Header({ blog, sections = [] }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const allNavLinks = [
+  // Cek apakah ada custom nav menu yang didefinisikan di config
+  const customNav = []
+  for (let i = 1; i <= 6; i++) {
+    const label = mergedConfig[`nav${i}_label`] || mergedConfig[`menu${i}_label`]
+    const href = mergedConfig[`nav${i}_url`] || mergedConfig[`menu${i}_url`]
+    if (label && href) {
+      customNav.push({ label, href })
+    }
+  }
+
+  const defaultNavLinks = [
     { id: 'usp', label: 'Keunggulan', href: '#keunggulan' },
     { id: 'location', label: 'Lokasi', href: '#lokasi' },
     { id: 'units', label: 'Tipe Unit', href: '#tipe-unit' },
@@ -23,9 +37,19 @@ export default function Header({ blog, sections = [] }) {
   ]
 
   const navLinks =
-    sections && sections.length > 0
-      ? allNavLinks.filter((link) => sections.some((s) => s.id === link.id))
-      : allNavLinks
+    customNav.length > 0
+      ? customNav
+      : sections && sections.length > 0
+      ? defaultNavLinks.filter((link) => sections.some((s) => s.id === link.id))
+      : defaultNavLinks
+
+  const logoImage = mergedConfig.logo_image || mergedConfig.logo_foto
+  const logoIcon = mergedConfig.logo_icon || '🏡'
+  const brandName = mergedConfig.brand_name || blog.title || 'Pesona Kahuripan'
+  const brandTagline = mergedConfig.brand_tagline || 'Residence & Cluster Modern'
+  const headerCtaText = mergedConfig.header_cta_text || '📅 Survey Lokasi'
+  const headerCtaUrl = mergedConfig.header_cta_url || '#lead-form'
+  const showSearch = mergedConfig.show_search !== 'false'
 
   return (
     <header
@@ -43,20 +67,28 @@ export default function Header({ blog, sections = [] }) {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5">
         {/* Brand Logo */}
         <a id="site-logo" href={blog.homepageUrl} className="group flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-700 font-display text-lg font-bold text-white shadow-lg shadow-emerald-600/30 transition group-hover:rotate-6">
-            🏡
-          </span>
+          {logoImage ? (
+            <img
+              src={logoImage}
+              alt={brandName}
+              className="h-10 w-auto max-w-[160px] object-contain rounded-xl"
+            />
+          ) : (
+            <span className="grid h-10 w-10 place-items-center rounded-2xl bg-gradient-to-br from-emerald-500 via-teal-500 to-emerald-700 font-display text-lg font-bold text-white shadow-lg shadow-emerald-600/30 transition group-hover:rotate-6">
+              {logoIcon}
+            </span>
+          )}
           <div className="flex flex-col">
             <span className="font-display text-lg font-bold tracking-tight text-emerald-950 dark:text-white leading-tight">
-              {blog.title || 'Pesona Kahuripan'}
+              {brandName}
             </span>
             <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium tracking-wide">
-              Residence &amp; Cluster Modern
+              {brandTagline}
             </span>
           </div>
         </a>
 
-        {/* Desktop Navigation Links - Terang & Bersih di Light Mode, Elegan di Dark Mode */}
+        {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center gap-5 text-xs font-semibold text-slate-700 dark:text-slate-200">
           {navLinks.map((link) => (
             <a
@@ -77,22 +109,24 @@ export default function Header({ blog, sections = [] }) {
 
         {/* Right CTA & Controls */}
         <div className="flex items-center gap-2.5 sm:gap-3">
-          <form id="search-form" action={blog.searchUrl} method="get" className="hidden xl:block">
-            <label htmlFor="search-input" className="sr-only">Cari artikel</label>
-            <input
-              id="search-input"
-              name="q"
-              type="search"
-              placeholder="Cari artikel…"
-              className="w-36 rounded-full px-3.5 py-1.5 text-xs outline-none transition focus:w-48 bg-white border border-emerald-200 text-slate-800 placeholder:text-slate-400 focus:border-emerald-500 dark:bg-white/5 dark:border-white/10 dark:text-white dark:placeholder:text-slate-400"
-            />
-          </form>
+          {showSearch && (
+            <form id="search-form" action={blog.searchUrl} method="get" className="hidden xl:block">
+              <label htmlFor="search-input" className="sr-only">Cari artikel</label>
+              <input
+                id="search-input"
+                name="q"
+                type="search"
+                placeholder="Cari artikel…"
+                className="w-36 rounded-full px-3.5 py-1.5 text-xs outline-none transition focus:w-48 bg-white border border-emerald-200 text-slate-800 placeholder:text-slate-400 focus:border-emerald-500 dark:bg-white/5 dark:border-white/10 dark:text-white dark:placeholder:text-slate-400"
+              />
+            </form>
+          )}
 
           <a
-            href="#lead-form"
+            href={headerCtaUrl}
             className="hidden sm:inline-flex btn-primary py-2 px-4 text-xs font-bold shadow-md shadow-emerald-600/20"
           >
-            📅 Survey Lokasi
+            {headerCtaText}
           </a>
 
           {/* Theme switch: Icon Only (tanpa teks) */}
@@ -137,11 +171,11 @@ export default function Header({ blog, sections = [] }) {
 
           <div className="pt-2 flex items-center justify-between border-t border-emerald-100 dark:border-white/5">
             <a
-              href="#lead-form"
+              href={headerCtaUrl}
               onClick={() => setMobileMenuOpen(false)}
               className="btn-primary w-full justify-center py-2.5 text-xs font-bold"
             >
-              📅 Jadwalkan Survey Rumah Contoh
+              {headerCtaText}
             </a>
           </div>
         </div>

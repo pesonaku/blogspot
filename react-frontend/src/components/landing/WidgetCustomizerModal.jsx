@@ -233,6 +233,7 @@ export default function WidgetCustomizerModal({
   const activeConfig = formData[activeTab] || {}
 
   const sectionTabs = [
+    { id: 'header', name: 'Logo & Menu Header', icon: '🏷️', widgetCode: 'HTML10' },
     { id: 'hero', name: 'Hero Banner', icon: '🖼️', widgetCode: 'HTML1' },
     { id: 'stats', name: 'Quick Stats', icon: '📊', widgetCode: 'HTML2' },
     { id: 'usp', name: 'Keunggulan USP', icon: '⭐', widgetCode: 'HTML3' },
@@ -242,6 +243,7 @@ export default function WidgetCustomizerModal({
     { id: 'promo', name: 'Promo Spesial', icon: '🎁', widgetCode: 'HTML7' },
     { id: 'social-proof', name: 'Testimoni & BAST', icon: '🤝', widgetCode: 'HTML8' },
     { id: 'lead-form', name: 'Form Survey Lead', icon: '📝', widgetCode: 'HTML9' },
+    { id: 'floating-cta', name: 'CTA Pojok Kanan Bawah', icon: '💬', widgetCode: 'HTML11' },
   ]
 
   const activeTabMeta = sectionTabs.find((t) => t.id === activeTab) || sectionTabs[0]
@@ -379,6 +381,77 @@ export default function WidgetCustomizerModal({
               <div className="rounded-xl bg-emerald-600 text-white px-4 py-2.5 text-xs font-semibold flex items-center justify-between shadow-lg animate-fade-up">
                 <span>📋 Kode format konfigurasi berhasil disalin ke clipboard! Siap ditempel di widget {activeTabMeta.widgetCode} Blogger.</span>
                 <span>✓</span>
+              </div>
+            )}
+
+            {/* SECTION 0: LOGO & MENU HEADER */}
+            {activeTab === 'header' && (
+              <div className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <FileUploadField
+                    label="Upload File Logo Brand (Gambar Transparan / PNG / SVG)"
+                    value={activeConfig.logo_image}
+                    onChange={(val) => handleFieldChange('header', 'logo_image', val)}
+                    helpText="Unggah logo perumahan Anda. Jika tidak diunggah, akan memakai ikon & teks brand."
+                  />
+                  <div className="space-y-3 p-4 rounded-2xl glass border border-emerald-500/15">
+                    <TextInput
+                      label="Icon Logo (Jika Tanpa Gambar)"
+                      value={activeConfig.logo_icon}
+                      onChange={(val) => handleFieldChange('header', 'logo_icon', val)}
+                      placeholder="🏡"
+                    />
+                    <TextInput
+                      label="Nama Brand / Perumahan"
+                      value={activeConfig.brand_name}
+                      onChange={(val) => handleFieldChange('header', 'brand_name', val)}
+                      placeholder="Pesona Kahuripan"
+                    />
+                    <TextInput
+                      label="Tagline Brand"
+                      value={activeConfig.brand_tagline}
+                      onChange={(val) => handleFieldChange('header', 'brand_tagline', val)}
+                      placeholder="Residence & Cluster Modern"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <TextInput
+                    label="Teks Tombol CTA Header"
+                    value={activeConfig.header_cta_text}
+                    onChange={(val) => handleFieldChange('header', 'header_cta_text', val)}
+                    placeholder="📅 Survey Lokasi"
+                  />
+                  <TextInput
+                    label="Link Tujuan Tombol CTA Header"
+                    value={activeConfig.header_cta_url}
+                    onChange={(val) => handleFieldChange('header', 'header_cta_url', val)}
+                    placeholder="#lead-form"
+                  />
+                </div>
+
+                <h5 className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 pt-2">
+                  Menu Navigasi Kustom (1 sampai 5) — Biarkan kosong untuk menggunakan menu default:
+                </h5>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {[1, 2, 3, 4, 5].map((num) => (
+                    <div key={num} className="p-3 rounded-2xl glass border border-emerald-500/15 grid grid-cols-2 gap-2">
+                      <TextInput
+                        label={`Nama Menu ${num}`}
+                        value={activeConfig[`nav${num}_label`]}
+                        onChange={(val) => handleFieldChange('header', `nav${num}_label`, val)}
+                        placeholder={num === 1 ? 'Keunggulan' : num === 2 ? 'Lokasi' : num === 3 ? 'Tipe Unit' : 'Menu'}
+                      />
+                      <TextInput
+                        label={`Link URL ${num}`}
+                        value={activeConfig[`nav${num}_url`]}
+                        onChange={(val) => handleFieldChange('header', `nav${num}_url`, val)}
+                        placeholder={num === 1 ? '#keunggulan' : num === 2 ? '#lokasi' : num === 3 ? '#tipe-unit' : '#'}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -1001,6 +1074,91 @@ export default function WidgetCustomizerModal({
                   placeholder="Lebih baik menjadwalkan survey 1 hari sebelumnya..."
                   rows={2}
                 />
+              </div>
+            )}
+
+            {/* SECTION 10: CTA POJOK KANAN BAWAH */}
+            {activeTab === 'floating-cta' && (
+              <div className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-3">
+                  <TextInput
+                    label="Nomor WhatsApp Hotline"
+                    value={activeConfig.whatsapp}
+                    onChange={(val) => handleFieldChange('floating-cta', 'whatsapp', val)}
+                    placeholder="6281288997711"
+                  />
+                  <TextInput
+                    label="Label Teks Tombol Melayang"
+                    value={activeConfig.button_label}
+                    onChange={(val) => handleFieldChange('floating-cta', 'button_label', val)}
+                    placeholder="Konsultasi WhatsApp"
+                  />
+                  <TextInput
+                    label="Icon Tombol Melayang"
+                    value={activeConfig.button_icon}
+                    onChange={(val) => handleFieldChange('floating-cta', 'button_icon', val)}
+                    placeholder="💬"
+                  />
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <FileUploadField
+                    label="Foto Avatar Tim Sales / CS"
+                    value={activeConfig.sales_avatar}
+                    onChange={(val) => handleFieldChange('floating-cta', 'sales_avatar', val)}
+                    helpText="Unggah foto profil konsultan / sales marketing yang ramah."
+                  />
+                  <div className="space-y-3 p-4 rounded-2xl glass border border-emerald-500/15">
+                    <TextInput
+                      label="Nama Petugas Sales / CS"
+                      value={activeConfig.sales_name}
+                      onChange={(val) => handleFieldChange('floating-cta', 'sales_name', val)}
+                      placeholder="Marketing Pesonaku"
+                    />
+                    <TextInput
+                      label="Status Online"
+                      value={activeConfig.sales_status}
+                      onChange={(val) => handleFieldChange('floating-cta', 'sales_status', val)}
+                      placeholder="Online • Balas Cepat"
+                    />
+                    <TextInput
+                      label="Teks Tombol Chat Langsung"
+                      value={activeConfig.direct_cta_label}
+                      onChange={(val) => handleFieldChange('floating-cta', 'direct_cta_label', val)}
+                      placeholder="Buka Obrolan WhatsApp Langsung"
+                    />
+                  </div>
+                </div>
+
+                <TextAreaInput
+                  label="Pesan Sambutan Pembuka (Greeting Bubble)"
+                  value={activeConfig.greeting_text}
+                  onChange={(val) => handleFieldChange('floating-cta', 'greeting_text', val)}
+                  placeholder="👋 Halo! Ada yang bisa kami bantu seputar pilihan tipe rumah, promo spesial..."
+                  rows={2}
+                />
+
+                <h5 className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 pt-2">
+                  3 Pilihan Topik Cepat (Quick Option Buttons):
+                </h5>
+                <div className="space-y-3">
+                  {[1, 2, 3].map((num) => (
+                    <div key={num} className="p-3 rounded-2xl glass border border-emerald-500/15 grid gap-3 sm:grid-cols-2">
+                      <TextInput
+                        label={`Label Tombol Topik ${num}`}
+                        value={activeConfig[`topic${num}_label`]}
+                        onChange={(val) => handleFieldChange('floating-cta', `topic${num}_label`, val)}
+                        placeholder={num === 1 ? 'Tanya Promo DP 0% & Free Biaya' : num === 2 ? 'Jadwal Survey Rumah Contoh' : 'Pricelist & Brosur Terbaru'}
+                      />
+                      <TextInput
+                        label={`Template Pesan WhatsApp ${num}`}
+                        value={activeConfig[`topic${num}_text`]}
+                        onChange={(val) => handleFieldChange('floating-cta', `topic${num}_text`, val)}
+                        placeholder="Halo Marketing, saya ingin tanya..."
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>

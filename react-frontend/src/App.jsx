@@ -39,6 +39,34 @@ export default function App({ data }) {
   const { blog, heading, pager, sections = [] } = data
   const isSingle = blog.pageType === 'item' || blog.pageType === 'static_page'
 
+  const [headerConfig, setHeaderConfig] = useState(() => {
+    try {
+      const s = localStorage.getItem('pesona_custom_widgets')
+      const parsed = s ? JSON.parse(s) : {}
+      return {
+        ...(sections.find((sec) => sec.id === 'header')?.config || {}),
+        ...(parsed.header || {}),
+      }
+    } catch {
+      return sections.find((sec) => sec.id === 'header')?.config || {}
+    }
+  })
+
+  // Dengarkan perubahan konfigurasi lokal
+  useEffect(() => {
+    const handleStorage = () => {
+      try {
+        const s = localStorage.getItem('pesona_custom_widgets')
+        if (s) {
+          const parsed = JSON.parse(s)
+          setHeaderConfig((prev) => ({ ...prev, ...(parsed.header || {}) }))
+        }
+      } catch {}
+    }
+    window.addEventListener('storage', handleStorage)
+    return () => window.removeEventListener('storage', handleStorage)
+  }, [])
+
   const [posts, setPosts] = useState(data.posts || [])
   const [labels, setLabels] = useState(data.labels || [])
   const [loading, setLoading] = useState(
@@ -140,7 +168,7 @@ export default function App({ data }) {
   return (
     <div className="relative flex min-h-screen flex-col">
       <Background />
-      <Header blog={blog} sections={sections} />
+      <Header blog={blog} sections={sections} config={headerConfig} />
       <main className="flex-1">{content}</main>
       <Footer blog={blog} />
     </div>
