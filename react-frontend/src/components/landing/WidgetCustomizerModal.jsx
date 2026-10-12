@@ -1347,49 +1347,152 @@ export default function WidgetCustomizerModal({
             {/* SECTION 9: FORM SURVEY LEAD */}
             {activeTab === 'lead-form' && (
               <div className="space-y-4">
+                {/* Section Badge & Headings */}
                 <div className="grid gap-4 sm:grid-cols-2">
                   <TextInput
-                    label="Jam Operasional Kantor"
+                    label="Badge / Label Kecil Section"
+                    value={activeConfig.badge}
+                    onChange={(val) => handleFieldChange('lead-form', 'badge', val)}
+                    placeholder="Jadwal Survey & Konsultasi Langsung"
+                  />
+                  <TextInput
+                    label="Judul Utama Section"
+                    value={activeConfig.title}
+                    onChange={(val) => handleFieldChange('lead-form', 'title', val)}
+                    placeholder="Kunjungi Rumah Contoh & Rasakan Langsung Suasananya"
+                  />
+                </div>
+
+                <TextAreaInput
+                  label="Deskripsi Pengantar Section"
+                  value={activeConfig.desc}
+                  onChange={(val) => handleFieldChange('lead-form', 'desc', val)}
+                  placeholder="Tim sales profesional kami siap menyambut Anda setiap hari di lokasi, mendampingi keliling show unit, serta memberikan konsultasi properti gratis tanpa dipungut biaya."
+                  rows={2}
+                />
+
+                {/* Kontak & Lokasi Kantor Pemasaran */}
+                <h5 className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 pt-2">
+                  📍 Informasi Kantor Pemasaran &amp; Show Unit:
+                </h5>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <TextInput
+                    label="Label Alamat Kantor"
+                    value={activeConfig.office_label}
+                    onChange={(val) => handleFieldChange('lead-form', 'office_label', val)}
+                    placeholder="Kantor Pemasaran & Show Unit:"
+                  />
+                  <TextInput
+                    label="Alamat Lengkap Kantor / Show Unit"
+                    value={activeConfig.address}
+                    onChange={(val) => handleFieldChange('lead-form', 'address', val)}
+                    placeholder="Jl. Raya Pesona Asri No. 88, Cileungsi - Klapanunggal, Bogor Timur"
+                  />
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <TextInput
+                    label="Label Jam Operasional"
+                    value={activeConfig.hours_label}
+                    onChange={(val) => handleFieldChange('lead-form', 'hours_label', val)}
+                    placeholder="Jam Operasional Show Unit:"
+                  />
+                  <TextInput
+                    label="Jam Operasional Show Unit"
                     value={activeConfig.opening_hours}
                     onChange={(val) => handleFieldChange('lead-form', 'opening_hours', val)}
                     placeholder="Buka Setiap Hari: 08.00 - 18.00 WIB"
                   />
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-3">
                   <TextInput
-                    label="Nomor WhatsApp Hotline"
+                    label="Label Hotline Resmi"
+                    value={activeConfig.hotline_label}
+                    onChange={(val) => handleFieldChange('lead-form', 'hotline_label', val)}
+                    placeholder="Hotline Konsultasi Resmi:"
+                  />
+                  <TextInput
+                    label="Nomor WhatsApp Hotline (Format 628...)"
                     value={activeConfig.whatsapp}
                     onChange={(val) => handleFieldChange('lead-form', 'whatsapp', val)}
                     placeholder="6281288997711"
+                  />
+                  <TextInput
+                    label="Tampilan Nomor WhatsApp"
+                    value={activeConfig.whatsapp_display}
+                    onChange={(val) => handleFieldChange('lead-form', 'whatsapp_display', val)}
+                    placeholder="0812-8899-7711"
+                  />
+                </div>
+
+                {/* Media Foto Kantor & Brosur */}
+                <h5 className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 pt-2">
+                  📸 Foto Kantor Pemasaran &amp; File E-Brosur:
+                </h5>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <FileUploadField
+                    label="Foto Kantor Pemasaran / Show Unit"
+                    value={activeConfig.kantor_image}
+                    onChange={(val) => handleFieldChange('lead-form', 'kantor_image', val)}
+                    helpText="Unggah foto kantor pemasaran atau show unit yang representatif."
+                  />
+                  <div className="space-y-3 p-4 rounded-2xl glass border border-emerald-500/15">
+                    <TextInput
+                      label="Link Download E-Brosur PDF"
+                      value={activeConfig.brochure_url}
+                      onChange={(val) => handleFieldChange('lead-form', 'brochure_url', val)}
+                      placeholder="https://drive.google.com/... atau link file PDF"
+                    />
+                    <TextInput
+                      label="Judul Tips Berkunjung"
+                      value={activeConfig.tips_title}
+                      onChange={(val) => handleFieldChange('lead-form', 'tips_title', val)}
+                      placeholder="Tips Berkunjung:"
+                    />
+                    <TextAreaInput
+                      label="Teks Tips Berkunjung"
+                      value={activeConfig.tips_text}
+                      onChange={(val) => handleFieldChange('lead-form', 'tips_text', val)}
+                      placeholder="Lebih baik menjadwalkan survey 1 hari sebelumnya agar tim sales dapat menyiapkan kunci..."
+                      rows={2}
+                    />
+                  </div>
+                </div>
+
+                {/* Pengaturan Formulir & Tombol Submit */}
+                <h5 className="text-xs font-bold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 pt-2">
+                  📝 Teks Formulir &amp; Tombol Aksi:
+                </h5>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <TextInput
+                    label="Judul Box Formulir"
+                    value={activeConfig.form_title}
+                    onChange={(val) => handleFieldChange('lead-form', 'form_title', val)}
+                    placeholder="Formulir Reservasi Survey & Konsultasi Sales"
+                  />
+                  <TextInput
+                    label="Teks Tombol Kirim Form Survey"
+                    value={activeConfig.submit_btn}
+                    onChange={(val) => handleFieldChange('lead-form', 'submit_btn', val)}
+                    placeholder="📅 Daftarkan Jadwal Survey Sekarang"
                   />
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <TextInput
-                    label="Link E-Brosur PDF (Google Drive / Direct Link)"
-                    value={activeConfig.brochure_url}
-                    onChange={(val) => handleFieldChange('lead-form', 'brochure_url', val)}
-                    placeholder="https://drive.google.com/..."
+                    label="Catatan Privasi Pengunjung"
+                    value={activeConfig.privacy_note}
+                    onChange={(val) => handleFieldChange('lead-form', 'privacy_note', val)}
+                    placeholder="🔒 Data Anda dijamin kerahasiaannya dan hanya digunakan untuk konfirmasi jadwal survey."
                   />
-                  <FileUploadField
-                    label="Foto Kantor Pemasaran / Show Unit"
-                    value={activeConfig.kantor_image}
-                    onChange={(val) => handleFieldChange('lead-form', 'kantor_image', val)}
+                  <TextInput
+                    label="Judul Notifikasi Sukses"
+                    value={activeConfig.success_title}
+                    onChange={(val) => handleFieldChange('lead-form', 'success_title', val)}
+                    placeholder="Permintaan Jadwal Survey Terkirim!"
                   />
                 </div>
-
-                <TextInput
-                  label="Judul Formulir Survey"
-                  value={activeConfig.form_title}
-                  onChange={(val) => handleFieldChange('lead-form', 'form_title', val)}
-                  placeholder="Formulir Reservasi Survey & Konsultasi Sales"
-                />
-
-                <TextAreaInput
-                  label="Teks Tips Berkunjung"
-                  value={activeConfig.tips_text}
-                  onChange={(val) => handleFieldChange('lead-form', 'tips_text', val)}
-                  placeholder="Lebih baik menjadwalkan survey 1 hari sebelumnya..."
-                  rows={2}
-                />
               </div>
             )}
 
@@ -1482,23 +1585,37 @@ export default function WidgetCustomizerModal({
 
         {/* Bottom Footer Bar */}
         <div className="p-4 border-t border-emerald-500/15 bg-slate-50/70 dark:bg-ink-950/80 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0 text-xs">
-          <p className="text-slate-500 dark:text-emerald-300/60">
-            💡 <strong>Info:</strong> Perubahan langsung disimpan di browser (LocalStorage) &amp; kode konfigurasi siap disalin ke widget Blogger Tata Letak.
-          </p>
-          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+          <div className="space-y-0.5 text-slate-600 dark:text-emerald-200/70 leading-relaxed max-w-2xl">
+            <p>
+              💡 <strong>Simpan Lokal:</strong> Tombol <em>&ldquo;Terapkan di Browser Ini&rdquo;</em> menyimpan preview langsung di browser ini.
+            </p>
+            <p className="text-[11px] text-amber-600 dark:text-amber-300">
+              📱 <strong>Agar Berubah di HP &amp; Publik:</strong> Salin kode via tombol <span className="font-bold underline">📋 Salin Kode Widget Blogger</span> di atas lalu tempelkan ke menu <strong>Tata Letak Blogger ({activeTabMeta.widgetCode})</strong>. Pastikan juga di menu <em>Tema &gt; Setelan Seluler</em> memilih opsi <em>&ldquo;Desktop&rdquo;</em>.
+            </p>
+          </div>
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end shrink-0">
+            <button
+              type="button"
+              onClick={handleCopyBloggerCode}
+              className="px-3.5 py-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-800 dark:text-emerald-200 hover:bg-emerald-500/20 text-xs font-bold transition flex items-center gap-1.5"
+              title="Salin kode widget yang siap ditempelkan di Blogger"
+            >
+              <span>📋</span>
+              <span>Salin Kode {activeTabMeta.widgetCode}</span>
+            </button>
             <button
               type="button"
               onClick={onClose}
-              className="btn-ghost py-2 px-4 text-xs font-semibold"
+              className="btn-ghost py-2 px-3 text-xs font-semibold"
             >
-              Batal
+              Tutup
             </button>
             <button
               type="button"
               onClick={handleSaveAndApply}
-              className="btn-primary py-2 px-5 text-xs font-bold shadow-lg shadow-emerald-600/30"
+              className="btn-primary py-2 px-4 text-xs font-bold shadow-lg shadow-emerald-600/30"
             >
-              Simpan &amp; Terapkan Perubahan
+              Terapkan di Browser Ini
             </button>
           </div>
         </div>
