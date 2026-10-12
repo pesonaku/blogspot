@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { serializeSectionConfig } from '../../lib/widgetConfig.js'
+import { serializeSectionConfig, isSectionDisabled } from '../../lib/widgetConfig.js'
 
 /**
  * Komponen upload file premium untuk Gambar atau Video
@@ -233,6 +233,20 @@ export default function WidgetCustomizerModal({
     }))
   }
 
+  const handleToggleDisable = (secId) => {
+    setFormData((prev) => {
+      const secCfg = prev[secId] || {}
+      const currentlyDisabled = isSectionDisabled(secCfg)
+      return {
+        ...prev,
+        [secId]: {
+          ...secCfg,
+          disable: currentlyDisabled ? 'false' : 'true',
+        },
+      }
+    })
+  }
+
   const activeConfig = formData[activeTab] || {}
 
   const sectionTabs = [
@@ -342,30 +356,47 @@ export default function WidgetCustomizerModal({
             <p className="hidden md:block text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-emerald-300/40 px-3 py-1">
               Pilih Section Widget:
             </p>
-            {sectionTabs.map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs font-bold transition text-left shrink-0 ${
-                  activeTab === tab.id
-                    ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
-                    : 'text-slate-700 dark:text-emerald-200 hover:bg-emerald-500/10'
-                }`}
-              >
-                <span className="flex items-center gap-2">
-                  <span>{tab.icon}</span>
-                  <span>{tab.name}</span>
-                </span>
-                <span
-                  className={`text-[9px] px-1.5 py-0.5 rounded font-mono ${
-                    activeTab === tab.id ? 'bg-white/20 text-white' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+            {sectionTabs.map((tab) => {
+              const tabCfg = formData[tab.id] || {}
+              const isTabDisabled = isSectionDisabled(tabCfg)
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs font-bold transition text-left shrink-0 ${
+                    activeTab === tab.id
+                      ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
+                      : isTabDisabled
+                      ? 'opacity-60 text-slate-400 dark:text-slate-500 hover:opacity-100 hover:bg-rose-500/10'
+                      : 'text-slate-700 dark:text-emerald-200 hover:bg-emerald-500/10'
                   }`}
                 >
-                  {tab.widgetCode}
-                </span>
-              </button>
-            ))}
+                  <span className="flex items-center gap-2">
+                    <span>{tab.icon}</span>
+                    <span className={isTabDisabled && activeTab !== tab.id ? 'line-through' : ''}>
+                      {tab.name}
+                    </span>
+                  </span>
+                  <div className="flex items-center gap-1">
+                    {isTabDisabled && (
+                      <span className="text-[9px] px-1 py-0.2 rounded bg-rose-500/20 text-rose-500 font-mono">
+                        OFF
+                      </span>
+                    )}
+                    <span
+                      className={`text-[9px] px-1.5 py-0.5 rounded font-mono ${
+                        activeTab === tab.id
+                          ? 'bg-white/20 text-white'
+                          : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                      }`}
+                    >
+                      {tab.widgetCode}
+                    </span>
+                  </div>
+                </button>
+              )
+            })}
           </div>
 
           {/* Right Pane: Dynamic Form for the active section */}
@@ -406,6 +437,74 @@ export default function WidgetCustomizerModal({
                 <span>✓</span>
               </div>
             )}
+
+            {/* Status Section: Aktif / Nonaktif (Disable Content) */}
+            {(() => {
+              const isCurrentDisabled = isSectionDisabled(activeConfig)
+              return (
+                <div className="space-y-3">
+                  <div
+                    className={`rounded-2xl p-4 transition-all border flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
+                      isCurrentDisabled
+                        ? 'bg-rose-500/10 border-rose-500/30 dark:bg-rose-950/25'
+                        : 'bg-emerald-500/10 border-emerald-500/30 dark:bg-emerald-950/20'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`grid h-9 w-9 place-items-center rounded-xl text-lg ${
+                          isCurrentDisabled ? 'bg-rose-500/20 text-rose-500' : 'bg-emerald-500/20 text-emerald-500'
+                        }`}
+                      >
+                        {isCurrentDisabled ? '🚫' : '👁️'}
+                      </span>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <p className="font-display font-bold text-sm text-emerald-950 dark:text-white">
+                            Status Tampilan Section
+                          </p>
+                          <span
+                            className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${
+                              isCurrentDisabled
+                                ? 'bg-rose-500 text-white shadow-sm'
+                                : 'bg-emerald-600 text-white shadow-sm'
+                            }`}
+                          >
+                            {isCurrentDisabled ? 'Dinonaktifkan (Sembunyi)' : 'Aktif (Tampil)'}
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-500 dark:text-emerald-200/60 mt-0.5">
+                          {isCurrentDisabled
+                            ? 'Section ini disembunyikan dan tidak akan muncul di halaman landing page website.'
+                            : 'Section ini aktif dan ditampilkan secara normal di halaman landing page.'}
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => handleToggleDisable(activeTab)}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-sm shrink-0 ${
+                        isCurrentDisabled
+                          ? 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/30'
+                          : 'bg-white dark:bg-ink-900 border border-rose-500/30 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30'
+                      }`}
+                    >
+                      <span>{isCurrentDisabled ? '✔ Aktifkan Kembali' : '🚫 Nonaktifkan / Sembunyikan Section'}</span>
+                    </button>
+                  </div>
+
+                  {isCurrentDisabled && (
+                    <div className="rounded-xl p-3 bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-xs flex items-center gap-2.5">
+                      <span className="text-base shrink-0">⚠️</span>
+                      <span>
+                        <strong>Section Dinonaktifkan:</strong> Konten di bawah tetap tersimpan, namun tidak akan dimunculkan kepada pengunjung di landing page sampai Anda mengaktifkannya kembali.
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )
+            })()}
 
             {/* SECTION 0: LOGO & MENU HEADER */}
             {activeTab === 'header' && (

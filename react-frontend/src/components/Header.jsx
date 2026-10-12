@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import ApiStatus from './ApiStatus.jsx'
 import ThemeToggle from './ThemeToggle.jsx'
+import { isSectionDisabled } from '../lib/widgetConfig.js'
 
 export default function Header({ blog, sections = [], config = {} }) {
   const [scrolled, setScrolled] = useState(false)
@@ -42,7 +43,9 @@ export default function Header({ blog, sections = [], config = {} }) {
       : mergedConfig.menuItems && mergedConfig.menuItems.length > 0
       ? mergedConfig.menuItems
       : sections && sections.length > 0
-      ? defaultNavLinks.filter((link) => sections.some((s) => s.id === link.id))
+      ? defaultNavLinks.filter((link) =>
+          sections.some((s) => s.id === link.id && !isSectionDisabled(s.config))
+        )
       : defaultNavLinks
 
   const logoImage = mergedConfig.logo_image || mergedConfig.logo_foto

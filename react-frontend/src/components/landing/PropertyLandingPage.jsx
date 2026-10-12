@@ -10,6 +10,7 @@ import { SocialProofSection } from './SocialProofSection.jsx'
 import { LeadFormSection } from './LeadFormSection.jsx'
 import { FloatingWhatsApp } from './FloatingWhatsApp.jsx'
 import WidgetCustomizerModal from './WidgetCustomizerModal.jsx'
+import { isSectionDisabled } from '../../lib/widgetConfig.js'
 import {
   FloorPlanModal,
   VirtualTourModal,
@@ -149,6 +150,9 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
 
   const renderSection = (sec) => {
     const config = { ...(sec.config || {}), ...(savedOverrides[sec.id] || {}) }
+    if (isSectionDisabled(config)) {
+      return null
+    }
     switch (sec.id) {
       case 'hero':
         return (
@@ -317,12 +321,14 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
       {activeSections.map((sec) => renderSection(sec))}
 
       {/* Tombol CTA Mengambang (Floating WhatsApp Button) */}
-      <FloatingWhatsApp
-        config={{
+      {(() => {
+        const floatingCtaConfig = {
           ...(sections.find((s) => s.id === 'floating-cta')?.config || {}),
           ...(savedOverrides['floating-cta'] || {}),
-        }}
-      />
+        }
+        if (isSectionDisabled(floatingCtaConfig)) return null
+        return <FloatingWhatsApp config={floatingCtaConfig} />
+      })()}
 
       {/* Modals Interaktif */}
       {selectedFloorPlanUnit && (

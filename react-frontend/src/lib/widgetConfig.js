@@ -114,6 +114,27 @@ const ALIAS_MAP = {
   link_brosur: 'brochure_url',
   file_brosur: 'brochure_url',
   download_brosur: 'brochure_url',
+  disabled: 'disable',
+  is_disabled: 'disable',
+  nonaktif: 'disable',
+  nonaktifkan: 'disable',
+  sembunyikan: 'disable',
+  hide: 'disable',
+  hide_section: 'disable',
+}
+
+/**
+ * Mengecek apakah suatu section atau konten dinonaktifkan (disable: true)
+ */
+export function isSectionDisabled(cfg) {
+  if (!cfg) return false
+  const val = String(cfg.disable ?? cfg.disabled ?? cfg.sembunyikan ?? cfg.nonaktif ?? '').trim().toLowerCase()
+  if (val === 'true' || val === '1' || val === 'yes' || val === 'ya') return true
+  if (cfg.enabled === 'false' || cfg.enabled === false) return true
+  if (cfg.show === 'false' || cfg.show === false) return true
+  if (cfg.tampilkan === 'false' || cfg.tampilkan === false) return true
+  if (cfg.status === 'disabled' || cfg.status === 'off') return true
+  return false
 }
 
 /**
@@ -205,7 +226,14 @@ export function serializeSectionConfig(sectionId, config = {}) {
   lines.push(`# Salin dan tempelkan teks ini ke widget HTML Blogger Anda.`)
   lines.push(`# ========================================================\n`)
 
+  // Status tampilan (disable: true / false) di baris pertama
+  if (config.disable !== undefined && config.disable !== '') {
+    lines.push(`# STATUS TAMPILAN SECTION (true = sembunyikan, false = tampilkan)`)
+    lines.push(`disable: ${config.disable}\n`)
+  }
+
   for (const [key, value] of Object.entries(config)) {
+    if (key === 'disable') continue
     if (value !== undefined && value !== null && value !== '') {
       lines.push(`${key}: ${value}`)
     }

@@ -155,6 +155,7 @@ theme_version: 2.5.0]]></b:widget-setting>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # PENGATURAN TAMBAHAN HEADER & TOMBOL CTA
 # ========================================================
+disable: false
 header_cta_text: 📅 Survey Lokasi
 header_cta_url: #lead-form
 logo_icon: 🏡
@@ -179,6 +180,7 @@ show_search: true]]></b:widget-setting>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # HERO BANNER: HEADLINE & TOMBOL AKSI UTAMA
 # ========================================================
+disable: false
 badge: Cluster Baru Rilis Tahap 3
 badge_promo: ✦ Promo DP 0% & Subsidi Suku Bunga KPR
 badge_shm: ★ Legalitas 100% Sertifikat SHM Pecah
@@ -203,6 +205,7 @@ whatsapp: 6281288997711]]></b:widget-setting>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # HERO BANNER: MEDIA VISUAL, VIDEO & TOUR 360
 # ========================================================
+disable: false
 hero_image: /hero-cluster.jpg
 video_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
 virtual_tour_url: 
@@ -232,6 +235,7 @@ cta_video: ▶ Putar Video Kawasan]]></b:widget-setting>
 # ========================================================
 # Ubah angka capaian dan teks di sebelah kanan tanda titik dua (:)
 # ========================================================
+disable: false
 
 stat1_num: 1.250+
 stat1_label: Unit Terhuni & Serah Terima
@@ -273,6 +277,7 @@ stat5_desc: BTN, BSI, Mandiri, BRI, BCA, BNI]]></b:widget-setting>
 # Anda dapat mengubah judul, deskripsi, serta seluruh 6 poin
 # keunggulan & fasilitas kawasan secara bebas di bawah ini.
 # ========================================================
+disable: false
 
 badge: Keunggulan Eksklusif
 title: Mengapa Pesona Kahuripan Pilihan Tepat Keluarga Anda?
@@ -337,6 +342,7 @@ usp6_icon: 🌳]]></b:widget-setting>
 # - siteplan_image: Link foto masterplan / denah kaveling kawasan
 # - Anda dapat mengubah nama tab dan poin akses transportasi, sekolah, RS, mall
 # ========================================================
+disable: false
 
 badge: Location Advantage
 title: Aksesibilitas Tanpa Batas di Titik Paling Strategis
@@ -446,6 +452,7 @@ mall4_note: Kebutuhan harian rumah tangga super praktis]]></b:widget-setting>
 # dimensi, luas LB/LT, kamar tidur KT/KM, deskripsi, foto tampak depan,
 # foto denah, dan spesifikasi material pondasi/dinding/atap/listrik/air).
 # ========================================================
+disable: false
 
 badge: Pilihan Tipe Unit
 title: Koleksi Rumah Modern Sesuai Kebutuhan Anda
@@ -555,6 +562,7 @@ unit3_air: Sumur bor submersible pump + filter air terpasang]]></b:widget-settin
 # - virtual_tour_url: Link Matterport / Kuula 360 / Web tour 3D
 # - gallery_image_X: Link foto galeri ruangan (1 s/d 6)
 # ========================================================
+disable: false
 
 badge: Galeri & Tur Virtual
 title: Jelajahi Setiap Sudut Keindahan Rumah Impian
@@ -627,6 +635,7 @@ gallery_cat_6: Kamar Tidur]]></b:widget-setting>
 # - offer1..3: Rincian 3 voucher/paket promo gratis
 # - promo_image: Link foto poster/flyer promo (opsional)
 # ========================================================
+disable: false
 
 badge: ⚡ Promo Terbatas Bulan Ini
 subbadge: Sisa 5 Unit Terakhir
@@ -689,6 +698,7 @@ wa_btn: Klaim via WhatsApp]]></b:widget-setting>
 # - bast_xxx: Teks komitmen serah terima legalitas dan skor kepuasan
 # - testi1..3: Nama, peran, unit, judul cerita, isi testimoni & foto avatar
 # ========================================================
+disable: false
 
 badge: Bukti Sosial & Kepuasan Konsumen
 title: Dipercaya Lebih dari 1.250+ Keluarga Bahagia
@@ -756,6 +766,7 @@ testi3_avatar: https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto
 # - office_image / kantor_image: Link foto kantor pemasaran
 # - Anda dapat mengubah teks tips, judul form, tombol submit, dan catatan privasi
 # ========================================================
+disable: false
 
 badge: Jadwal Survey & Konsultasi Langsung
 title: Kunjungi Rumah Contoh & Rasakan Langsung Suasananya
@@ -804,6 +815,7 @@ privacy_note: 🔒 Data Anda dijamin kerahasiaannya dan hanya digunakan untuk ko
 # - greeting_text: Pesan pembuka balon sapaan
 # - topic1..3: Pilihan topik pertanyaan cepat & template chat
 # ========================================================
+disable: false
 
 whatsapp: 6281288997711
 button_label: Konsultasi WhatsApp
