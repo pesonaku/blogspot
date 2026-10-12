@@ -1,7 +1,11 @@
 import { useState } from 'react'
+import { formatEmbedVideoUrl } from '../../lib/widgetConfig.js'
 
 export function FloorPlanModal({ unit, onClose, onSelectUnitForSurvey }) {
   if (!unit) return null
+
+  const hasImage = Boolean(unit.floorPlanImage)
+  const [viewMode, setViewMode] = useState(hasImage ? 'image' : 'blueprint')
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-up">
@@ -27,9 +31,49 @@ export function FloorPlanModal({ unit, onClose, onSelectUnitForSurvey }) {
           Dimensi Kaveling: <span className="font-semibold text-white">{unit.dimensi}</span> • Luas Bangunan: <span className="font-semibold text-white">{unit.lb} m²</span> • Luas Tanah: <span className="font-semibold text-white">{unit.lt} m²</span>
         </p>
 
+        {/* Tab Switcher: Gambar Denah Asli vs Skema Blueprint */}
+        {hasImage && (
+          <div className="mt-4 flex gap-2">
+            <button
+              type="button"
+              onClick={() => setViewMode('image')}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                viewMode === 'image'
+                  ? 'bg-emerald-500/20 border border-emerald-400/50 text-emerald-300 shadow-md'
+                  : 'glass text-slate-400 hover:text-white'
+              }`}
+            >
+              <span>🖼️ Foto Denah Asli</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode('blueprint')}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                viewMode === 'blueprint'
+                  ? 'bg-indigo-500/20 border border-indigo-400/50 text-indigo-300 shadow-md'
+                  : 'glass text-slate-400 hover:text-white'
+              }`}
+            >
+              <span>📐 Skema Arsitektur (Bagan)</span>
+            </button>
+          </div>
+        )}
+
         <div className="mt-6 grid gap-6 lg:grid-cols-12 items-start">
-          {/* Visual Floor Plan Diagram */}
+          {/* Visual Floor Plan Diagram / Uploaded Image */}
           <div className="lg:col-span-7 rounded-2xl overflow-hidden border border-white/10 bg-ink-900 p-4">
+            {viewMode === 'image' && hasImage ? (
+              <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-900 flex items-center justify-center group">
+                <img
+                  src={unit.floorPlanImage}
+                  alt={`Denah Arsitektur ${unit.name}`}
+                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute bottom-3 left-3 glass px-3 py-1 rounded-lg text-[11px] text-white backdrop-blur-md">
+                  Denah Tata Ruang Resmi ({unit.code})
+                </div>
+              </div>
+            ) : (
             <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-slate-900 flex items-center justify-center">
               {/* Floor Plan Graphic Simulation */}
               <div className="absolute inset-0 bg-gradient-to-b from-indigo-950/40 to-slate-950/80 p-5 flex flex-col justify-between">
@@ -84,7 +128,8 @@ export function FloorPlanModal({ unit, onClose, onSelectUnitForSurvey }) {
                 </div>
               </div>
             </div>
-          </div>
+          )}
+        </div>
 
           {/* Room breakdown table & CTA */}
           <div className="lg:col-span-5 flex flex-col justify-between h-full">
@@ -124,7 +169,7 @@ export function FloorPlanModal({ unit, onClose, onSelectUnitForSurvey }) {
   )
 }
 
-export function VirtualTourModal({ onClose }) {
+export function VirtualTourModal({ virtualTourUrl, onClose }) {
   const [activeRoom, setActiveRoom] = useState('living')
 
   const rooms360 = {
@@ -144,6 +189,10 @@ export function VirtualTourModal({ onClose }) {
       desc: 'Kamar tidur utama dengan pencahayaan alami dan lantai granit anti noda.',
     },
   }
+
+  const isEmbedTour =
+    virtualTourUrl &&
+    (virtualTourUrl.startsWith('http://') || virtualTourUrl.startsWith('https://'))
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-up">
@@ -165,76 +214,94 @@ export function VirtualTourModal({ onClose }) {
           </h3>
         </div>
 
-        {/* Room Switcher Tabs */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          <button
-            onClick={() => setActiveRoom('living')}
-            className={`px-4 py-2 rounded-full text-xs font-semibold transition ${
-              activeRoom === 'living'
-                ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white shadow-lg'
-                : 'glass text-slate-300 hover:text-white'
-            }`}
-          >
-            Ruang Keluarga & Tamu
-          </button>
-          <button
-            onClick={() => setActiveRoom('cluster')}
-            className={`px-4 py-2 rounded-full text-xs font-semibold transition ${
-              activeRoom === 'cluster'
-                ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white shadow-lg'
-                : 'glass text-slate-300 hover:text-white'
-            }`}
-          >
-            Fasad Cluster & Jalan
-          </button>
-          <button
-            onClick={() => setActiveRoom('master')}
-            className={`px-4 py-2 rounded-full text-xs font-semibold transition ${
-              activeRoom === 'master'
-                ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white shadow-lg'
-                : 'glass text-slate-300 hover:text-white'
-            }`}
-          >
-            Kamar Tidur Utama
-          </button>
-        </div>
-
-        {/* Interactive Viewer Box */}
-        <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-white/10 bg-slate-950 group">
-          <img
-            src={rooms360[activeRoom].image}
-            alt={rooms360[activeRoom].title}
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
-
-          {/* 360 Compass Pill */}
-          <div className="absolute top-4 left-4 glass px-3.5 py-1.5 rounded-full text-xs font-semibold text-white flex items-center gap-2">
-            <span className="inline-block h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            360° Panoramic View Active
+        {isEmbedTour ? (
+          <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-white/10 bg-slate-950">
+            <iframe
+              src={virtualTourUrl}
+              title="Virtual Tour 360"
+              className="w-full h-full border-0"
+              allow="accelerometer; gyroscope; magnetometer; vr; xr-spatial-tracking; fullscreen"
+              allowFullScreen
+            />
           </div>
-
-          <div className="absolute bottom-5 left-5 right-5 flex flex-col md:flex-row md:items-end justify-between gap-3 text-white">
-            <div>
-              <h4 className="font-display text-lg md:text-xl font-bold">{rooms360[activeRoom].title}</h4>
-              <p className="text-xs md:text-sm text-slate-300">{rooms360[activeRoom].desc}</p>
+        ) : (
+          <>
+            {/* Room Switcher Tabs */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              <button
+                onClick={() => setActiveRoom('living')}
+                className={`px-4 py-2 rounded-full text-xs font-semibold transition ${
+                  activeRoom === 'living'
+                    ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white shadow-lg'
+                    : 'glass text-slate-300 hover:text-white'
+                }`}
+              >
+                Ruang Keluarga & Tamu
+              </button>
+              <button
+                onClick={() => setActiveRoom('cluster')}
+                className={`px-4 py-2 rounded-full text-xs font-semibold transition ${
+                  activeRoom === 'cluster'
+                    ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white shadow-lg'
+                    : 'glass text-slate-300 hover:text-white'
+                }`}
+              >
+                Fasad Cluster & Jalan
+              </button>
+              <button
+                onClick={() => setActiveRoom('master')}
+                className={`px-4 py-2 rounded-full text-xs font-semibold transition ${
+                  activeRoom === 'master'
+                    ? 'bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white shadow-lg'
+                    : 'glass text-slate-300 hover:text-white'
+                }`}
+              >
+                Kamar Tidur Utama
+              </button>
             </div>
-            <a
-              href="#lead-form"
-              onClick={onClose}
-              className="btn-primary py-2 px-4 text-xs font-semibold self-start md:self-auto"
-            >
-              Lihat Langsung Unit Ini
-            </a>
-          </div>
-        </div>
+
+            {/* Interactive Viewer Box */}
+            <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-white/10 bg-slate-950 group">
+              <img
+                src={rooms360[activeRoom].image}
+                alt={rooms360[activeRoom].title}
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
+
+              {/* 360 Compass Pill */}
+              <div className="absolute top-4 left-4 glass px-3.5 py-1.5 rounded-full text-xs font-semibold text-white flex items-center gap-2">
+                <span className="inline-block h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                360° Panoramic View Active
+              </div>
+
+              <div className="absolute bottom-5 left-5 right-5 flex flex-col md:flex-row md:items-end justify-between gap-3 text-white">
+                <div>
+                  <h4 className="font-display text-lg md:text-xl font-bold">{rooms360[activeRoom].title}</h4>
+                  <p className="text-xs md:text-sm text-slate-300">{rooms360[activeRoom].desc}</p>
+                </div>
+                <a
+                  href="#lead-form"
+                  onClick={onClose}
+                  className="btn-primary py-2 px-4 text-xs font-semibold self-start md:self-auto"
+                >
+                  Lihat Langsung Unit Ini
+                </a>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
 }
 
-export function VideoPlayerModal({ onClose }) {
+export function VideoPlayerModal({ videoUrl, title, onClose }) {
+  const embedSrc =
+    formatEmbedVideoUrl(videoUrl) ||
+    'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1'
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-up">
       <div className="relative w-full max-w-4xl rounded-3xl border border-white/10 bg-ink-950 p-6 md:p-8 shadow-2xl text-slate-200">
@@ -247,7 +314,7 @@ export function VideoPlayerModal({ onClose }) {
         </button>
 
         <h3 className="font-display text-2xl font-bold text-white mb-2 pr-12">
-          Video Tour Show Unit & Site Plan Kawasan Pesona Kahuripan
+          {title || 'Video Tour Show Unit & Site Plan Kawasan Pesona Kahuripan'}
         </h3>
         <p className="text-xs text-slate-400 mb-5">
           Tinjauan lengkap dari udara (drone footage) dan walkthrough interior unit rumah contoh.
@@ -256,8 +323,8 @@ export function VideoPlayerModal({ onClose }) {
         <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-white/10 bg-slate-950">
           <iframe
             className="w-full h-full"
-            src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1"
-            title="Video Show Unit Pesona Kahuripan"
+            src={embedSrc}
+            title={title || 'Video Show Unit Pesona Kahuripan'}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
@@ -267,7 +334,7 @@ export function VideoPlayerModal({ onClose }) {
   )
 }
 
-export function BrosurModal({ onClose }) {
+export function BrosurModal({ brochureUrl, onClose }) {
   const [downloaded, setDownloaded] = useState(false)
   const [name, setName] = useState('')
   const [wa, setWa] = useState('')
@@ -275,6 +342,9 @@ export function BrosurModal({ onClose }) {
   const handleDownload = (e) => {
     e.preventDefault()
     setDownloaded(true)
+    if (brochureUrl) {
+      window.open(brochureUrl, '_blank')
+    }
   }
 
   return (
@@ -293,7 +363,7 @@ export function BrosurModal({ onClose }) {
             📥
           </span>
           <h3 className="font-display text-2xl font-bold text-white">
-            Unduh E-Brosur & Pricelist 2026
+            Unduh E-Brosur &amp; Pricelist 2026
           </h3>
           <p className="mt-1 text-xs text-slate-400">
             Dapatkan katalog lengkap spesifikasi, denah arsitektur, dan pricelist resmi perumahan Pesona Kahuripan.

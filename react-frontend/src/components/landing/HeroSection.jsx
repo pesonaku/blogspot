@@ -129,7 +129,7 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
             <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
               <button
                 type="button"
-                onClick={onOpenVirtualTour}
+                onClick={() => onOpenVirtualTour && onOpenVirtualTour(config.virtual_tour_url)}
                 className="btn glass hover:bg-violet-600/30 text-violet-200 border-violet-400/40 rounded-2xl px-4 py-3 text-xs md:text-sm font-semibold flex items-center gap-2 backdrop-blur-md transition shadow-lg"
               >
                 <span>🔄</span>
@@ -138,7 +138,7 @@ export function HeroSection({ blog, config = {}, onOpenVideo, onOpenBrosur, onOp
 
               <button
                 type="button"
-                onClick={onOpenVideo}
+                onClick={() => onOpenVideo && onOpenVideo(config.video_url, brandName)}
                 className="btn-primary rounded-2xl px-5 py-3 text-xs md:text-sm font-bold flex items-center gap-2 shadow-xl shadow-fuchsia-500/25 transition"
               >
                 <span>▶</span>

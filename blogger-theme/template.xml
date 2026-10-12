@@ -65,11 +65,35 @@ a{color:#a5b4fc}
     <b:section class='sec-hero' id='sec-hero' name='Section 1: Hero Banner &amp; Headline' showaddelement='yes'>
       <b:widget id='HTML1' locked='false' title='[Section 1] Hero Banner &amp; Headline' type='HTML' version='2' visible='true'>
         <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[# PENGATURAN SECTION 1 (HERO BANNER)
-# Cukup edit teks setelah tanda titik dua (:)
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 1] HERO BANNER & HEADLINE
+# ========================================================
+# PANDUAN PENGISIAN:
+# Cukup ganti teks atau link di sebelah kanan titik dua (:)
+# Baris yang diawali tanda '#' adalah panduan/komentar.
+#
+# CARA UPLOAD GAMBAR:
+# 1. Buka menu Posting/Halaman Blogger -> Sisipkan Gambar -> Upload dari komputer.
+# 2. Klik kanan gambar -> 'Salin alamat gambar' (Copy image address).
+# 3. Tempelkan link gambar di 'hero_image:' di bawah ini.
+#
+# CARA INPUT VIDEO:
+# Masukkan link video YouTube Anda (contoh: https://www.youtube.com/watch?v=...)
+# ========================================================
+
+# --- GAMBAR & MEDIA UTAMA ---
+hero_image: /hero-cluster.jpg
+video_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+virtual_tour_url: 
+
+# --- TEKS & BADGE PROMO ---
 badge: Cluster Baru Rilis Tahap 3
+badge_promo: ✦ Promo DP 0% & Subsidi Suku Bunga KPR
+badge_shm: ★ Legalitas 100% Sertifikat SHM Pecah
 headline: Wujudkan Rumah Impian Masa Depan Keluarga Anda di Pesona Kahuripan
 subheadline: Hunian bernuansa asri berkonsep modern minimalis di lokasi sangat strategis. Nikmati kemudahan DP 0% dan sertifikat SHM sudah pecah siap serah terima.
+
+# --- TOMBOL CTA & KONTAK ---
 cta_survey: 📅 Jadwalkan Survey Lokasi
 cta_brosur: 📥 Unduh Brosur & Pricelist
 cta_wa: 💬 Chat Sales via WhatsApp
@@ -89,19 +113,28 @@ whatsapp: 6281288997711]]></b:widget-setting>
     <b:section class='sec-stats' id='sec-stats' name='Section 2: Quick Stats &amp; Kredibilitas' showaddelement='yes'>
       <b:widget id='HTML2' locked='false' title='[Section 2] Quick Stats &amp; Angka Penjualan' type='HTML' version='2' visible='true'>
         <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[# PENGATURAN SECTION 2 (QUICK STATS & KREDIBILITAS)
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 2] QUICK STATS & KREDIBILITAS
+# ========================================================
+# Ubah angka capaian dan teks di sebelah kanan tanda titik dua (:)
+# ========================================================
+
 stat1_num: 1.250+
 stat1_label: Unit Terhuni & Serah Terima
 stat1_desc: Komunitas warga sudah ramai dan hidup
+
 stat2_num: 100%
 stat2_label: Sertifikat SHM & PBG Pecah
 stat2_desc: Legalitas aman dan siap balik nama
+
 stat3_num: 0 Rupiah
 stat3_label: Uang Muka (DP 0%)
 stat3_desc: Cukup booking fee 2 juta all-in
+
 stat4_num: 15 Menit
 stat4_label: Ke Gerbang Tol & Stasiun
 stat4_desc: Akses cepat ke Jakarta, Depok & Bekasi
+
 stat5_num: 8+ Bank
 stat5_label: Mitra KPR Terpercaya
 stat5_desc: BTN, BSI, Mandiri, BRI, BCA, BNI]]></b:widget-setting>
@@ -120,7 +153,10 @@ stat5_desc: BTN, BSI, Mandiri, BRI, BCA, BNI]]></b:widget-setting>
     <b:section class='sec-usp' id='sec-usp' name='Section 3: Keunggulan &amp; Fasilitas (USP)' showaddelement='yes'>
       <b:widget id='HTML3' locked='false' title='[Section 3] Keunggulan Kawasan &amp; Fasilitas' type='HTML' version='2' visible='true'>
         <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[# PENGATURAN SECTION 3 (KEUNGGULAN & FASILITAS USP)
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 3] KEUNGGULAN KAWASAN & FASILITAS (USP)
+# ========================================================
+
 badge: Keunggulan Eksklusif
 title: Mengapa Pesona Kahuripan Pilihan Tepat Keluarga Anda?
 desc: Lebih dari sekadar bangunan, kami menghadirkan ekosistem hunian yang aman, nyaman, dan bernilai investasi tinggi untuk generasi mendatang.]]></b:widget-setting>
@@ -136,15 +172,25 @@ desc: Lebih dari sekadar bangunan, kami menghadirkan ekosistem hunian yang aman,
     </b:section>
 
     <!-- 4. Lokasi Strategis & Aksesibilitas -->
-    <b:section class='sec-location' id='sec-location' name='Section 4: Lokasi Strategis &amp; Aksesibilitas' showaddelement='yes'>
+    <b:section class='sec-location' id='sec-location' name='Section 4: Lokasi Strategis &amp; Akses Tol' showaddelement='yes'>
       <b:widget id='HTML4' locked='false' title='[Section 4] Lokasi Strategis &amp; Akses Tol' type='HTML' version='2' visible='true'>
         <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[# PENGATURAN SECTION 4 (LOKASI STRATEGIS & AKSESIBILITAS)
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 4] LOKASI STRATEGIS & AKSES TOL
+# ========================================================
+# PANDUAN PETA & SITEPLAN:
+# - gmaps_url: Link Google Maps penunjuk arah langsung
+# - gmaps_embed: Link embed iframe dari Google Maps
+# - siteplan_image: Link foto masterplan / denah kaveling kawasan
+# ========================================================
+
 badge: Location Advantage
 title: Aksesibilitas Tanpa Batas di Titik Paling Strategis
 desc: Dekat dengan simpul gerbang tol, stasiun KRL, sentra niaga, dan fasilitas umum vital untuk mobilitas harian yang efisien.
 address: Jl. Raya Pesona Asri No. 88, Cileungsi - Klapanunggal, Bogor Timur
-gmaps_url: https://maps.google.com/?q=Cileungsi+Bogor]]></b:widget-setting>
+gmaps_url: https://maps.google.com/?q=Cileungsi+Bogor
+gmaps_embed: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.176483582496!2d106.96821437508316!3d-6.371221762326756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699313db43e261%3A0xe5a3eb4293f7734!2sCileungsi%2C%20Bogor%20Regency%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid
+siteplan_image: ]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='location' expr:data-title='data:title'>
@@ -160,11 +206,43 @@ gmaps_url: https://maps.google.com/?q=Cileungsi+Bogor]]></b:widget-setting>
     <b:section class='sec-units' id='sec-units' name='Section 5: Tipe Unit &amp; Spesifikasi' showaddelement='yes'>
       <b:widget id='HTML5' locked='false' title='[Section 5] Katalog Tipe Unit &amp; Denah' type='HTML' version='2' visible='true'>
         <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[# PENGATURAN SECTION 5 (TIPE UNIT & SPESIFIKASI RUMAH)
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 5] KATALOG TIPE UNIT & SPESIFIKASI RUMAH
+# ========================================================
+# PANDUAN UPLOAD FOTO RUMAH & DENAH:
+# Anda bisa mengganti foto tampak depan dan denah ruangan untuk
+# setiap tipe rumah. Upload foto di Blogger (menu Posting),
+# lalu salin alamat gambar dan tempel di bawah.
+# ========================================================
+
 badge: Pilihan Tipe Unit
 title: Koleksi Rumah Modern Sesuai Kebutuhan Anda
 desc: Setiap unit didesain dengan konsep tropis modern berplafon tinggi, pencahayaan alami optimal, dan material bangunan berkualitas standar SNI.
-whatsapp: 6281288997711]]></b:widget-setting>
+whatsapp: 6281288997711
+
+# --- TIPE 1 (MELATI 30/60) ---
+unit1_name: Tipe Melati
+unit1_code: 30/60
+unit1_price: Mulai Rp 280 Jutaan
+unit1_cicilan: Rp 1,9 Jutaan / bulan
+unit1_image: /hero-cluster.jpg
+unit1_floorplan: https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80
+
+# --- TIPE 2 (FLAMBOYAN 36/72) ---
+unit2_name: Tipe Flamboyan
+unit2_code: 36/72
+unit2_price: Mulai Rp 375 Jutaan
+unit2_cicilan: Rp 2,4 Jutaan / bulan
+unit2_image: https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80
+unit2_floorplan: https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80
+
+# --- TIPE 3 (ANGGREK 45/84) ---
+unit3_name: Tipe Anggrek
+unit3_code: 45/84
+unit3_price: Mulai Rp 495 Jutaan
+unit3_cicilan: Rp 3,2 Jutaan / bulan
+unit3_image: https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80
+unit3_floorplan: https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='units' expr:data-title='data:title'>
@@ -180,10 +258,48 @@ whatsapp: 6281288997711]]></b:widget-setting>
     <b:section class='sec-gallery' id='sec-gallery' name='Section 6: Galeri Foto &amp; Virtual Tour' showaddelement='yes'>
       <b:widget id='HTML6' locked='false' title='[Section 6] Galeri Foto &amp; Tur 360°' type='HTML' version='2' visible='true'>
         <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[# PENGATURAN SECTION 6 (GALERI FOTO & TUR VIRTUAL 360)
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 6] GALERI FOTO & TUR VIRTUAL 360°
+# ========================================================
+# PANDUAN PENGISIAN MEDIA:
+# - video_url: Link YouTube Drone / Walkthrough kawasan
+# - virtual_tour_url: Link Matterport / Kuula 360 / Web tour 3D
+# - gallery_image_X: Link foto galeri ruangan (1 s/d 6)
+# ========================================================
+
 badge: Galeri & Tur Virtual
 title: Jelajahi Setiap Sudut Keindahan Rumah Impian
-desc: Kenyamanan nyata yang dapat Anda rasakan langsung melalui visual detail ruangan dan pengalaman tur 360 derajat interaktif.]]></b:widget-setting>
+desc: Kenyamanan nyata yang dapat Anda rasakan langsung melalui visual detail ruangan dan pengalaman tur 360 derajat interaktif.
+
+# --- VIDEO SHOW UNIT & TUR VIRTUAL 360 ---
+video_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+video_title: Video Site Plan & Walkthrough Kawasan
+virtual_tour_url: 
+
+# --- FOTO GALERI 1 SAMPAI 6 ---
+gallery_image_1: /hero-cluster.jpg
+gallery_title_1: Cluster Tropis Modern Tahap 3
+gallery_cat_1: Fasad & Lingkungan
+
+gallery_image_2: /living-room.jpg
+gallery_title_2: Ruang Tamu High Ceiling 3.8m
+gallery_cat_2: Living Room
+
+gallery_image_3: https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=80
+gallery_title_3: Master Bedroom Bernuansa Hangat
+gallery_cat_3: Kamar Tidur
+
+gallery_image_4: https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80
+gallery_title_4: Modern Kitchen & Island Bar
+gallery_cat_4: Dapur & Dining
+
+gallery_image_5: https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80
+gallery_title_5: Gerbang One Gate System & Keamanan
+gallery_cat_5: Fasad & Lingkungan
+
+gallery_image_6: https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80
+gallery_title_6: Kamar Anak / Ruang Kerja Fleksibel
+gallery_cat_6: Kamar Tidur]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='gallery' expr:data-title='data:title'>
@@ -199,12 +315,19 @@ desc: Kenyamanan nyata yang dapat Anda rasakan langsung melalui visual detail ru
     <b:section class='sec-promo' id='sec-promo' name='Section 7: Promo Spesial &amp; Penawaran' showaddelement='yes'>
       <b:widget id='HTML7' locked='false' title='[Section 7] Promo DP 0% &amp; Subsidi Biaya' type='HTML' version='2' visible='true'>
         <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[# PENGATURAN SECTION 7 (PROMO & PENAWARAN SPESIAL)
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 7] PROMO SPESIAL & PENAWARAN DP 0%
+# ========================================================
+# PANDUAN:
+# - promo_image: Link foto poster/flyer promo (opsional)
+# ========================================================
+
 badge: ⚡ Promo Terbatas Bulan Ini
 subbadge: Sisa 5 Unit Terakhir
 title: Paket Spesial Hunian Baru: All-In Bebas Biaya!
 desc: Cukup bayar booking fee 2 juta rupiah, tanpa uang muka (DP 0%), dan nikmati subsidi bebas semua biaya notaris, BPHTB, appraisal, hingga serah terima kunci.
-whatsapp: 6281288997711]]></b:widget-setting>
+whatsapp: 6281288997711
+promo_image: ]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='promo' expr:data-title='data:title'>
@@ -220,10 +343,44 @@ whatsapp: 6281288997711]]></b:widget-setting>
     <b:section class='sec-social' id='sec-social' name='Section 8: Testimoni &amp; Bank Rekanan' showaddelement='yes'>
       <b:widget id='HTML8' locked='false' title='[Section 8] Testimoni Pembeli &amp; Mitra Bank' type='HTML' version='2' visible='true'>
         <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[# PENGATURAN SECTION 8 (TESTIMONI & BUKTI SOSIAL)
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 8] TESTIMONI PEMBELI & MITRA BANK
+# ========================================================
+# PANDUAN:
+# - handover_image: Link foto dokumentasi serah terima kunci (BAST)
+# - testiX_avatar: Link foto avatar konsumen (1 s/d 3)
+# ========================================================
+
 badge: Bukti Sosial & Kepuasan Konsumen
 title: Dipercaya Lebih dari 1.250+ Keluarga Bahagia
-desc: Kisah nyata kepuasan para pembeli yang telah mewujudkan hunian idaman mereka bersama Pesona Kahuripan.]]></b:widget-setting>
+desc: Kisah nyata kepuasan para pembeli yang telah mewujudkan hunian idaman mereka bersama Pesona Kahuripan.
+
+# --- FOTO SERAH TERIMA KUNCI (BAST) ---
+handover_image: /handover.jpg
+
+# --- TESTIMONI KONSUMEN 1 ---
+testi1_name: Bapak Dimas & Ibu Rini
+testi1_role: Karyawan BUMN & ASN Guru
+testi1_unit: Tipe Flamboyan 36/72
+testi1_title: Proses KPR Cepat dan DP 0% Nyata Tanpa Tipu-Tipu
+testi1_text: Awalnya sempat ragu apakah benar DP 0% dan bebas semua biaya. Ternyata tim sales sangat jujur dan mendampingi berkas KPR dari awal sampai akad di Bank BTN.
+testi1_avatar: https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80
+
+# --- TESTIMONI KONSUMEN 2 ---
+testi2_name: Ibu Sarah Maharani
+testi2_role: Wirausahawan Kuliner
+testi2_unit: Tipe Melati 30/60
+testi2_title: Desain Plafon Tinggi Bikin Rumah Sangat Sejuk!
+testi2_text: Plafon 3,8 meternya juara banget! Siang hari rumah tetap sejuk walau tanpa menyalakan AC terus-menerus. Dinding hebelnya juga sangat kedap.
+testi2_avatar: https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80
+
+# --- TESTIMONI KONSUMEN 3 ---
+testi3_name: Mas Aditya Pratama
+testi3_role: Software Engineer (Remote Worker)
+testi3_unit: Tipe Anggrek 45/84
+testi3_title: Akses Tol & Stasiun Dekat, Nilai Investasi Menjanjikan
+testi3_text: Sebagai pekerja teknologi yang sesekali harus meeting ke Jakarta Selatan, jarak ke gerbang tol cuma 10 menitan sangat memudahkan hidup. Kualitas air tanahnya sangat jernih.
+testi3_avatar: https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='social-proof' expr:data-title='data:title'>
@@ -239,14 +396,23 @@ desc: Kisah nyata kepuasan para pembeli yang telah mewujudkan hunian idaman mere
     <b:section class='sec-lead' id='sec-lead' name='Section 9: Form Survey &amp; Kontak Sales' showaddelement='yes'>
       <b:widget id='HTML9' locked='false' title='[Section 9] Jadwal Survey &amp; Form Lead' type='HTML' version='2' visible='true'>
         <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[# PENGATURAN SECTION 9 (FORMULIR SURVEY & KONTAK SALES)
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 9] FORMULIR SURVEY & KONTAK SALES
+# ========================================================
+# PANDUAN FILE & FOTO:
+# - brochure_url: Link download E-Brosur PDF (Google Drive / link langsung)
+# - office_image: Link foto kantor pemasaran / show unit (opsional)
+# ========================================================
+
 badge: Jadwal Survey & Konsultasi Langsung
 title: Kunjungi Rumah Contoh & Rasakan Langsung Suasananya
 desc: Tim sales profesional kami siap menyambut Anda setiap hari di lokasi, mendampingi keliling show unit, serta memberikan konsultasi properti gratis tanpa dipungut biaya.
 address: Jl. Raya Pesona Asri No. 88, Cileungsi - Klapanunggal, Bogor Timur
 opening_hours: Buka Setiap Hari: 08.00 - 18.00 WIB
 whatsapp: 6281288997711
-whatsapp_display: 0812-8899-7711]]></b:widget-setting>
+whatsapp_display: 0812-8899-7711
+brochure_url: 
+office_image: ]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='lead-form' expr:data-title='data:title'>

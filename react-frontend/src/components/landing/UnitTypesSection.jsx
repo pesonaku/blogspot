@@ -2,10 +2,23 @@ import { useState } from 'react'
 import { propertyInfo, unitTypes } from './propertyData.js'
 
 export function UnitTypesSection({ config = {}, onOpenFloorPlan, onSelectUnitForSurvey }) {
-  const [selectedUnitId, setSelectedUnitId] = useState(unitTypes[0].id)
+  const mergedUnits = unitTypes.map((u, idx) => {
+    const num = idx + 1
+    return {
+      ...u,
+      name: config[`unit${num}_name`] || u.name,
+      code: config[`unit${num}_code`] || u.code,
+      priceEstimate: config[`unit${num}_price`] || u.priceEstimate,
+      cicilanEstimate: config[`unit${num}_cicilan`] || u.cicilanEstimate,
+      heroImage: config[`unit${num}_image`] || config[`unit${num}_foto`] || u.heroImage,
+      floorPlanImage: config[`unit${num}_floorplan`] || config[`unit${num}_denah`] || u.floorPlanImage,
+    }
+  })
+
+  const [selectedUnitId, setSelectedUnitId] = useState(mergedUnits[0].id)
   const [showSpecsTable, setShowSpecsTable] = useState(false)
 
-  const activeUnit = unitTypes.find((u) => u.id === selectedUnitId) || unitTypes[0]
+  const activeUnit = mergedUnits.find((u) => u.id === selectedUnitId) || mergedUnits[0]
   const whatsappNumber = config.whatsapp || propertyInfo.whatsapp
 
   return (
@@ -25,7 +38,7 @@ export function UnitTypesSection({ config = {}, onOpenFloorPlan, onSelectUnitFor
 
       {/* Unit Switcher Tabs */}
       <div className="flex flex-wrap justify-center gap-3 mb-10">
-        {unitTypes.map((unit) => (
+        {mergedUnits.map((unit) => (
           <button
             key={unit.id}
             type="button"

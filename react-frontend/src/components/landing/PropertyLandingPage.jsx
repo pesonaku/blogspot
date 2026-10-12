@@ -36,6 +36,8 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
   const [showBrosurModal, setShowBrosurModal] = useState(false)
   const [lightboxData, setLightboxData] = useState(null)
   const [prefilledUnitForSurvey, setPrefilledUnitForSurvey] = useState('')
+  const [activeVideo, setActiveVideo] = useState({ url: '', title: '' })
+  const [activeVirtualTourUrl, setActiveVirtualTourUrl] = useState('')
 
   const handleSelectUnitForSurvey = (unitName) => {
     setPrefilledUnitForSurvey(unitName)
@@ -63,9 +65,18 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
             <HeroSection
               blog={blog}
               config={config}
-              onOpenVideo={() => setShowVideoModal(true)}
+              onOpenVideo={(url, title) => {
+                setActiveVideo({
+                  url: url || config.video_url || '',
+                  title: title || config.headline || config.title || '',
+                })
+                setShowVideoModal(true)
+              }}
               onOpenBrosur={() => setShowBrosurModal(true)}
-              onOpenVirtualTour={() => setShowVirtualTour(true)}
+              onOpenVirtualTour={(url) => {
+                setActiveVirtualTourUrl(url || config.virtual_tour_url || '')
+                setShowVirtualTour(true)
+              }}
             />
             {sec.contentHtml && (
               <div
@@ -139,8 +150,17 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
                   subtitle: item.subtitle,
                 })
               }
-              onOpenVirtualTour={() => setShowVirtualTour(true)}
-              onOpenVideo={() => setShowVideoModal(true)}
+              onOpenVirtualTour={(url) => {
+                setActiveVirtualTourUrl(url || config.virtual_tour_url || '')
+                setShowVirtualTour(true)
+              }}
+              onOpenVideo={(url, title) => {
+                setActiveVideo({
+                  url: url || config.video_url || '',
+                  title: title || config.video_title || config.title || '',
+                })
+                setShowVideoModal(true)
+              }}
             />
             {sec.contentHtml && (
               <div
@@ -218,15 +238,29 @@ export default function PropertyLandingPage({ blog, sections = [] }) {
       )}
 
       {showVirtualTour && (
-        <VirtualTourModal onClose={() => setShowVirtualTour(false)} />
+        <VirtualTourModal
+          virtualTourUrl={activeVirtualTourUrl}
+          onClose={() => setShowVirtualTour(false)}
+        />
       )}
 
       {showVideoModal && (
-        <VideoPlayerModal onClose={() => setShowVideoModal(false)} />
+        <VideoPlayerModal
+          videoUrl={activeVideo.url}
+          title={activeVideo.title}
+          onClose={() => setShowVideoModal(false)}
+        />
       )}
 
       {showBrosurModal && (
-        <BrosurModal onClose={() => setShowBrosurModal(false)} />
+        <BrosurModal
+          brochureUrl={
+            sections.find((s) => s.id === 'lead-form')?.config?.brochure_url ||
+            sections.find((s) => s.id === 'hero')?.config?.brochure_url ||
+            ''
+          }
+          onClose={() => setShowBrosurModal(false)}
+        />
       )}
 
       {lightboxData && (

@@ -12,10 +12,30 @@ export function GalleryVirtualTour({ config = {}, onOpenLightbox, onOpenVirtualT
     { key: 'dapur', label: 'Dapur & Dining' },
   ]
 
+  const mergedItems = galleryItems.map((item, idx) => {
+    const num = idx + 1
+    const customImg =
+      config[`gallery_image_${num}`] ||
+      config[`gallery_foto_${num}`] ||
+      config[`foto_${num}`] ||
+      config[`image_${num}`]
+    const customTitle = config[`gallery_title_${num}`] || config[`judul_${num}`]
+    const customSub = config[`gallery_desc_${num}`] || config[`desc_${num}`]
+    const customCat = config[`gallery_cat_${num}`]
+
+    return {
+      ...item,
+      image: customImg || item.image,
+      title: customTitle || item.title,
+      subtitle: customSub || item.subtitle,
+      categoryName: customCat || item.categoryName,
+    }
+  })
+
   const filteredItems =
     activeFilter === 'all'
-      ? galleryItems
-      : galleryItems.filter((item) => item.category === activeFilter)
+      ? mergedItems
+      : mergedItems.filter((item) => item.category === activeFilter)
 
   return (
     <section id="galeri" className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
@@ -51,7 +71,7 @@ export function GalleryVirtualTour({ config = {}, onOpenLightbox, onOpenVirtualT
           <div className="relative z-10 mt-6">
             <button
               type="button"
-              onClick={onOpenVirtualTour}
+              onClick={() => onOpenVirtualTour && onOpenVirtualTour(config.virtual_tour_url)}
               className="btn-primary py-2.5 px-5 text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg shadow-violet-500/25"
             >
               <span>Mulai Tur Virtual 360°</span>
@@ -77,7 +97,10 @@ export function GalleryVirtualTour({ config = {}, onOpenLightbox, onOpenVirtualT
           <div className="relative z-10 mt-6">
             <button
               type="button"
-              onClick={onOpenVideo}
+              onClick={() =>
+                onOpenVideo &&
+                onOpenVideo(config.video_url, config.video_title || 'Video Site Plan & Kawasan')
+              }
               className="btn glass hover:bg-emerald-500/20 text-emerald-200 border-emerald-400/40 py-2.5 px-5 text-xs sm:text-sm font-bold flex items-center gap-2 transition"
             >
               <span>▶ Putar Video Kawasan</span>

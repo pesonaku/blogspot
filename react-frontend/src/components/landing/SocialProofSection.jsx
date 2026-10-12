@@ -1,6 +1,22 @@
 import { bankPartners, testimonials } from './propertyData.js'
 
 export function SocialProofSection({ config = {} }) {
+  const handoverImage =
+    config.handover_image || config.foto_serah_terima || '/handover.jpg'
+
+  const mergedTestimonials = testimonials.map((testi, idx) => {
+    const num = idx + 1
+    return {
+      ...testi,
+      name: config[`testi${num}_name`] || testi.name,
+      role: config[`testi${num}_role`] || testi.role,
+      title: config[`testi${num}_title`] || testi.title,
+      text: config[`testi${num}_text`] || testi.text,
+      avatar: config[`testi${num}_avatar`] || config[`testi${num}_foto`] || testi.avatar,
+      typeUnit: config[`testi${num}_unit`] || testi.typeUnit,
+    }
+  })
+
   return (
     <section id="testimoni" className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
       {/* Section Header */}
@@ -22,7 +38,7 @@ export function SocialProofSection({ config = {} }) {
           <div className="lg:col-span-7">
             <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-white/10 bg-slate-950 shadow-xl group">
               <img
-                src="/handover.jpg"
+                src={handoverImage}
                 alt="Dokumentasi Serah Terima Kunci Konsumen"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
@@ -89,7 +105,7 @@ export function SocialProofSection({ config = {} }) {
 
       {/* 3 Detailed Testimonial Cards */}
       <div className="grid gap-6 md:grid-cols-3 mb-16">
-        {testimonials.map((testi) => (
+        {mergedTestimonials.map((testi) => (
           <div
             key={testi.id}
             className="rounded-3xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-amber-400/40 hover:bg-white/[0.06]"

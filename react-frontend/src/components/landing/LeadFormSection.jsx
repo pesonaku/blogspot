@@ -91,7 +91,18 @@ export function LeadFormSection({ config = {}, prefilledUnit }) {
               </div>
             </div>
 
-            <div className="mt-8 p-4 rounded-2xl border border-violet-400/20 bg-violet-400/5 text-xs text-violet-200">
+            {/* Foto Galeri Marketing / Kantor Pemasaran jika diupload */}
+            {config.office_image && (
+              <div className="mt-6 rounded-2xl overflow-hidden border border-white/10 shadow-lg group">
+                <img
+                  src={config.office_image}
+                  alt="Kantor Pemasaran & Show Unit"
+                  className="w-full h-44 object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+            )}
+
+            <div className="mt-6 p-4 rounded-2xl border border-violet-400/20 bg-violet-400/5 text-xs text-violet-200">
               💡 <strong>Tips Berkunjung:</strong> Lebih baik menjadwalkan survey 1 hari sebelumnya agar tim sales dapat menyiapkan kunci rumah contoh dan berkas brosur lengkap untuk tipe yang Anda minati.
             </div>
           </div>

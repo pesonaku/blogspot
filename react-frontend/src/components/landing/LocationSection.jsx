@@ -85,6 +85,22 @@ export function LocationSection({ config = {} }) {
               </p>
             </div>
           </div>
+
+          {/* Masterplan / Siteplan Image jika diupload */}
+          {config.siteplan_image && (
+            <div className="mt-4 rounded-2xl overflow-hidden border border-emerald-400/30 bg-ink-900 group">
+              <div className="relative aspect-[16/9] w-full overflow-hidden">
+                <img
+                  src={config.siteplan_image}
+                  alt="Siteplan Kawasan"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute bottom-2 left-2 glass px-3 py-1 rounded-lg text-[11px] text-emerald-300 backdrop-blur-md">
+                  🗺️ Masterplan &amp; Siteplan Kawasan
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Right: Google Maps Embed Card */}

@@ -78,6 +78,17 @@ export function PromoSection({ config = {}, onClaimPromo }) {
           </div>
         </div>
 
+        {/* Banner Flyer Promo jika user mengupload gambar promo */}
+        {config.promo_image && (
+          <div className="relative z-10 mt-8 rounded-2xl overflow-hidden border border-fuchsia-400/40 shadow-xl max-h-80 group">
+            <img
+              src={config.promo_image}
+              alt={config.title || 'Promo Hunian'}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+        )}
+
         {/* 3 Main Promo Offer Benefit Cards */}
         <div className="relative z-10 mt-8 grid gap-6 md:grid-cols-3">
           {promoOffers.map((offer) => (

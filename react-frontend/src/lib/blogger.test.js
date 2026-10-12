@@ -111,3 +111,41 @@ describe('parseFeedEntry', () => {
     expect(post.snippet).toContain('Halo dunia ini isi artikel lengkap')
   })
 })
+
+describe('formatEmbedVideoUrl & parseWidgetConfig image/video inputs', () => {
+  it('mengonversi berbagai format URL YouTube menjadi link embed yang valid', async () => {
+    const { formatEmbedVideoUrl } = await import('./widgetConfig.js')
+
+    expect(formatEmbedVideoUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ')).toBe(
+      'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1',
+    )
+    expect(formatEmbedVideoUrl('https://youtu.be/dQw4w9WgXcQ')).toBe(
+      'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1',
+    )
+    expect(formatEmbedVideoUrl('https://www.youtube.com/shorts/dQw4w9WgXcQ')).toBe(
+      'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1',
+    )
+    expect(formatEmbedVideoUrl('dQw4w9WgXcQ')).toBe(
+      'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1',
+    )
+  })
+
+  it('mem-parsing input gambar, video, dan alias bahasa Indonesia dengan pembersihan otomatis', async () => {
+    const { parseWidgetConfig } = await import('./widgetConfig.js')
+
+    const raw = `
+      # Pengaturan
+      gambar_hero: "https://blogger.googleusercontent.com/img/hero.jpg"
+      link_video: https://www.youtube.com/watch?v=12345678901
+      tur_virtual: https://my.matterport.com/show/?m=sample
+      unit1_image: <img src="https://img.com/unit1.jpg" />
+    `
+    const { config } = parseWidgetConfig(raw)
+
+    expect(config.hero_image).toBe('https://blogger.googleusercontent.com/img/hero.jpg')
+    expect(config.video_url).toBe('https://www.youtube.com/watch?v=12345678901')
+    expect(config.virtual_tour_url).toBe('https://my.matterport.com/show/?m=sample')
+    expect(config.unit1_image).toBe('https://img.com/unit1.jpg')
+  })
+})
+
