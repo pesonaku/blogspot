@@ -39,6 +39,8 @@ export default function Header({ blog, sections = [], config = {} }) {
   const navLinks =
     customNav.length > 0
       ? customNav
+      : mergedConfig.menuItems && mergedConfig.menuItems.length > 0
+      ? mergedConfig.menuItems
       : sections && sections.length > 0
       ? defaultNavLinks.filter((link) => sections.some((s) => s.id === link.id))
       : defaultNavLinks

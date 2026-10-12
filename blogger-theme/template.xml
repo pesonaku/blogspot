@@ -72,47 +72,95 @@ a{color:#10b981}
     <!-- melalui menu Tata Letak di Dashboard Blogger.           -->
     <!-- ======================================================== -->
 
-    <!-- 0. Header: Logo & Menu Navigasi -->
-    <b:section class='sec-header' id='sec-header' name='Section 0: Header Logo &amp; Menu' showaddelement='yes'>
-      <b:widget id='HTML10' locked='false' title='[Header] Logo &amp; Menu Navigasi' type='HTML' version='2' visible='true'>
+    <!-- #CONFIG -->
+    <b:section class='sec-config' id='sec-config' name='#CONFIG' showaddelement='yes'>
+      <b:widget id='HTML99' locked='false' title='Kode Lisensi ( Premium )' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================
-# [HEADER] LOGO BRAND & MENU NAVIGASI
+# KODE LISENSI TEMPLATE & KONFIGURASI SISTEM
 # ========================================================
-# PANDUAN PENGISIAN:
-# - logo_image: Link foto logo transparan PNG/SVG (kosongkan jika pakai teks)
-# - logo_icon: Ikon simbol logo brand (contoh: 🏡)
-# - brand_name: Nama perumahan / brand Anda
-# - brand_tagline: Slogan ringkas di bawah nama brand
-# - nav1..5: Menu navigasi kustom (label & link url)
-# ========================================================
+license_key: PESONA-PREMIUM-2026-ACTIVE
+status: verified
+theme_version: 2.5.0]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='config' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
 
-logo_image: 
+    <!-- #HEADER-SECTION -->
+    <b:section class='sec-header' id='sec-header' name='#HEADER-SECTION' showaddelement='yes'>
+      <b:widget id='Header1' locked='false' title='Pesona Kahuripan 10 (Header)' type='Header' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='displayUrl'/>
+          <b:widget-setting name='displayHeight'>0</b:widget-setting>
+          <b:widget-setting name='sectionWidth'>0</b:widget-setting>
+          <b:widget-setting name='useImage'>false</b:widget-setting>
+          <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+          <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
+          <b:widget-setting name='displayWidth'>0</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='header-main'>
+            <b:if cond='data:image'>
+              <meta data-bt='header-logo' expr:content='data:image'/>
+            </b:if>
+            <span data-bt='header-title'><data:title/></span>
+            <span data-bt='header-desc'><data:description/></span>
+          </div>
+        </b:includable>
+      </b:widget>
+
+      <b:widget id='LinkList1' locked='false' title='Menu Homepage' type='LinkList' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='text-0'>Keunggulan</b:widget-setting>
+          <b:widget-setting name='link-0'>#keunggulan</b:widget-setting>
+          <b:widget-setting name='text-1'>Lokasi</b:widget-setting>
+          <b:widget-setting name='link-1'>#lokasi</b:widget-setting>
+          <b:widget-setting name='text-2'>Tipe Unit</b:widget-setting>
+          <b:widget-setting name='link-2'>#tipe-unit</b:widget-setting>
+          <b:widget-setting name='text-3'>Galeri 360°</b:widget-setting>
+          <b:widget-setting name='link-3'>#galeri</b:widget-setting>
+          <b:widget-setting name='text-4'>Promo</b:widget-setting>
+          <b:widget-setting name='link-4'>#promo</b:widget-setting>
+          <b:widget-setting name='text-5'>Jadwal Survey</b:widget-setting>
+          <b:widget-setting name='link-5'>#lead-form</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='header-menu'>
+            <b:loop values='data:links' var='link'>
+              <a expr:data-title='data:link.name' expr:href='data:link.target'><data:link.name/></a>
+            </b:loop>
+          </div>
+        </b:includable>
+      </b:widget>
+
+      <b:widget id='BlogSearch1' locked='false' title='Pencarian' type='BlogSearch' version='2' visible='true'>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='header-search'>
+            <form expr:action='data:blog.searchUrl'>
+              <input name='q' type='text'/>
+            </form>
+          </div>
+        </b:includable>
+      </b:widget>
+
+      <b:widget id='HTML10' locked='false' title='Pengaturan Tambahan Header &amp; CTA' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# PENGATURAN TAMBAHAN HEADER & TOMBOL CTA
+# ========================================================
+header_cta_text: 📅 Survey Lokasi
+header_cta_url: #lead-form
 logo_icon: 🏡
 brand_name: Pesona Kahuripan
 brand_tagline: Residence & Cluster Modern
-
-# --- TOMBOL CTA HEADER ---
-header_cta_text: 📅 Survey Lokasi
-header_cta_url: #lead-form
-show_search: true
-
-# --- MENU NAVIGASI KUSTOM (OPSIONAL) ---
-# Kosongkan baris nav di bawah jika ingin memakai menu section bawaan otomatis.
-nav1_label: Keunggulan
-nav1_url: #keunggulan
-
-nav2_label: Lokasi
-nav2_url: #lokasi
-
-nav3_label: Tipe Unit
-nav3_url: #tipe-unit
-
-nav4_label: Galeri 360°
-nav4_url: #galeri
-
-nav5_label: Promo
-nav5_url: #promo]]></b:widget-setting>
+show_search: true]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
           <div class='bt-section-widget bt-hidden' data-bt-section='header' expr:data-title='data:title'>
@@ -124,47 +172,18 @@ nav5_url: #promo]]></b:widget-setting>
       </b:widget>
     </b:section>
 
-    <!-- 1. Hero Banner & Promo Utama -->
-    <b:section class='sec-hero' id='sec-hero' name='Section 1: Hero Banner &amp; Headline' showaddelement='yes'>
-      <b:widget id='HTML1' locked='false' title='[Section 1] Hero Banner &amp; Headline' type='HTML' version='2' visible='true'>
+    <!-- HERO BANNER UTAMA -->
+    <b:section class='sec-hero' id='sec-hero' name='HERO BANNER UTAMA' showaddelement='yes'>
+      <b:widget id='HTML1' locked='false' title='Wujudkan Rumah Impian Anda (Hero Banner Utama)' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================
-# [SECTION 1] HERO BANNER & HEADLINE
+# HERO BANNER: HEADLINE & TOMBOL AKSI UTAMA
 # ========================================================
-# PANDUAN PENGISIAN:
-# Cukup ganti teks atau link di sebelah kanan titik dua (:)
-# Baris yang diawali tanda '#' adalah panduan/komentar.
-#
-# CARA UPLOAD GAMBAR:
-# 1. Buka menu Posting/Halaman Blogger -> Sisipkan Gambar -> Upload dari komputer.
-# 2. Klik kanan gambar -> 'Salin alamat gambar' (Copy image address).
-# 3. Tempelkan link gambar di 'hero_image:' di bawah ini.
-#
-# CARA INPUT VIDEO:
-# Masukkan link video YouTube Anda (contoh: https://www.youtube.com/watch?v=...)
-# ========================================================
-
-# --- GAMBAR & MEDIA UTAMA ---
-hero_image: /hero-cluster.jpg
-video_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
-virtual_tour_url: 
-
-# --- TEKS & BADGE PROMO ---
 badge: Cluster Baru Rilis Tahap 3
 badge_promo: ✦ Promo DP 0% & Subsidi Suku Bunga KPR
 badge_shm: ★ Legalitas 100% Sertifikat SHM Pecah
 headline: Wujudkan Rumah Impian Masa Depan Keluarga Anda di Pesona Kahuripan
 subheadline: Hunian bernuansa asri berkonsep modern minimalis di lokasi sangat strategis. Nikmati kemudahan DP 0% dan sertifikat SHM sudah pecah siap serah terima.
-
-# --- BADGE KARTU GAMBAR (OVERLAY) ---
-pill1: Ready Stock Tahap 3
-pill2: Bebas Banjir 100%
-card_title: Suasana Asri & Udara Sejuk Khas Perbukitan
-card_desc: Konsep hunian hijau dengan row jalan lebar dan taman bermain keluarga terintegrasi.
-cta_tour: 🔄 Virtual Tour 360°
-cta_video: ▶ Putar Video Kawasan
-
-# --- TOMBOL CTA & KONTAK ---
 cta_survey: 📅 Jadwalkan Survey Lokasi
 cta_brosur: 📥 Unduh Brosur & Pricelist
 cta_wa: 💬 Chat Sales via WhatsApp
@@ -178,11 +197,35 @@ whatsapp: 6281288997711]]></b:widget-setting>
           </div>
         </b:includable>
       </b:widget>
+
+      <b:widget id='HTML12' locked='false' title='Rumah Subsidi - Pesona Kahuripan (Media &amp; Video)' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# HERO BANNER: MEDIA VISUAL, VIDEO & TOUR 360
+# ========================================================
+hero_image: /hero-cluster.jpg
+video_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+virtual_tour_url: 
+pill1: Ready Stock Tahap 3
+pill2: Bebas Banjir 100%
+card_title: Suasana Asri & Udara Sejuk Khas Perbukitan
+card_desc: Konsep hunian hijau dengan row jalan lebar dan taman bermain keluarga terintegrasi.
+cta_tour: 🔄 Virtual Tour 360°
+cta_video: ▶ Putar Video Kawasan]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='hero-media' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
     </b:section>
 
     <!-- 2. Quick Stats / Bar Kredibilitas -->
-    <b:section class='sec-stats' id='sec-stats' name='Section 2: Quick Stats &amp; Kredibilitas' showaddelement='yes'>
-      <b:widget id='HTML2' locked='false' title='[Section 2] Quick Stats &amp; Angka Penjualan' type='HTML' version='2' visible='true'>
+    <b:section class='sec-stats' id='sec-stats' name='#SECTION-STATS' showaddelement='yes'>
+      <b:widget id='HTML2' locked='false' title='Ringkasan Proyek &amp; Angka Kunci (Quick Stats)' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 2] QUICK STATS & KREDIBILITAS
@@ -221,8 +264,8 @@ stat5_desc: BTN, BSI, Mandiri, BRI, BCA, BNI]]></b:widget-setting>
     </b:section>
 
     <!-- 3. Keunggulan & Fasilitas (USP) -->
-    <b:section class='sec-usp' id='sec-usp' name='Section 3: Keunggulan &amp; Fasilitas (USP)' showaddelement='yes'>
-      <b:widget id='HTML3' locked='false' title='[Section 3] Keunggulan Kawasan &amp; Fasilitas' type='HTML' version='2' visible='true'>
+    <b:section class='sec-usp' id='sec-usp' name='#SECTION-USP' showaddelement='yes'>
+      <b:widget id='HTML3' locked='false' title='Keunggulan Kawasan &amp; Fasilitas (USP)' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 3] KEUNGGULAN KAWASAN & FASILITAS (USP)
@@ -282,8 +325,8 @@ usp6_icon: 🌳]]></b:widget-setting>
     </b:section>
 
     <!-- 4. Lokasi Strategis & Aksesibilitas -->
-    <b:section class='sec-location' id='sec-location' name='Section 4: Lokasi Strategis &amp; Akses Tol' showaddelement='yes'>
-      <b:widget id='HTML4' locked='false' title='[Section 4] Lokasi Strategis &amp; Akses Tol' type='HTML' version='2' visible='true'>
+    <b:section class='sec-location' id='sec-location' name='#SECTION-LOKASI' showaddelement='yes'>
+      <b:widget id='HTML4' locked='false' title='Aksesibilitas Lokasi &amp; Peta Google Maps' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 4] LOKASI STRATEGIS & AKSES TOL
@@ -392,8 +435,8 @@ mall4_note: Kebutuhan harian rumah tangga super praktis]]></b:widget-setting>
     </b:section>
 
     <!-- 5. Tipe Unit & Spesifikasi Rumah -->
-    <b:section class='sec-units' id='sec-units' name='Section 5: Tipe Unit &amp; Spesifikasi' showaddelement='yes'>
-      <b:widget id='HTML5' locked='false' title='[Section 5] Katalog Tipe Unit &amp; Denah' type='HTML' version='2' visible='true'>
+    <b:section class='sec-units' id='sec-units' name='#SECTION-TIPE-UNIT' showaddelement='yes'>
+      <b:widget id='HTML5' locked='false' title='Katalog Tipe Unit &amp; Spesifikasi Rumah' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 5] KATALOG TIPE UNIT & SPESIFIKASI RUMAH
@@ -501,8 +544,8 @@ unit3_air: Sumur bor submersible pump + filter air terpasang]]></b:widget-settin
     </b:section>
 
     <!-- 6. Galeri Foto & Tur Virtual 360° -->
-    <b:section class='sec-gallery' id='sec-gallery' name='Section 6: Galeri Foto &amp; Virtual Tour' showaddelement='yes'>
-      <b:widget id='HTML6' locked='false' title='[Section 6] Galeri Foto &amp; Tur 360°' type='HTML' version='2' visible='true'>
+    <b:section class='sec-gallery' id='sec-gallery' name='#SECTION-GALERI' showaddelement='yes'>
+      <b:widget id='HTML6' locked='false' title='Galeri Foto Ruangan &amp; Tur Virtual 360°' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 6] GALERI FOTO & TUR VIRTUAL 360°
@@ -573,8 +616,8 @@ gallery_cat_6: Kamar Tidur]]></b:widget-setting>
     </b:section>
 
     <!-- 7. Promo & Penawaran Spesial -->
-    <b:section class='sec-promo' id='sec-promo' name='Section 7: Promo Spesial &amp; Penawaran' showaddelement='yes'>
-      <b:widget id='HTML7' locked='false' title='[Section 7] Promo DP 0% &amp; Subsidi Biaya' type='HTML' version='2' visible='true'>
+    <b:section class='sec-promo' id='sec-promo' name='#SECTION-PROMO' showaddelement='yes'>
+      <b:widget id='HTML7' locked='false' title='Promo Spesial Bulan Ini &amp; Countdown NUP' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 7] PROMO SPESIAL & PENAWARAN DP 0%
@@ -635,8 +678,8 @@ wa_btn: Klaim via WhatsApp]]></b:widget-setting>
     </b:section>
 
     <!-- 8. Testimoni Pembeli & Mitra Bank Rekanan -->
-    <b:section class='sec-social' id='sec-social' name='Section 8: Testimoni &amp; Bank Rekanan' showaddelement='yes'>
-      <b:widget id='HTML8' locked='false' title='[Section 8] Testimoni Pembeli &amp; Mitra Bank' type='HTML' version='2' visible='true'>
+    <b:section class='sec-social' id='sec-social' name='#SECTION-TESTIMONI' showaddelement='yes'>
+      <b:widget id='HTML8' locked='false' title='Testimoni Konsumen &amp; Serah Terima Kunci (BAST)' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 8] TESTIMONI PEMBELI & MITRA BANK
@@ -702,8 +745,8 @@ testi3_avatar: https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto
     </b:section>
 
     <!-- 9. Formulir Survey & Kontak Sales -->
-    <b:section class='sec-lead' id='sec-lead' name='Section 9: Form Survey &amp; Kontak Sales' showaddelement='yes'>
-      <b:widget id='HTML9' locked='false' title='[Section 9] Jadwal Survey &amp; Form Lead' type='HTML' version='2' visible='true'>
+    <b:section class='sec-lead' id='sec-lead' name='#SECTION-SURVEY' showaddelement='yes'>
+      <b:widget id='HTML9' locked='false' title='Formulir Reservasi Survey &amp; Kontak Sales' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [SECTION 9] FORMULIR SURVEY & KONTAK SALES
@@ -745,8 +788,8 @@ privacy_note: 🔒 Data Anda dijamin kerahasiaannya dan hanya digunakan untuk ko
     </b:section>
 
     <!-- 11. Tombol Melayang (Floating CTA WhatsApp Pojok Bawah) -->
-    <b:section class='sec-cta' id='sec-cta' name='Floating CTA: Kontak Pojok Kanan Bawah' showaddelement='yes'>
-      <b:widget id='HTML11' locked='false' title='[Floating CTA] Kontak WhatsApp Pojok Kanan Bawah' type='HTML' version='2' visible='true'>
+    <b:section class='sec-cta' id='sec-cta' name='#FLOATING-CTA' showaddelement='yes'>
+      <b:widget id='HTML11' locked='false' title='Tombol Melayang WhatsApp Pojok Bawah' type='HTML' version='2' visible='true'>
         <b:widget-settings>
           <b:widget-setting name='content'><![CDATA[# ========================================================
 # [FLOATING CTA] TOMBOL MELAYANG WHATSAPP POJOK KANAN BAWAH
@@ -791,7 +834,7 @@ topic3_text: Halo Marketing, saya ingin minta pricelist dan brosur terbaru Peson
       </b:widget>
     </b:section>
 
-    <b:section class='bt-labels' id='labels' maxwidgets='1' name='Sidebar: Label Kategori' showaddelement='yes'>
+    <b:section class='bt-labels' id='labels' maxwidgets='1' name='#SIDEBAR-LABELS' showaddelement='yes'>
       <b:widget id='Label1' locked='false' title='Label' type='Label' version='2' visible='true'>
         <b:includable id='main'>
           <nav class='bt-hidden' data-bt='labels'>
@@ -803,7 +846,7 @@ topic3_text: Halo Marketing, saya ingin minta pricelist dan brosur terbaru Peson
       </b:widget>
     </b:section>
 
-    <b:section class='bt-main' id='main' maxwidgets='1' name='Section 10: Artikel &amp; Postingan Blog' showaddelement='yes'>
+    <b:section class='bt-main' id='main' maxwidgets='1' name='#POSTINGAN-BLOG' showaddelement='yes'>
       <b:widget id='Blog1' locked='true' title='Postingan Blog' type='Blog' version='2' visible='true'>
         <b:includable id='main'>
           <main data-bt='posts'>

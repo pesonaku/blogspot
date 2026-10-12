@@ -131,6 +131,54 @@ export function readBloggerData(container, globalData = window.BloggerData || {}
     }
   })
 
+  // 1. Baca widget Header bawaan Blogger jika ada
+  const headerMainEl = container.querySelector('[data-bt-section="header-main"]')
+  let nativeHeader = {}
+  if (headerMainEl) {
+    const logoMeta = headerMainEl.querySelector('[data-bt="header-logo"]')
+    const titleSpan = headerMainEl.querySelector('[data-bt="header-title"]')
+    const descSpan = headerMainEl.querySelector('[data-bt="header-desc"]')
+    nativeHeader = {
+      logo_image: logoMeta?.getAttribute('content') || '',
+      brand_name: titleSpan ? titleSpan.textContent.trim() : '',
+      brand_tagline: descSpan ? descSpan.textContent.trim() : '',
+    }
+  }
+
+  // 2. Baca widget Menu Homepage (LinkList) bawaan Blogger jika ada
+  const headerMenuEl = container.querySelector('[data-bt-section="header-menu"]')
+  let nativeMenuItems = []
+  if (headerMenuEl) {
+    const links = Array.from(headerMenuEl.querySelectorAll('a'))
+    nativeMenuItems = links
+      .map((a) => ({
+        label: a.dataset.title || a.textContent.trim(),
+        href: a.getAttribute('href') || '#',
+      }))
+      .filter((item) => item.label && item.href)
+  }
+
+  // Merge ke section 'header'
+  let headerSection = sections.find((s) => s.id === 'header')
+  if (!headerSection) {
+    headerSection = { id: 'header', title: 'Header', config: {}, contentHtml: '' }
+    sections.unshift(headerSection)
+  }
+  headerSection.config = {
+    ...headerSection.config,
+    ...(nativeHeader.logo_image ? { logo_image: nativeHeader.logo_image } : {}),
+    ...(nativeHeader.brand_name ? { brand_name: nativeHeader.brand_name } : {}),
+    ...(nativeHeader.brand_tagline ? { brand_tagline: nativeHeader.brand_tagline } : {}),
+    ...(nativeMenuItems.length > 0 ? { menuItems: nativeMenuItems } : {}),
+  }
+
+  // Merge hero-media ke hero jika ada
+  const heroMedia = sections.find((s) => s.id === 'hero-media')
+  const heroSec = sections.find((s) => s.id === 'hero')
+  if (heroSec && heroMedia) {
+    heroSec.config = { ...heroSec.config, ...heroMedia.config }
+  }
+
   return {
     blog: {
       title: globalData.blogTitle || document.title,
