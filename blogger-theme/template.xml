@@ -10,7 +10,7 @@
     //__THEME_JS__     -> diganti JS hasil build React
     __API_BASE_URL__   -> diganti URL Laravel API (env THEME_API_BASE_URL)
 -->
-<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' expr:lang='data:blog.localeUnderscoreDelimited' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html class='dark' b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' expr:lang='data:blog.localeUnderscoreDelimited' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 <head>
   <meta charset='utf-8'/>
   <meta content='width=device-width, initial-scale=1' name='viewport'/>
@@ -20,12 +20,23 @@
   <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
   <link href='https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap' rel='stylesheet'/>
 
+  <script type='text/javascript'>
+    try {
+      var savedTheme = localStorage.getItem('pesona_theme') || 'dark';
+      document.documentElement.classList.remove('dark', 'light');
+      document.documentElement.classList.add(savedTheme);
+      document.documentElement.style.colorScheme = savedTheme;
+    } catch(e) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+
   <!-- Fallback style untuk markup server-side (tampil sebelum React mount / tanpa JS) -->
   <b:skin version='1.0.0'><![CDATA[
-body{margin:0;background:#0b0b14;color:#e5e7f0;font-family:Inter,system-ui,sans-serif;line-height:1.6}
-a{color:#a5b4fc}
+body{margin:0;background:#121517;color:#f1f5f9;font-family:Inter,system-ui,sans-serif;line-height:1.6}
+a{color:#10b981}
 #root{max-width:960px;margin:0 auto;padding:24px}
-.bt-ssr-post{padding:16px 0;border-bottom:1px solid #22223a}
+.bt-ssr-post{padding:16px 0;border-bottom:1px solid #2d3748}
 .bt-ssr-post img{max-width:100%;height:auto}
 .bt-hidden{display:none}
   ]]></b:skin>
@@ -54,7 +65,776 @@ a{color:#a5b4fc}
     React membaca data dari markup ini, lalu me-render ulang UI di #root.
   -->
   <div id='root'>
-    <b:section class='bt-labels' id='labels' maxwidgets='1' showaddelement='yes'>
+    <!-- ======================================================== -->
+    <!-- TATA LETAK BLOGGER: WIDGET KONTROL UNTUK SETIAP SECTION  -->
+    <!-- Pengguna dapat mengatur urutan, mengubah judul,         -->
+    <!-- menyembunyikan/menampilkan, atau mengisi HTML custom     -->
+    <!-- melalui menu Tata Letak di Dashboard Blogger.           -->
+    <!-- ======================================================== -->
+
+    <!-- #CONFIG -->
+    <b:section class='sec-config' id='sec-config' name='#CONFIG' showaddelement='yes'>
+      <b:widget id='HTML99' locked='false' title='Kode Lisensi ( Premium )' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# KODE LISENSI TEMPLATE & KONFIGURASI SISTEM
+# ========================================================
+license_key: PESONA-PREMIUM-2026-ACTIVE
+status: verified
+theme_version: 2.5.0]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='config' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- #HEADER-SECTION -->
+    <b:section class='sec-header' id='sec-header' name='#HEADER-SECTION' showaddelement='yes'>
+      <b:widget id='Header1' locked='false' title='Pesona Kahuripan 10 (Header)' type='Header' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='displayUrl'/>
+          <b:widget-setting name='displayHeight'>0</b:widget-setting>
+          <b:widget-setting name='sectionWidth'>0</b:widget-setting>
+          <b:widget-setting name='useImage'>false</b:widget-setting>
+          <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+          <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
+          <b:widget-setting name='displayWidth'>0</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='header-main'>
+            <b:if cond='data:image'>
+              <meta data-bt='header-logo' expr:content='data:image'/>
+            </b:if>
+            <span data-bt='header-title'><data:title/></span>
+            <span data-bt='header-desc'><data:description/></span>
+          </div>
+        </b:includable>
+      </b:widget>
+
+      <b:widget id='LinkList1' locked='false' title='Menu Homepage' type='LinkList' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='text-0'>Keunggulan</b:widget-setting>
+          <b:widget-setting name='link-0'>#keunggulan</b:widget-setting>
+          <b:widget-setting name='text-1'>Lokasi</b:widget-setting>
+          <b:widget-setting name='link-1'>#lokasi</b:widget-setting>
+          <b:widget-setting name='text-2'>Tipe Unit</b:widget-setting>
+          <b:widget-setting name='link-2'>#tipe-unit</b:widget-setting>
+          <b:widget-setting name='text-3'>Galeri 360°</b:widget-setting>
+          <b:widget-setting name='link-3'>#galeri</b:widget-setting>
+          <b:widget-setting name='text-4'>Promo</b:widget-setting>
+          <b:widget-setting name='link-4'>#promo</b:widget-setting>
+          <b:widget-setting name='text-5'>Jadwal Survey</b:widget-setting>
+          <b:widget-setting name='link-5'>#lead-form</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='header-menu'>
+            <b:loop values='data:links' var='link'>
+              <a expr:data-title='data:link.name' expr:href='data:link.target'><data:link.name/></a>
+            </b:loop>
+          </div>
+        </b:includable>
+      </b:widget>
+
+      <b:widget id='BlogSearch1' locked='false' title='Pencarian' type='BlogSearch' version='2' visible='true'>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='header-search'>
+            <form expr:action='data:blog.searchUrl'>
+              <input name='q' type='text'/>
+            </form>
+          </div>
+        </b:includable>
+      </b:widget>
+
+      <b:widget id='HTML10' locked='false' title='Pengaturan Tambahan Header &amp; CTA' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# PENGATURAN TAMBAHAN HEADER & TOMBOL CTA
+# ========================================================
+header_cta_text: 📅 Survey Lokasi
+header_cta_url: #lead-form
+logo_icon: 🏡
+brand_name: Pesona Kahuripan
+brand_tagline: Residence & Cluster Modern
+show_search: true]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='header' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- HERO BANNER UTAMA -->
+    <b:section class='sec-hero' id='sec-hero' name='HERO BANNER UTAMA' showaddelement='yes'>
+      <b:widget id='HTML1' locked='false' title='Wujudkan Rumah Impian Anda (Hero Banner Utama)' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# HERO BANNER: HEADLINE & TOMBOL AKSI UTAMA
+# ========================================================
+badge: Cluster Baru Rilis Tahap 3
+badge_promo: ✦ Promo DP 0% & Subsidi Suku Bunga KPR
+badge_shm: ★ Legalitas 100% Sertifikat SHM Pecah
+headline: Wujudkan Rumah Impian Masa Depan Keluarga Anda di Pesona Kahuripan
+subheadline: Hunian bernuansa asri berkonsep modern minimalis di lokasi sangat strategis. Nikmati kemudahan DP 0% dan sertifikat SHM sudah pecah siap serah terima.
+cta_survey: 📅 Jadwalkan Survey Lokasi
+cta_brosur: 📥 Unduh Brosur & Pricelist
+cta_wa: 💬 Chat Sales via WhatsApp
+whatsapp: 6281288997711]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='hero' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+
+      <b:widget id='HTML12' locked='false' title='Rumah Subsidi - Pesona Kahuripan (Media &amp; Video)' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# HERO BANNER: MEDIA VISUAL, VIDEO & TOUR 360
+# ========================================================
+hero_image: /hero-cluster.jpg
+video_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+virtual_tour_url: 
+pill1: Ready Stock Tahap 3
+pill2: Bebas Banjir 100%
+card_title: Suasana Asri & Udara Sejuk Khas Perbukitan
+card_desc: Konsep hunian hijau dengan row jalan lebar dan taman bermain keluarga terintegrasi.
+cta_tour: 🔄 Virtual Tour 360°
+cta_video: ▶ Putar Video Kawasan]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='hero-media' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- 2. Quick Stats / Bar Kredibilitas -->
+    <b:section class='sec-stats' id='sec-stats' name='#SECTION-STATS' showaddelement='yes'>
+      <b:widget id='HTML2' locked='false' title='Ringkasan Proyek &amp; Angka Kunci (Quick Stats)' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 2] QUICK STATS & KREDIBILITAS
+# ========================================================
+# Ubah angka capaian dan teks di sebelah kanan tanda titik dua (:)
+# ========================================================
+
+stat1_num: 1.250+
+stat1_label: Unit Terhuni & Serah Terima
+stat1_desc: Komunitas warga sudah ramai dan hidup
+
+stat2_num: 100%
+stat2_label: Sertifikat SHM & PBG Pecah
+stat2_desc: Legalitas aman dan siap balik nama
+
+stat3_num: 0 Rupiah
+stat3_label: Uang Muka (DP 0%)
+stat3_desc: Cukup booking fee 2 juta all-in
+
+stat4_num: 15 Menit
+stat4_label: Ke Gerbang Tol & Stasiun
+stat4_desc: Akses cepat ke Jakarta, Depok & Bekasi
+
+stat5_num: 8+ Bank
+stat5_label: Mitra KPR Terpercaya
+stat5_desc: BTN, BSI, Mandiri, BRI, BCA, BNI]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='stats' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- 3. Keunggulan & Fasilitas (USP) -->
+    <b:section class='sec-usp' id='sec-usp' name='#SECTION-USP' showaddelement='yes'>
+      <b:widget id='HTML3' locked='false' title='Keunggulan Kawasan &amp; Fasilitas (USP)' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 3] KEUNGGULAN KAWASAN & FASILITAS (USP)
+# ========================================================
+# Anda dapat mengubah judul, deskripsi, serta seluruh 6 poin
+# keunggulan & fasilitas kawasan secara bebas di bawah ini.
+# ========================================================
+
+badge: Keunggulan Eksklusif
+title: Mengapa Pesona Kahuripan Pilihan Tepat Keluarga Anda?
+desc: Lebih dari sekadar bangunan, kami menghadirkan ekosistem hunian yang aman, nyaman, dan bernilai investasi tinggi untuk generasi mendatang.
+
+# --- KEUNGGULAN 1 ---
+usp1_title: Legalitas SHM 100% Aman & Terjamin
+usp1_desc: Sertifikat Hak Milik (SHM) dan IMB/PBG sudah pecah per kaveling, siap balik nama atas nama pembeli.
+usp1_badge: Legalitas Pasti
+usp1_icon: 🛡️
+
+# --- KEUNGGULAN 2 ---
+usp2_title: Akses Transportasi Super Strategis
+usp2_desc: Hanya 15 menit ke Gerbang Tol Nagrak/Cibubur dan Stasiun KRL, memudahkan mobilitas kerja ke Jakarta.
+usp2_badge: 15 Menit Tol
+usp2_icon: 🚆
+
+# --- KEUNGGULAN 3 ---
+usp3_title: Desain Tropis High Ceiling Modern
+usp3_desc: Plafon ruang tamu setinggi 3.8 meter membuat sirkulasi udara sejuk, hemat listrik, dan pencahayaan maksimal.
+usp3_badge: Plafon 3.8m
+usp3_icon: 🏛️
+
+# --- KEUNGGULAN 4 ---
+usp4_title: Bebas Banjir Terbukti Bertahun-tahun
+usp4_desc: Berada di kontur tanah perbukitan alami yang tinggi dengan sistem drainase bawah tanah modern terintegrasi.
+usp4_badge: Bebas Banjir
+usp4_icon: 🌊
+
+# --- KEUNGGULAN 5 ---
+usp5_title: One Gate System & Keamanan 24 Jam
+usp5_desc: Gerbang portal otomatis dengan kartu akses penghuni, kamera CCTV di setiap sudut jalan, dan pos satpam 24 jam.
+usp5_badge: Keamanan 24 Jam
+usp5_icon: 🔒
+
+# --- KEUNGGULAN 6 ---
+usp6_title: Fasilitas Lengkap Ramah Keluarga
+usp6_desc: Tersedia masjid megah di dalam kawasan, taman bermain anak, lapangan olahraga, dan jalan utama aspal row 8 meter.
+usp6_badge: Fasilitas Lengkap
+usp6_icon: 🌳]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='usp' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- 4. Lokasi Strategis & Aksesibilitas -->
+    <b:section class='sec-location' id='sec-location' name='#SECTION-LOKASI' showaddelement='yes'>
+      <b:widget id='HTML4' locked='false' title='Aksesibilitas Lokasi &amp; Peta Google Maps' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 4] LOKASI STRATEGIS & AKSES TOL
+# ========================================================
+# PANDUAN PETA & SITEPLAN:
+# - gmaps_url: Link Google Maps penunjuk arah langsung
+# - gmaps_embed: Link embed iframe dari Google Maps
+# - siteplan_image: Link foto masterplan / denah kaveling kawasan
+# - Anda dapat mengubah nama tab dan poin akses transportasi, sekolah, RS, mall
+# ========================================================
+
+badge: Location Advantage
+title: Aksesibilitas Tanpa Batas di Titik Paling Strategis
+desc: Dekat dengan simpul gerbang tol, stasiun KRL, sentra niaga, dan fasilitas umum vital untuk mobilitas harian yang efisien.
+address_label: Alamat Kantor Pemasaran & Lokasi:
+address: Jl. Raya Pesona Asri No. 88, Cileungsi - Klapanunggal, Bogor Timur
+gmaps_url: https://maps.google.com/?q=Cileungsi+Bogor
+gmaps_embed: https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.176483582496!2d106.96821437508316!3d-6.371221762326756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699313db43e261%3A0xe5a3eb4293f7734!2sCileungsi%2C%20Bogor%20Regency%2C%20West%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid
+siteplan_image: 
+siteplan_badge: 🗺️ Masterplan & Siteplan Kawasan
+maps_caption: 🧭 Navigasikan perjalanan survey langsung ke lokasi kami
+maps_btn: Buka di Google Maps ↗
+
+# --- LABEL TAB KATEGORI AKSES ---
+tab_trans: 🚆 Transportasi & Tol
+tab_edu: 🎓 Sekolah & Kampus
+tab_health: 🏥 Rumah Sakit & Medis
+tab_mall: 🛍️ Mall & Rekreasi
+
+# --- KATEGORI 1: TRANSPORTASI & TOL ---
+trans1_title: Gerbang Tol Nagrak (Tol Cimanggis - Cibitung)
+trans1_time: 12 Menit
+trans1_note: Akses langsung tol JORR 2 menuju Bandara & BSD
+
+trans2_title: Gerbang Tol Cibubur Junction (Tol Jagorawi)
+trans2_time: 20 Menit
+trans2_note: Jalur utama menuju pusat Kota Jakarta
+
+trans3_title: Stasiun KRL Nambo & Cibinong
+trans3_time: 15 Menit
+trans3_note: Terhubung langsung jaringan Commuter Line Jabodetabek
+
+trans4_title: Terminal Transjabodetabek Cileungsi
+trans4_time: 8 Menit
+trans4_note: Bus AC rute Blok M, Grogol, Senayan & Tanjung Priok
+
+# --- KATEGORI 2: SEKOLAH & KAMPUS ---
+edu1_title: Sekolah Islam Terpadu & Al-Azhar
+edu1_time: 5 Menit
+edu1_note: Pendidikan karakter unggulan dekat rumah
+
+edu2_title: SMAN 1 & SMKN Unggulan Negeri
+edu2_time: 8 Menit
+edu2_note: Sekolah negeri terakreditasi A
+
+edu3_title: Sekolah Kristen Penabur & Regina Caeli
+edu3_time: 12 Menit
+edu3_note: Fasilitas sekolah nasional plus & internasional
+
+edu4_title: Kampus & Politeknik Terkemuka
+edu4_time: 20 Menit
+edu4_note: Pusat riset dan pendidikan tinggi
+
+# --- KATEGORI 3: RUMAH SAKIT & MEDIS ---
+health1_title: RS Hermina Mekarsari
+health1_time: 7 Menit
+health1_note: RS rujukan utama dengan IGD 24 Jam
+
+health2_title: RSUD Cileungsi
+health2_time: 9 Menit
+health2_note: Fasilitas kesehatan lengkap melayani BPJS & asuransi
+
+health3_title: RS Mitra Keluarga Cibubur
+health3_time: 15 Menit
+health3_note: Pusat spesialis dan perawatan modern
+
+health4_title: Klinik Pratama & Apotek 24 Jam
+health4_time: 2 Menit
+health4_note: Tersedia tepat di gerbang perumahan
+
+# --- KATEGORI 4: MALL & REKREASI ---
+mall1_title: Metropolitan Mall Cibubur
+mall1_time: 10 Menit
+mall1_note: Bioskop XXI, Uniqlo, Matahari, & Gramedia
+
+mall2_title: Pasar Tradisional Modern Cileungsi
+mall2_time: 6 Menit
+mall2_note: Bahan pangan segar setiap hari dengan harga bersahabat
+
+mall3_title: Taman Wisata Mekarsari & Waterpark
+mall3_time: 8 Menit
+mall3_note: Wahana rekreasi hijau dan wisata keluarga akhir pekan
+
+mall4_title: Superindo, Indomaret Fresh, & Alfamidi
+mall4_time: 3 Menit
+mall4_note: Kebutuhan harian rumah tangga super praktis]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='location' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- 5. Tipe Unit & Spesifikasi Rumah -->
+    <b:section class='sec-units' id='sec-units' name='#SECTION-TIPE-UNIT' showaddelement='yes'>
+      <b:widget id='HTML5' locked='false' title='Katalog Tipe Unit &amp; Spesifikasi Rumah' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 5] KATALOG TIPE UNIT & SPESIFIKASI RUMAH
+# ========================================================
+# PANDUAN PENGISIAN LENGKAP:
+# Anda bisa mengubah seluruh data tipe unit (nama, harga, cicilan,
+# dimensi, luas LB/LT, kamar tidur KT/KM, deskripsi, foto tampak depan,
+# foto denah, dan spesifikasi material pondasi/dinding/atap/listrik/air).
+# ========================================================
+
+badge: Pilihan Tipe Unit
+title: Koleksi Rumah Modern Sesuai Kebutuhan Anda
+desc: Setiap unit didesain dengan konsep tropis modern berplafon tinggi, pencahayaan alami optimal, dan material bangunan berkualitas standar SNI.
+whatsapp: 6281288997711
+
+# ========================================================
+# TIPE 1: MELATI (30/60) - TIPE COMPACT MINIMALIS
+# ========================================================
+unit1_name: Tipe Melati
+unit1_code: 30/60
+unit1_tag: Compact Living · Cocok Pasangan Muda & Milenial
+unit1_badge: Best Seller DP 0%
+unit1_dimensi: 6 x 10 Meter
+unit1_lb: 30
+unit1_lt: 60
+unit1_kt: 2
+unit1_km: 1
+unit1_price: Mulai Rp 280 Jutaan
+unit1_cicilan: Rp 1,9 Jutaan / bulan
+unit1_desc: Rumah tapak fungsional 2 kamar tidur dengan sirkulasi udara optimal dan sisa tanah belakang untuk pengembangan dapur terbuka.
+unit1_image: /hero-cluster.jpg
+unit1_floorplan: https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80
+unit1_pondasi: Batu kali + sloof beton bertulang
+unit1_dinding: Bata ringan hebel diplester aci, finishing cat Weathercoat
+unit1_lantai: Granit tile 60x60 motif elegan
+unit1_atap: Rangka baja ringan, genteng flat beton monier
+unit1_kusen: Aluminium powder coating 3 inch
+unit1_pintu: Engineering solid wood (pintu utama), double teakwood
+unit1_sanitair: Kloset duduk American Standard / setara + shower
+unit1_listrik: PLN 1.300 VA sistem token
+unit1_air: Sumur pantek jet pump + torn air (air tanah jernih)
+
+# ========================================================
+# TIPE 2: FLAMBOYAN (36/72) - TIPE FAVORIT KELUARGA
+# ========================================================
+unit2_name: Tipe Flamboyan
+unit2_code: 36/72
+unit2_tag: Most Popular · Halaman Luas & Carport Lega
+unit2_badge: Favorit Pilihan Konsumen
+unit2_dimensi: 6 x 12 Meter
+unit2_lb: 36
+unit2_lt: 72
+unit2_kt: 2
+unit2_km: 1
+unit2_price: Mulai Rp 375 Jutaan
+unit2_cicilan: Rp 2,4 Jutaan / bulan
+unit2_desc: Hunian ideal dengan ruang tamu high ceiling 3.8m, carport mobil keluarga, taman depan asri, dan void belakang untuk cahaya melimpah.
+unit2_image: https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=1200&q=80
+unit2_floorplan: https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80
+unit2_pondasi: Batu kali + footplate beton bertulang
+unit2_dinding: Bata hebel tebal diaci halus, cat interior Jotun & exterior Dulux
+unit2_lantai: Granit tile 60x60 polished nano
+unit2_atap: Baja ringan zincalume, insulasi peredam, genteng beton
+unit2_kusen: Aluminium anodized anti rayap & anti korosi
+unit2_pintu: Solid panel modern dengan smart lock ready
+unit2_sanitair: Kloset duduk + jet washer + instalasi water heater
+unit2_listrik: PLN 2.200 VA
+unit2_air: Sumur bor artesis + mesin semi jet pump
+
+# ========================================================
+# TIPE 3: ANGGREK (45/84) - TIPE EKSKLUSIF & LEGA
+# ========================================================
+unit3_name: Tipe Anggrek
+unit3_code: 45/84
+unit3_tag: Premium Unit · Ruang Keluarga Ekstra Luas
+unit3_badge: Limited Hoek Ready
+unit3_dimensi: 7 x 12 Meter
+unit3_lb: 45
+unit3_lt: 84
+unit3_kt: 3
+unit3_km: 1
+unit3_price: Mulai Rp 495 Jutaan
+unit3_cicilan: Rp 3,2 Jutaan / bulan
+unit3_desc: Unit premium 3 kamar tidur dengan master bedroom luas, ruang keluarga lapang, dan area taman samping yang memberikan privasi maksimal.
+unit3_image: https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80
+unit3_floorplan: https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80
+unit3_pondasi: Footplate beton bertulang + batu belah
+unit3_dinding: Bata merah / hebel kualitas super, finishing double aci cat premium
+unit3_lantai: Homogeneous tile 60x60 glazed
+unit3_atap: Baja ringan Bluescope, genteng keramik berglazur
+unit3_kusen: Aluminium tebal motif urat kayu / hitam doff
+unit3_pintu: Pintu utama kayu kamper samarinda oven
+unit3_sanitair: Kloset duduk TOTO / setara + hand shower
+unit3_listrik: PLN 2.200 VA
+unit3_air: Sumur bor submersible pump + filter air terpasang]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='units' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- 6. Galeri Foto & Tur Virtual 360° -->
+    <b:section class='sec-gallery' id='sec-gallery' name='#SECTION-GALERI' showaddelement='yes'>
+      <b:widget id='HTML6' locked='false' title='Galeri Foto Ruangan &amp; Tur Virtual 360°' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 6] GALERI FOTO & TUR VIRTUAL 360°
+# ========================================================
+# PANDUAN PENGISIAN MEDIA:
+# - video_url: Link YouTube Drone / Walkthrough kawasan
+# - virtual_tour_url: Link Matterport / Kuula 360 / Web tour 3D
+# - gallery_image_X: Link foto galeri ruangan (1 s/d 6)
+# ========================================================
+
+badge: Galeri & Tur Virtual
+title: Jelajahi Setiap Sudut Keindahan Rumah Impian
+desc: Kenyamanan nyata yang dapat Anda rasakan langsung melalui visual detail ruangan dan pengalaman tur 360 derajat interaktif.
+
+# --- KARTU BANNER TUR VIRTUAL 360 ---
+tour_badge: 🔄 360° Interactive View
+tour_title: Tur Virtual 360 Derajat
+tour_desc: Jelajahi ruang tamu berplafon tinggi, kamar tidur utama, dan layout rumah contoh dari gadget Anda kapan saja.
+tour_btn: Mulai Tur Virtual 360°
+virtual_tour_url: 
+
+# --- KARTU BANNER VIDEO DRONE KAWASAN ---
+video_badge: 🎬 Drone & Video Walkthrough
+video_title: Video Site Plan & Walkthrough Kawasan
+video_desc: Saksikan masterplan kawasan perumahan dari ketinggian dan suasana lingkungan warga yang ramah & asri.
+video_btn: Putar Video Kawasan
+video_url: https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+# --- FOTO GALERI 1 SAMPAI 6 ---
+gallery_image_1: /hero-cluster.jpg
+gallery_title_1: Cluster Tropis Modern Tahap 3
+gallery_desc_1: Row jalan utama aspal lebar 8 meter dengan pohon rindang
+gallery_cat_1: Fasad & Lingkungan
+
+gallery_image_2: /living-room.jpg
+gallery_title_2: Ruang Tamu High Ceiling 3.8m
+gallery_desc_2: Sirkulasi sejuk dengan pencahayaan alami kaca sudut
+gallery_cat_2: Living Room
+
+gallery_image_3: https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=80
+gallery_title_3: Master Bedroom Bernuansa Hangat
+gallery_desc_3: Ruang istirahat lapang dengan lantai granit nano polished
+gallery_cat_3: Kamar Tidur
+
+gallery_image_4: https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80
+gallery_title_4: Modern Kitchen & Island Bar
+gallery_desc_4: Meja dapur cor finishing keramik + kitchen sink stainless
+gallery_cat_4: Dapur & Dining
+
+gallery_image_5: https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80
+gallery_title_5: Gerbang One Gate System & Keamanan
+gallery_desc_5: Portal kartu RFID otomatis dan pos security siaga 24 jam
+gallery_cat_5: Fasad & Lingkungan
+
+gallery_image_6: https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80
+gallery_title_6: Kamar Anak / Ruang Kerja Fleksibel
+gallery_desc_6: Ruang fleksibel untuk kamar kedua maupun ruang kerja WFH
+gallery_cat_6: Kamar Tidur]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='gallery' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- 7. Promo & Penawaran Spesial -->
+    <b:section class='sec-promo' id='sec-promo' name='#SECTION-PROMO' showaddelement='yes'>
+      <b:widget id='HTML7' locked='false' title='Promo Spesial Bulan Ini &amp; Countdown NUP' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 7] PROMO SPESIAL & PENAWARAN DP 0%
+# ========================================================
+# PANDUAN PENGISIAN LENGKAP:
+# - timer_days & timer_hours: Menyetel waktu mundur promo
+# - offer1..3: Rincian 3 voucher/paket promo gratis
+# - promo_image: Link foto poster/flyer promo (opsional)
+# ========================================================
+
+badge: ⚡ Promo Terbatas Bulan Ini
+subbadge: Sisa 5 Unit Terakhir
+title: Paket Spesial Hunian Baru: All-In Bebas Biaya!
+desc: Cukup bayar booking fee 2 juta rupiah, tanpa uang muka (DP 0%), dan nikmati subsidi bebas semua biaya notaris, BPHTB, appraisal, hingga serah terima kunci.
+whatsapp: 6281288997711
+promo_image: 
+
+# --- COUNTDOWN TIMER ---
+timer_days: 4
+timer_hours: 18
+timer_label: Promo Berakhir Dalam:
+
+# --- VOUCHER PROMO 1 ---
+offer1_badge: Hemat Rp 35 Jt
+offer1_icon: 🏷️
+offer1_title: Bebas Semua Biaya KPR & Notaris
+offer1_highlight: Subsidi BPHTB, AJB, BBN, & Provisi Bank 100%
+offer1_desc: Pembeli tidak perlu menyiapkan dana tunai puluhan juta saat akad kredit. Seluruh biaya legalitas ditanggung developer.
+
+# --- VOUCHER PROMO 2 ---
+offer2_badge: Hadiah Langsung
+offer2_icon: ❄️
+offer2_title: Bonus AC 1 PK & Kanopi Carport
+offer2_highlight: Terpasang Siap Huni Tanpa Renovasi
+offer2_desc: Langsung dapat unit AC inverter hemat daya dan kanopi carport rangka hollow kokoh begitu terima kunci fisik.
+
+# --- VOUCHER PROMO 3 ---
+offer3_badge: Kemudahan Akad
+offer3_icon: 🛡️
+offer3_title: Bantuan Lolos Berkas KPR
+offer3_highlight: Pendampingan BI Checking & Dokumen Bank
+offer3_desc: Konsultan KPR kami membantu pemberkasan Anda sampai disetujui bank rekanan dengan bunga promo spesial.
+
+# --- CTA KLAIM PROMO ---
+cta_title: Siap Mengamankan Voucher Promo & Unit Pilihan Anda?
+cta_desc: Konsultasikan syarat KPR dan amankan nomor urut pemesanan (NUP) Anda hari ini sebelum kehabisan!
+cta_btn: 🎟 Klaim Voucher Promo Sekarang
+wa_btn: Klaim via WhatsApp]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='promo' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- 8. Testimoni Pembeli & Mitra Bank Rekanan -->
+    <b:section class='sec-social' id='sec-social' name='#SECTION-TESTIMONI' showaddelement='yes'>
+      <b:widget id='HTML8' locked='false' title='Testimoni Konsumen &amp; Serah Terima Kunci (BAST)' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 8] TESTIMONI PEMBELI & MITRA BANK
+# ========================================================
+# PANDUAN PENGISIAN LENGKAP:
+# - handover_image: Link foto dokumentasi serah terima kunci (BAST)
+# - bast_xxx: Teks komitmen serah terima legalitas dan skor kepuasan
+# - testi1..3: Nama, peran, unit, judul cerita, isi testimoni & foto avatar
+# ========================================================
+
+badge: Bukti Sosial & Kepuasan Konsumen
+title: Dipercaya Lebih dari 1.250+ Keluarga Bahagia
+desc: Kisah nyata kepuasan para pembeli yang telah mewujudkan hunian idaman mereka bersama Pesona Kahuripan.
+
+# --- FOTO & KOMITMEN SERAH TERIMA KUNCI (BAST) ---
+handover_image: /handover.jpg
+bast_badge: ✓ Serah Terima Kunci (BAST) Resmi
+bast_title: Momen Serah Terima Unit Rumah Kepada Konsumen Bahagia
+bast_desc: Legalitas lengkap, kunci diserahkan tepat waktu, siap huni dengan rasa bangga.
+bast_label: Komitmen Serah Terima
+bast_heading: Akad Kredit Lancar, Kunci Diterima Tanpa Kendala
+bast_body: Setiap konsumen didampingi secara personal oleh tim legal dan konsultan KPR kami sejak tahap pemberkasan, wawancara bank, hingga prosesi tanda tangan akad kredit notaris dan serah terima kunci fisik.
+bast_point1: 100% Sertifikat Pecah per Kaveling & IMB/PBG Resmi
+bast_point2: Pendampingan KPR di Bank Rekanan sampai disetujui
+bast_point3: Garansi pemeliharaan bangunan pasca serah terima unit
+bast_score: 4.9 / 5.0
+bast_score_label: Tingkat Kepuasan Konsumen
+bast_approval: 98.5%
+bast_approval_label: Approval Rate Pengajuan KPR
+
+# --- TESTIMONI KONSUMEN 1 ---
+testi1_name: Bapak Dimas & Ibu Rini
+testi1_role: Karyawan BUMN & ASN Guru
+testi1_unit: Tipe Flamboyan 36/72
+testi1_title: Proses KPR Cepat dan DP 0% Nyata Tanpa Tipu-Tipu
+testi1_text: Awalnya sempat ragu apakah benar DP 0% dan bebas semua biaya. Ternyata tim sales sangat jujur dan mendampingi berkas KPR dari awal sampai akad di Bank BTN.
+testi1_avatar: https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80
+
+# --- TESTIMONI KONSUMEN 2 ---
+testi2_name: Ibu Sarah Maharani
+testi2_role: Wirausahawan Kuliner
+testi2_unit: Tipe Melati 30/60
+testi2_title: Desain Plafon Tinggi Bikin Rumah Sangat Sejuk!
+testi2_text: Plafon 3,8 meternya juara banget! Siang hari rumah tetap sejuk walau tanpa menyalakan AC terus-menerus. Dinding hebelnya juga sangat kedap.
+testi2_avatar: https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80
+
+# --- TESTIMONI KONSUMEN 3 ---
+testi3_name: Mas Aditya Pratama
+testi3_role: Software Engineer (Remote Worker)
+testi3_unit: Tipe Anggrek 45/84
+testi3_title: Akses Tol & Stasiun Dekat, Nilai Investasi Menjanjikan
+testi3_text: Sebagai pekerja teknologi yang sesekali harus meeting ke Jakarta Selatan, jarak ke gerbang tol cuma 10 menitan sangat memudahkan hidup. Kualitas air tanahnya sangat jernih.
+testi3_avatar: https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='social-proof' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- 9. Formulir Survey & Kontak Sales -->
+    <b:section class='sec-lead' id='sec-lead' name='#SECTION-SURVEY' showaddelement='yes'>
+      <b:widget id='HTML9' locked='false' title='Formulir Reservasi Survey &amp; Kontak Sales' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [SECTION 9] FORMULIR SURVEY & KONTAK SALES
+# ========================================================
+# PANDUAN PENGISIAN LENGKAP:
+# - brochure_url: Link file E-Brosur PDF (Google Drive / link langsung)
+# - office_image / kantor_image: Link foto kantor pemasaran
+# - Anda dapat mengubah teks tips, judul form, tombol submit, dan catatan privasi
+# ========================================================
+
+badge: Jadwal Survey & Konsultasi Langsung
+title: Kunjungi Rumah Contoh & Rasakan Langsung Suasananya
+desc: Tim sales profesional kami siap menyambut Anda setiap hari di lokasi, mendampingi keliling show unit, serta memberikan konsultasi properti gratis tanpa dipungut biaya.
+office_label: Kantor Pemasaran & Show Unit:
+address: Jl. Raya Pesona Asri No. 88, Cileungsi - Klapanunggal, Bogor Timur
+hours_label: Jam Operasional Show Unit:
+opening_hours: Buka Setiap Hari: 08.00 - 18.00 WIB
+hotline_label: Hotline Konsultasi Resmi:
+whatsapp: 6281288997711
+whatsapp_display: 0812-8899-7711
+brochure_url: 
+kantor_image: 
+
+# --- TIPS & TEKS FORMULIR ---
+tips_title: Tips Berkunjung:
+tips_text: Lebih baik menjadwalkan survey 1 hari sebelumnya agar tim sales dapat menyiapkan kunci rumah contoh dan berkas brosur lengkap untuk tipe yang Anda minati.
+form_title: Formulir Reservasi Survey & Konsultasi Sales
+submit_btn: 📅 Daftarkan Jadwal Survey Sekarang
+privacy_note: 🔒 Data Anda dijamin kerahasiaannya dan hanya digunakan untuk konfirmasi jadwal survey.]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='lead-form' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <!-- 11. Tombol Melayang (Floating CTA WhatsApp Pojok Bawah) -->
+    <b:section class='sec-cta' id='sec-cta' name='#FLOATING-CTA' showaddelement='yes'>
+      <b:widget id='HTML11' locked='false' title='Tombol Melayang WhatsApp Pojok Bawah' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[# ========================================================
+# [FLOATING CTA] TOMBOL MELAYANG WHATSAPP POJOK KANAN BAWAH
+# ========================================================
+# PANDUAN PENGISIAN:
+# - whatsapp: Nomor WhatsApp tujuan (format 628xxxxxxxxxx)
+# - button_label: Teks yang tampil di tombol melayang
+# - button_icon: Ikon emoji tombol (contoh: 💬)
+# - sales_avatar: Link foto avatar tim sales / CS
+# - sales_name: Nama tim sales yang melayani
+# - sales_status: Status respons (contoh: Online • Balas Cepat)
+# - greeting_text: Pesan pembuka balon sapaan
+# - topic1..3: Pilihan topik pertanyaan cepat & template chat
+# ========================================================
+
+whatsapp: 6281288997711
+button_label: Konsultasi WhatsApp
+button_icon: 💬
+sales_name: Marketing Pesonaku
+sales_status: Online • Balas Cepat
+sales_avatar: 
+greeting_text: 👋 Halo! Ada yang bisa kami bantu seputar pilihan tipe rumah, promo spesial, atau jadwal survey ke lokasi hari ini?
+direct_cta_label: Buka Obrolan WhatsApp Langsung
+
+# --- 3 PILIHAN TOPIK PERTANYAAN CEPAT ---
+topic1_label: Tanya Promo DP 0% & Free Biaya
+topic1_text: Halo Marketing, saya ingin tanya promo DP 0% dan gratis biaya BPHTB/Notaris di Pesona Kahuripan
+
+topic2_label: Jadwal Survey Rumah Contoh
+topic2_text: Halo, saya mau atur jadwal survey ke show unit Pesona Kahuripan besok
+
+topic3_label: Pricelist & Brosur Terbaru
+topic3_text: Halo Marketing, saya ingin minta pricelist dan brosur terbaru Pesona Kahuripan]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'>
+          <div class='bt-section-widget bt-hidden' data-bt-section='floating-cta' expr:data-title='data:title'>
+            <b:if cond='data:content'>
+              <div data-bt='content'><data:content/></div>
+            </b:if>
+          </div>
+        </b:includable>
+      </b:widget>
+    </b:section>
+
+    <b:section class='bt-labels' id='labels' maxwidgets='1' name='#SIDEBAR-LABELS' showaddelement='yes'>
       <b:widget id='Label1' locked='false' title='Label' type='Label' version='2' visible='true'>
         <b:includable id='main'>
           <nav class='bt-hidden' data-bt='labels'>
@@ -66,7 +846,7 @@ a{color:#a5b4fc}
       </b:widget>
     </b:section>
 
-    <b:section class='bt-main' id='main' maxwidgets='1' showaddelement='yes'>
+    <b:section class='bt-main' id='main' maxwidgets='1' name='#POSTINGAN-BLOG' showaddelement='yes'>
       <b:widget id='Blog1' locked='true' title='Postingan Blog' type='Blog' version='2' visible='true'>
         <b:includable id='main'>
           <main data-bt='posts'>

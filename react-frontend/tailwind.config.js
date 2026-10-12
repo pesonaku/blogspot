@@ -2,6 +2,7 @@ import typography from '@tailwindcss/typography'
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
@@ -11,11 +12,11 @@ export default {
       },
       colors: {
         ink: {
-          950: '#0b0b14',
-          900: '#11111d',
-          800: '#191929',
-          700: '#24243a',
-          600: '#34344f',
+          950: '#121517', // darkgrey background
+          900: '#181c20', // darkgrey surface 1
+          800: '#20252a', // darkgrey surface 2
+          700: '#2c333a',
+          600: '#3c454e',
         },
       },
       keyframes: {

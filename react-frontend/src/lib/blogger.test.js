@@ -43,7 +43,28 @@ describe('readBloggerData', () => {
   it('memberi default aman bila data kosong', () => {
     const data = readBloggerData(document.createElement('div'), {})
     expect(data.posts).toEqual([])
+    expect(data.sections).toEqual([])
     expect(data.blog.pageType).toBe('index')
+  })
+
+  it('membaca custom section widgets dari markup Blogger Tata Letak', () => {
+    const el = document.createElement('div')
+    el.innerHTML = `
+      <div data-bt-section="hero" data-title="[Section 1] Hero Banner"></div>
+      <div data-bt-section="promo" data-title="[Section 7] Promo"><div data-bt="content"><b>Diskon 50%</b></div></div>
+      <div data-bt-section="stats" data-title="[Section 2] Stats"><div data-bt="content"># PANDUAN&#10;stat1_num: 2.000+&#10;whatsapp: 08123456</div></div>
+    `
+    const data = readBloggerData(el)
+    expect(data.sections).toEqual([
+      { id: 'hero', title: '[Section 1] Hero Banner', contentHtml: '', config: {} },
+      { id: 'promo', title: '[Section 7] Promo', contentHtml: '<b>Diskon 50%</b>', config: {} },
+      {
+        id: 'stats',
+        title: '[Section 2] Stats',
+        contentHtml: '',
+        config: { stat1_num: '2.000+', whatsapp: '08123456' },
+      },
+    ])
   })
 })
 
@@ -90,3 +111,41 @@ describe('parseFeedEntry', () => {
     expect(post.snippet).toContain('Halo dunia ini isi artikel lengkap')
   })
 })
+
+describe('formatEmbedVideoUrl & parseWidgetConfig image/video inputs', () => {
+  it('mengonversi berbagai format URL YouTube menjadi link embed yang valid', async () => {
+    const { formatEmbedVideoUrl } = await import('./widgetConfig.js')
+
+    expect(formatEmbedVideoUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ')).toBe(
+      'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1',
+    )
+    expect(formatEmbedVideoUrl('https://youtu.be/dQw4w9WgXcQ')).toBe(
+      'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1',
+    )
+    expect(formatEmbedVideoUrl('https://www.youtube.com/shorts/dQw4w9WgXcQ')).toBe(
+      'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1',
+    )
+    expect(formatEmbedVideoUrl('dQw4w9WgXcQ')).toBe(
+      'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=0&controls=1',
+    )
+  })
+
+  it('mem-parsing input gambar, video, dan alias bahasa Indonesia dengan pembersihan otomatis', async () => {
+    const { parseWidgetConfig } = await import('./widgetConfig.js')
+
+    const raw = `
+      # Pengaturan
+      gambar_hero: "https://blogger.googleusercontent.com/img/hero.jpg"
+      link_video: https://www.youtube.com/watch?v=12345678901
+      tur_virtual: https://my.matterport.com/show/?m=sample
+      unit1_image: <img src="https://img.com/unit1.jpg" />
+    `
+    const { config } = parseWidgetConfig(raw)
+
+    expect(config.hero_image).toBe('https://blogger.googleusercontent.com/img/hero.jpg')
+    expect(config.video_url).toBe('https://www.youtube.com/watch?v=12345678901')
+    expect(config.virtual_tour_url).toBe('https://my.matterport.com/show/?m=sample')
+    expect(config.unit1_image).toBe('https://img.com/unit1.jpg')
+  })
+})
+

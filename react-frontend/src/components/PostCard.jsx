@@ -11,12 +11,12 @@ export function Cover({ post, className = '' }) {
       />
     )
   }
-  // Fallback bila post tidak punya gambar: gradient + huruf awal judul.
+  // Fallback bila post tidak punya gambar: gradient nuansa hijau tropis + huruf awal judul.
   return (
     <div
-      className={`grid h-full w-full place-items-center bg-gradient-to-br from-violet-600/40 via-fuchsia-600/30 to-amber-500/30 ${className}`}
+      className={`grid h-full w-full place-items-center bg-gradient-to-br from-emerald-700/50 via-teal-700/40 to-lime-600/30 ${className}`}
     >
-      <span className="font-display text-6xl font-bold text-white/70">{post.title.charAt(0)}</span>
+      <span className="font-display text-6xl font-bold text-white/80">{post.title.charAt(0)}</span>
     </div>
   )
 }
@@ -24,9 +24,9 @@ export function Cover({ post, className = '' }) {
 export function PostMeta({ post }) {
   const date = formatDate(post.date)
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-400">
-      {post.author && <span className="font-medium text-slate-300">{post.author}</span>}
-      {post.author && date && <span className="h-1 w-1 rounded-full bg-slate-600" />}
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500 dark:text-emerald-200/60">
+      {post.author && <span className="font-medium text-emerald-950 dark:text-emerald-100">{post.author}</span>}
+      {post.author && date && <span className="h-1 w-1 rounded-full bg-emerald-500/50" />}
       {date && <time dateTime={post.date}>{date}</time>}
     </div>
   )
@@ -35,7 +35,7 @@ export function PostMeta({ post }) {
 export default function PostCard({ post, index = 0, featured = false }) {
   return (
     <article
-      className={`group glass relative flex animate-fade-up flex-col overflow-hidden rounded-3xl transition duration-500 hover:-translate-y-1 hover:border-violet-400/30 hover:shadow-2xl hover:shadow-violet-900/30 ${
+      className={`group glass relative flex animate-fade-up flex-col overflow-hidden rounded-3xl transition duration-500 hover:-translate-y-1 hover:border-emerald-400/40 hover:shadow-2xl hover:shadow-emerald-950/20 ${
         featured ? 'md:col-span-2 md:flex-row' : ''
       }`}
       style={{ animationDelay: `${index * 80}ms` }}
@@ -58,20 +58,20 @@ export default function PostCard({ post, index = 0, featured = false }) {
           </div>
         )}
         <h2
-          className={`font-display font-semibold leading-tight text-white transition group-hover:text-violet-200 ${
+          className={`font-display font-semibold leading-tight text-emerald-950 dark:text-white transition group-hover:text-emerald-600 dark:group-hover:text-emerald-300 ${
             featured ? 'text-3xl md:text-4xl' : 'text-xl'
           }`}
         >
           <a href={post.url} className="after:absolute after:inset-0 after:content-['']">{post.title}</a>
         </h2>
         {post.snippet && (
-          <p className={`text-sm leading-relaxed text-slate-400 ${featured ? 'line-clamp-4' : 'line-clamp-3'}`}>
+          <p className={`text-sm leading-relaxed text-slate-600 dark:text-emerald-100/70 ${featured ? 'line-clamp-4' : 'line-clamp-3'}`}>
             {post.snippet}
           </p>
         )}
         <div className="mt-auto flex items-center justify-between pt-2">
           <PostMeta post={post} />
-          <span className="text-sm font-semibold text-violet-300 transition group-hover:translate-x-1">Baca →</span>
+          <span className="text-sm font-semibold text-emerald-700 dark:text-emerald-300 transition group-hover:translate-x-1">Baca →</span>
         </div>
       </div>
     </article>

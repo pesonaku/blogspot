@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { promoOffers, propertyInfo } from './propertyData.js'
 
-export function PromoSection({ onClaimPromo }) {
+export function PromoSection({ config = {}, onClaimPromo }) {
   // Real-time countdown timer to create urgency
+  const initialDays = config.timer_days ? parseInt(config.timer_days, 10) : 4
+  const initialHours = config.timer_hours ? parseInt(config.timer_hours, 10) : 18
+
   const [timeLeft, setTimeLeft] = useState({
-    days: 4,
-    hours: 18,
+    days: isNaN(initialDays) ? 4 : initialDays,
+    hours: isNaN(initialHours) ? 18 : initialHours,
     minutes: 42,
     seconds: 30,
   })
@@ -23,81 +26,106 @@ export function PromoSection({ onClaimPromo }) {
     return () => clearInterval(timer)
   }, [])
 
+  const mergedOffers = promoOffers.map((offer, idx) => {
+    const num = idx + 1
+    return {
+      ...offer,
+      title: config[`offer${num}_title`] || offer.title,
+      highlight: config[`offer${num}_highlight`] || offer.highlight,
+      desc: config[`offer${num}_desc`] || offer.desc,
+      badge: config[`offer${num}_badge`] || offer.badge,
+      icon: config[`offer${num}_icon`] || offer.icon || '🎁',
+    }
+  })
+
+  const whatsappNumber = config.whatsapp || propertyInfo.whatsapp
+
   return (
     <section id="promo" className="relative mx-auto max-w-6xl px-5 py-16 md:py-24">
-      <div className="relative rounded-3xl border-2 border-fuchsia-500/30 bg-gradient-to-b from-ink-900/90 via-ink-950/95 to-ink-900/90 backdrop-blur-2xl p-6 sm:p-10 md:p-12 shadow-2xl overflow-hidden">
+      <div className="glass relative rounded-3xl border-2 border-emerald-500/30 p-6 sm:p-10 md:p-12 shadow-2xl overflow-hidden">
         {/* Glow backdrop behind promo container */}
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 h-80 w-80 rounded-full bg-fuchsia-500/20 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-80 w-80 rounded-full bg-violet-600/20 blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 -mr-20 -mt-20 h-80 w-80 rounded-full bg-emerald-500/20 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-80 w-80 rounded-full bg-teal-600/20 blur-3xl pointer-events-none" />
 
         {/* Section Heading & Urgency Timer */}
-        <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/10">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-emerald-500/10 dark:border-white/10">
           <div>
             <div className="flex items-center gap-2">
-              <span className="chip border-fuchsia-400/40 bg-fuchsia-400/20 text-fuchsia-300 font-bold text-xs uppercase tracking-wider">
-                ⚡ Promo Terbatas Bulan Ini
+              <span className="chip border-emerald-400/40 bg-emerald-400/20 text-emerald-700 dark:text-emerald-300 font-bold text-xs uppercase tracking-wider">
+                {config.badge || '⚡ Promo Terbatas Bulan Ini'}
               </span>
-              <span className="chip border-amber-400/40 bg-amber-400/20 text-amber-300 font-bold text-xs">
-                Sisa 5 Unit Terakhir
+              <span className="chip border-amber-400/40 bg-amber-400/20 text-amber-800 dark:text-amber-300 font-bold text-xs">
+                {config.subbadge || 'Sisa 5 Unit Terakhir'}
               </span>
             </div>
-            <h2 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-white">
-              Paket Spesial Hunian Baru: All-In Bebas Biaya!
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-emerald-950 dark:text-white">
+              {config.title || 'Paket Spesial Hunian Baru: All-In Bebas Biaya!'}
             </h2>
-            <p className="mt-2 text-sm md:text-base text-slate-300 max-w-xl">
-              Dapatkan kemudahan kepemilikan rumah impian tanpa beban biaya administrasi tambahan. Penawaran berlaku terbatas sebelum harga naik!
+            <p className="mt-2 text-sm md:text-base text-slate-600 dark:text-emerald-100/70 max-w-xl">
+              {config.desc || 'Dapatkan kemudahan kepemilikan rumah impian tanpa beban biaya administrasi tambahan. Penawaran berlaku terbatas sebelum harga naik!'}
             </p>
           </div>
 
           {/* Countdown Clock Box */}
-          <div className="rounded-2xl border border-white/15 bg-black/50 p-4 shrink-0 text-center shadow-lg">
-            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-2">
-              Promo Berakhir Dalam:
+          <div className="glass rounded-2xl border border-emerald-500/20 p-4 shrink-0 text-center shadow-lg">
+            <p className="text-[11px] font-bold text-emerald-800 dark:text-emerald-300 uppercase tracking-widest mb-2">
+              {config.timer_label || 'Promo Berakhir Dalam:'}
             </p>
-            <div className="flex items-center gap-2 font-mono font-extrabold text-lg sm:text-xl text-white">
+            <div className="flex items-center gap-2 font-mono font-extrabold text-lg sm:text-xl text-emerald-950 dark:text-white">
               <div className="glass rounded-xl px-2.5 py-1.5 min-w-[44px]">
                 <span>{String(timeLeft.days).padStart(2, '0')}</span>
-                <span className="block text-[9px] font-sans font-normal text-slate-400">Hari</span>
+                <span className="block text-[9px] font-sans font-normal text-slate-500 dark:text-slate-400">Hari</span>
               </div>
-              <span className="text-fuchsia-400">:</span>
+              <span className="text-emerald-500">:</span>
               <div className="glass rounded-xl px-2.5 py-1.5 min-w-[44px]">
                 <span>{String(timeLeft.hours).padStart(2, '0')}</span>
-                <span className="block text-[9px] font-sans font-normal text-slate-400">Jam</span>
+                <span className="block text-[9px] font-sans font-normal text-slate-500 dark:text-slate-400">Jam</span>
               </div>
-              <span className="text-fuchsia-400">:</span>
+              <span className="text-emerald-500">:</span>
               <div className="glass rounded-xl px-2.5 py-1.5 min-w-[44px]">
                 <span>{String(timeLeft.minutes).padStart(2, '0')}</span>
-                <span className="block text-[9px] font-sans font-normal text-slate-400">Mnt</span>
+                <span className="block text-[9px] font-sans font-normal text-slate-500 dark:text-slate-400">Mnt</span>
               </div>
-              <span className="text-fuchsia-400">:</span>
-              <div className="glass rounded-xl px-2.5 py-1.5 min-w-[44px] text-fuchsia-300">
+              <span className="text-emerald-500">:</span>
+              <div className="glass rounded-xl px-2.5 py-1.5 min-w-[44px] text-emerald-600 dark:text-emerald-300">
                 <span>{String(timeLeft.seconds).padStart(2, '0')}</span>
-                <span className="block text-[9px] font-sans font-normal text-slate-400">Dtk</span>
+                <span className="block text-[9px] font-sans font-normal text-slate-500 dark:text-slate-400">Dtk</span>
               </div>
             </div>
           </div>
         </div>
 
+        {/* Banner Flyer Promo jika user mengupload gambar promo */}
+        {config.promo_image && (
+          <div className="relative z-10 mt-8 rounded-2xl overflow-hidden border border-emerald-400/40 shadow-xl max-h-80 group">
+            <img
+              src={config.promo_image}
+              alt={config.title || 'Promo Hunian'}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+        )}
+
         {/* 3 Main Promo Offer Benefit Cards */}
         <div className="relative z-10 mt-8 grid gap-6 md:grid-cols-3">
-          {promoOffers.map((offer) => (
+          {mergedOffers.map((offer) => (
             <div
               key={offer.id}
-              className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl transition hover:border-fuchsia-400/40 hover:bg-white/[0.07]"
+              className="glass rounded-2xl p-6 transition hover:border-emerald-400/50"
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold px-3 py-1 rounded-full bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-400/30">
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 border border-emerald-400/30">
                   {offer.badge}
                 </span>
-                <span className="text-2xl">🎁</span>
+                <span className="text-2xl">{offer.icon}</span>
               </div>
-              <h3 className="font-display text-lg font-bold text-white">
+              <h3 className="font-display text-lg font-bold text-emerald-950 dark:text-white">
                 {offer.title}
               </h3>
-              <p className="mt-1 text-xs font-bold text-emerald-400">
+              <p className="mt-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
                 {offer.highlight}
               </p>
-              <p className="mt-2 text-xs text-slate-300 leading-relaxed">
+              <p className="mt-2 text-xs text-slate-600 dark:text-emerald-100/70 leading-relaxed">
                 {offer.desc}
               </p>
             </div>
@@ -105,13 +133,13 @@ export function PromoSection({ onClaimPromo }) {
         </div>
 
         {/* Bottom Call to Action for Promo */}
-        <div className="relative z-10 mt-10 rounded-2xl bg-gradient-to-r from-violet-600/30 to-fuchsia-600/30 border border-white/15 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="relative z-10 mt-10 rounded-2xl glass border border-emerald-500/25 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <p className="font-display font-bold text-white text-base md:text-lg">
-              Siap Mengamankan Voucher Promo &amp; Unit Pilihan Anda?
+            <p className="font-display font-bold text-emerald-950 dark:text-white text-base md:text-lg">
+              {config.cta_title || 'Siap Mengamankan Voucher Promo & Unit Pilihan Anda?'}
             </p>
-            <p className="text-xs text-slate-300 mt-0.5">
-              Konsultasikan syarat KPR dan amankan nomor urut pemesanan (NUP) Anda hari ini.
+            <p className="text-xs text-slate-600 dark:text-emerald-100/70 mt-0.5">
+              {config.cta_desc || 'Konsultasikan syarat KPR dan amankan nomor urut pemesanan (NUP) Anda hari ini.'}
             </p>
           </div>
 
@@ -120,18 +148,18 @@ export function PromoSection({ onClaimPromo }) {
               id="cta-klaim-promo"
               type="button"
               onClick={onClaimPromo}
-              className="btn-primary w-full sm:w-auto py-3 px-6 text-sm font-bold shadow-xl shadow-fuchsia-500/30 justify-center"
+              className="btn-primary w-full sm:w-auto py-3 px-6 text-sm font-bold shadow-xl shadow-emerald-600/30 justify-center"
             >
-              🎟 Klaim Voucher Promo Sekarang
+              {config.cta_btn || '🎟 Klaim Voucher Promo Sekarang'}
             </button>
             <a
-              href={`https://wa.me/${propertyInfo.whatsapp}?text=Halo%20Marketing%2C%20saya%20ingin%20klaim%20Voucher%20Promo%20Pesona%20Kahuripan%20(Free%20Biaya%20%2B%20Bonus%20AC%20Kanopi)`}
+              href={`https://wa.me/${whatsappNumber}?text=Halo%20Marketing%2C%20saya%20ingin%20klaim%20Voucher%20Promo%20Pesona%20Kahuripan%20(Free%20Biaya%20%2B%20Bonus%20AC%20Kanopi)`}
               target="_blank"
               rel="noreferrer"
-              className="glass hover:bg-emerald-500/20 text-emerald-300 border-emerald-400/40 rounded-full px-5 py-3 text-xs font-bold transition flex items-center gap-1.5"
+              className="glass hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-400/40 rounded-full px-5 py-3 text-xs font-bold transition flex items-center gap-1.5"
             >
               <span>💬</span>
-              <span>Klaim via WhatsApp</span>
+              <span>{config.wa_btn || 'Klaim via WhatsApp'}</span>
             </a>
           </div>
         </div>
